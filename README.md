@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DOMO
+
+INVEST IN REAL ESTATE FRACTIONS
+No more long processes. Relax and receive monthly income - DOMO takes care of everything!
 
 ## Getting Started
 
@@ -12,27 +15,61 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Hardhat 
+```bash
+npx hardhat compile
+npx hardhat test
+npx hardhat node
+npx hardhat run scripts/deploy.js --network localhost
+npx hardhat run scripts/deploy.js --network mumbai
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Install dependencies 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### General 
+```bash
+ yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+ ### Hardhat 
+```bash
+ yarn add --dev hardhat
+```
 
-## Learn More
+ ### Open Zeppelin
+```bash
+ yarn add @openzeppelin/contracts
+ yarn add ipfs-http-client 
+```
+### Tailwind
+```bash
+ yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest
+ npx tailwindcss init -p
+```
+### Otros
+```bash
+ yarn add axios
+ yarn add alchemy-sdk
+ yarn add dotenv
+ yarn add react-scroll
+ yarn add web3modal
+```  
+ <!-- yarn add web3modal  -->
+## Tutorials 
 
-To learn more about Next.js, take a look at the following resources:
+1) Account Abstraction Link: https://www.youtube.com/watch?v=qBPoVs66CxE&ab_channel=NaderDabit
+2) Build Full Stack Polygon Link: https://www.youtube.com/watch?v=GKJBEEXUha0
+3) Metadata Standars Link: https://docs.opensea.io/docs/metadata-standards
+4) How to deploy Polygon SC: https://docs.alchemy.com/docs/how-to-code-and-deploy-a-polygon-smart-contract
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## TODO 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Investigar :
+    Alchemy
+    Chain Stack
+    Quick node 
 
-## Deploy on Vercel
+    https://github.com/The-Stripes-NFT/the-stripes-nft-contract/blob/main/TheStripesNFT.sol 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    Time : https://betterprogramming.pub/solidity-tutorial-all-about-time-units-b392324bea32
