@@ -12,11 +12,6 @@ module.exports = {
       url: API_URL, 
       accounts: [`0x${PRIVATE_KEY}`], 
     },
-    // mainnet: {
-    //   url: " ", 
-    //   accounts: ""
-
-    // },
   },
   solidity: "0.8.17",
 };
