@@ -1,2 +1,2 @@
-export const sc_realState = ""
-export const sc_scrow = ""
+export const sc_realState_localhost = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+export const sc_scrow_localhost = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
