@@ -19,8 +19,8 @@ const Navbar = ({account,setAccount}) => {
   return (
     <div>
       <nav className='w-full flex py-6 justify-between items-center navbar'>
-        <p> DOMO APP </p>
-        <div className='flex mt-4'>
+        
+        <div className='flex mt-6'>
           <Link href='/' legacyBehavior>
             <a className='mr-4 text-pink2'>
               Home
@@ -38,6 +38,11 @@ const Navbar = ({account,setAccount}) => {
                Mercado Secundario 
             </a>
           </Link>
+
+          <div className='nav__brand'>
+            <img src='{logo_color}' alt="Logo" />
+          </div>
+
           {
           account ? (
             <button type='button' className='nav__connect'>
