@@ -10,10 +10,10 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract RealEstate is ERC721URIStorage {
     
     uint256 public maxSupply;
-    //para que era ste ?
+    //marketplace
     address contractAddress;
     address creator;
-    string tokenDATA;
+    string public tokenDATA;
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
