@@ -6,8 +6,9 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
-import { sc_realState_localhost, sc_scrow_localhost } from '../config'
+import { sc_factory_localhost, sc_realState_localhost, sc_scrow_localhost } from '../config'
 import Escrow from '../artifacts/contracts/Escrow.sol/Escrow.json'
+import Factory from '../artifacts/contracts/RealEstate.sol/Factory.json'
 import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
 import {Navbar, Search} from '../components'
 
@@ -30,20 +31,22 @@ export default function Home() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
     const network = await provider.getNetwork()
-    const realEstate = new ethers.Contract(sc_realState_localhost, RealEstate.abi, provider)
-    const totalSupply = await realEstate.totalSupply()
+    const factory = new ethers.Contract(sc_factory_localhost, Factory.abi, provider)
+    const total_rs = Number(await factory.totalRealEstate())
     const homes = []
 
-    for( var i = 1 ; i<= totalSupply; i++){
-      const uri = await realEstate.tokenURI(i)
-      const response = await fetch(uri)
-      const metadata = await response.json()
+    for( var i = 0 ; i< total_rs; i++){
+      const address_re = await factory.RealEstateArray(i);
+      const realEstate = new ethers.Contract(address_re, RealEstate.abi, provider);
+      const totalSupply = Number(await realEstate.totalSupply())
+      const maxSupply = Number(await realEstate.maxSupply())
+      const data = await realEstate.tokenDATA();
+      const response = await fetch(data)
+      var metadata = await response.json()
+      metadata["percentage"] = totalSupply * 100 / maxSupply
       homes.push(metadata)
     }
     setHomes(homes)
-
-    console.log(homes)
-
   }
 
   async function connect() { 
@@ -80,6 +83,7 @@ export default function Home() {
                   <strong> {home.attributes[4].value} </strong> sqft \
                 </p>
                 <p> {home.address}</p>
+                <p> {home.percentage}</p>
               </div>
             </div>
           ))}
