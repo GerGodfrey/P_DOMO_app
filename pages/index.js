@@ -77,14 +77,19 @@ export default function Home() {
               </div>
               <div className='card__info'>
                 <h4> {home.attributes[0].value} ETH </h4>
-                <p>
+                {/* <p>
                   <strong> {home.attributes[2].value} </strong> bds \ 
                   <strong> {home.attributes[3].value} </strong> ba \
                   <strong> {home.attributes[4].value} </strong> sqft \
-                </p>
+                </p> */}
                 <p> {home.address}</p>
-                <p> {home.percentage}</p>
+                <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                  <div className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: `${home.percentage}%`}}>
+                    {home.percentage}%
+                  </div>
+                </div>             
               </div>
+              
             </div>
           ))}
 
