@@ -53,17 +53,14 @@ contract Escrow {
         lender = _lender;
     }
 
-
-
     // Transferir el NFT con ese ID del RealEstate a este contrato y guardar quien lo compró
     function list(
         uint256 _nftID,
         address _buyer,
         uint256 _purchasePrice,
         uint256 _escrowAmount
-    ) public payable onlySeller {
+    ) public payable {
 
-        // console.log("ID del nft:",_nftID);
         IERC721(nftAddress).transferFrom(msg.sender, address(this),_nftID);
         isListed[_nftID] = true;
         purchasePrice[_nftID] = _purchasePrice;
@@ -73,7 +70,6 @@ contract Escrow {
 
     // Put Under Contract (only buyer - payable scrow)
     function depositEarnest(uint256 _nftID) public payable onlyBuyer(_nftID){
-        console.log(escrowAmount[_nftID]);
         require(msg.value >= escrowAmount[_nftID]);
     }
 
