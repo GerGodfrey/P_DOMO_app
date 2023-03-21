@@ -11,6 +11,8 @@
   "dependencies": {
     "@next/font": "13.2.4",
     "@openzeppelin/contracts": "^4.8.2",
+    "@polybase/auth": "^0.3.37",
+    "@polybase/client": "^0.3.37",
     "alchemy-sdk": "^2.6.1",
     "axios": "^1.3.4",
     "dotenv": "^16.0.3",
