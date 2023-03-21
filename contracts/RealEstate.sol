@@ -29,7 +29,7 @@ contract RealEstate is ERC721URIStorage {
     // Mintear n veces la misma casa
     function mint() public returns (uint256) {
         //confirmamos requerimientos 
-        require(_tokenIds.current() < maxSupply, "I'm sorry we reached the cap");
+        require(_tokenIds.current() <= maxSupply, "I'm sorry we reached the cap");
 
         //aumentamos y cambiamos el ID 
         _tokenIds.increment();
