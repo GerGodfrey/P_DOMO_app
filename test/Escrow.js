@@ -58,7 +58,7 @@ describe('Escrow', () => {
         await transaction.wait()
 
 
-        // Mint the first house
+        // Mint the second house
         let transaction2 = await real_estate_1.connect(second_buyer).mint()
         await transaction2.wait()
         // Approve Property
