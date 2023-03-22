@@ -56,7 +56,6 @@ npx hardhat run scripts/deploy.js --network mumbai
  yarn add web3modal
  yarn add @polybase/client
  yarn add @polybase/auth
-
 ```  
  <!-- yarn add web3modal  -->
 ## Tutorials 
