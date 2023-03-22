@@ -9,22 +9,24 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract RealEstate is ERC721URIStorage {
     
-    uint256 public maxSupply;
-    //marketplace
+    //marketplace 
+    
     address contractAddress;
     address creator;
     string public tokenDATA;
+    uint256 public publicPrice;
+    uint256 public maxSupply;
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
     //TODO : address marketplaceAddress
-    constructor(uint256 _maxSupply, string memory _tokenDATA, address _creator ) ERC721("Real Estate", "REAL"){  
+    constructor(uint256 _maxSupply, string memory _tokenDATA, address _creator, uint256 _publicPrice) ERC721("Real Estate", "REAL"){  
         maxSupply = _maxSupply;
         tokenDATA = _tokenDATA;
         creator = _creator;
+        publicPrice = _publicPrice;
     }
-
 
     // Mintear n veces la misma casa
     function mint() public returns (uint256) {
@@ -58,9 +60,8 @@ contract RealEstate is ERC721URIStorage {
 contract Factory {
    RealEstate[] public RealEstateArray;
    
-   function CreateNewRealEstate(uint256 _maxSupply, string memory _tokenURI) public {
-    //console.log("Creator of New Real Estate: ",msg.sender);
-    RealEstate realestate = new RealEstate(_maxSupply, _tokenURI, msg.sender);
+   function CreateNewRealEstate(uint256 _maxSupply, string memory _tokenURI, uint256 _publicPrice) public {
+    RealEstate realestate = new RealEstate(_maxSupply, _tokenURI, msg.sender, _publicPrice);
     RealEstateArray.push(realestate);
    }
 
