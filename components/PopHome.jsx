@@ -3,68 +3,69 @@ import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import close from '../assets/close.svg';
 
-const PopHome = ({ home, provider,account, escrow, togglePop }) => {
-
-    
-    // eslint-disable-next-line 
-    const [hasBought, setHasBought] = useState(false)
-    // eslint-disable-next-line
-    const [hasLended, setHasLended] = useState(false)
-    // eslint-disable-next-line
-    const [hasInspected, setHasInspected] = useState(false)
-    // eslint-disable-next-line
-    const [hasSold, setHasSold] = useState(false)
-
-    // eslint-disable-next-line 
-    const [buyer,setBuyer] =useState(null)
-    // eslint-disable-next-line 
+const PopHome = ({ home, provider,account, escrow, togglePop }) => {    
     const [lender,setLender] =useState(null)
-    // eslint-disable-next-line 
     const [inspector,setInspector] =useState(null)
-    // eslint-disable-next-line 
     const [seller,setSeller] =useState(null)
-    // eslint-disable-next-line 
+    const[souldOut, setSouldOut] = useState(false)
+
     const[owner, setOwner] = useState(null)
-    
-    
+    const [hasBought, setHasBought] = useState(false)
+    const [hasLended, setHasLended] = useState(false)
+    const [hasInspected, setHasInspected] = useState(false)
+    const [hasSold, setHasSold] = useState(false)
+    const [buyer,setBuyer] =useState(null)
+
     useEffect(() => {
 
-        const fetchOwner = async () => {
-            const variable = await escrow.isListed(home.id) 
-            if (variable) {
-                const owner = await escrow.buyer(home.id)
-                setOwner(owner)
+        const fetchSouldOut = async () => {
+            if (home.percentage == 100) { 
+                setSouldOut(true)
             }
         }
-
-        fetchOwner()
+        fetchSouldOut()
         .catch(console.error);;
-        
+                
         const fetchDetails = async () => {
-            const buyer = await escrow.buyer(home.id)
-            setBuyer(buyer)
-            const hasBought = await escrow.approval(home.id, buyer)
-            setHasBought(hasBought)
+            // const buyer = await escrow.buyer(home.id)
+            // setBuyer(buyer)
+
+            // const hasBought = await escrow.approval(home.id, buyer)
+            // setHasBought(hasBought)
     
             const seller = await escrow.seller()
             setSeller(seller)
+
+            const lender = await escrow.lender()
+            setLender(lender)
+
+            const inspector = await escrow.inspector()
+            console.log("inspector: ",inspector)
+            console.log("account:", account)
+            
+            console.log(inspector === account)
+            setInspector(inspector)
+            
             const hasSold = await escrow.approval(home.id, seller)
             setHasSold(hasSold)
     
-            const lender = await escrow.lender()
-            setLender(lender)
             const hasLended = await escrow.approval(home.id, lender)
             setHasLended(hasLended)
-    
-            const inspector = await escrow.inspector()
-            setInspector(inspector)
-            const hasInspected = await escrow.inspectionPassed(home.id)
-            setHasInspected(hasInspected)
-    
-        }
 
+            const hasInspected = await escrow.inspectionPassed()
+            setHasInspected(hasInspected)
+        }
         fetchDetails()
         .catch(console.error);;
+
+        // const fetchOwner = async () => {
+        //     const variable = await escrow.isListed(home.id) 
+        //     if (variable) {
+        //         const owner = await escrow.buyer(home.id)
+        //         setOwner(owner)
+        //     }
+        // }
+        // fetchOwner()
         
     }) 
 
@@ -77,17 +78,13 @@ const PopHome = ({ home, provider,account, escrow, togglePop }) => {
 
                 <div className='home__overview'>
                     <h1>{home.name}</h1>
-                    <p>
-                        <strong>{home.attributes[2].value}</strong> bds /
-                        <strong>{home.attributes[3].value}</strong> ba /
-                        <strong>{home.attributes[4].value}</strong> sqft /
-                    </p>
+                    <h1>Total: {home.totalSupply} / {home.maxSupply}</h1>
+                    <h2>Precio: {home.attributes[0].value} ETH</h2>
                     <p> {home.address}</p>
-                    <h2> {home.attributes[0].value} ETH</h2>
-
-                    {owner ? (
+                    
+                    {souldOut ? (
                         <div className='home__owned'>
-                            Owned by {owner.slice(0,6) + "..." + owner.slice(38,42)}
+                            Sould OUT !! 
                         </div>
                     ) : (
                         <div> 
@@ -110,7 +107,7 @@ const PopHome = ({ home, provider,account, escrow, togglePop }) => {
                             )}
 
                             <button className='home__contact'>
-                                Contact agent 
+                                Buy FIAT
                             </button>
                         </div>
                     )}
@@ -137,10 +134,7 @@ const PopHome = ({ home, provider,account, escrow, togglePop }) => {
                 <button onClick={togglePop} className='home__close'>
                     <img src={close} alt = 'Close' />
                 </button>
-
             </div>
-
-            
         </div>
     );
 }
