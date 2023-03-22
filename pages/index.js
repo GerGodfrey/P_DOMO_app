@@ -44,14 +44,25 @@ export default function Home() {
       const realEstate = new ethers.Contract(address_re, RealEstate.abi, provider);
       const totalSupply = Number(await realEstate.totalSupply());
       const maxSupply = Number(await realEstate.maxSupply());
+      // const precio = Number(await realEstate.publicPrice());
       const data = await realEstate.tokenDATA();
       const response = await fetch(data);
       var metadata = await response.json();
       metadata["address_re"] = address_re;
+      metadata["totalSupply"] = totalSupply;
+      metadata["maxSupply"] = maxSupply;
       metadata["percentage"] = totalSupply * 100 / maxSupply;
+
       homes.push(metadata);
     }
     setHomes(homes)
+
+    window.ethereum.on('accountsChanged', async () => {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = ethers.utils.getAddress(accounts[0])
+      setAccount(account);
+    })
+
   }
 
 
@@ -61,7 +72,7 @@ export default function Home() {
       defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,
     });
 
-    const collectionReference = db.collection("Contracts5");
+    const collectionReference = db.collection("Contracts11");
     const records = await collectionReference.where("real_estate_contract", "==", address_re).get();
     const escrow_contract = records.data[0].data.escrow_contract
 
@@ -97,7 +108,7 @@ export default function Home() {
 
       <div className='cards__section'>
         <h1> Home </h1>
-        <hr />
+        <hr/>
         <div className = 'cards'>
           {homes.map((home,index) => (
             <div className='card' key={index} onClick={() => togglePop(home)}> 
