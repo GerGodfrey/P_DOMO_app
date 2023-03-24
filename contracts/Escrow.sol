@@ -87,19 +87,12 @@ contract Escrow {
     }
 
     function finalizeSale(uint256 _nftID) public {
-        console.log("finalizando:");
         require(isSouldOut);
         require(inspectionPassed);
-        require( address(this).balance >= purchasePrice[_nftID] * maxSupply); 
-        
-        // require(approval[_nftID][buyer[_nftID]]);
-        // require(generic_approval[seller]);
-        // require(generic_approval[lender]);
-               
+        require( address(this).balance >= purchasePrice[_nftID] * maxSupply);                
         (bool success,) = payable(seller).call{value: address(this).balance}("");
         require(success);
 
-        // console.log("MANDANDO:");
         for (uint i = 1; i <= maxSupply ; i++) {
             
             isListed[_nftID] = false;

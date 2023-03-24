@@ -31,11 +31,11 @@ export default function Home() {
 
   const loadBlockchainData = async () => {
 
-    window.ethereum.on('accountsChanged', async () => {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const account = ethers.utils.getAddress(accounts[0])
-      setAccount(account);
-    })
+    // window.ethereum.on('accountsChanged', async () => {
+    //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    //   const account = ethers.utils.getAddress(accounts[0])
+    //   setAccount(account);
+    // })
 
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
@@ -64,12 +64,19 @@ export default function Home() {
     setHomes(homes)
   }
 
+  const changeWallet = async () => {
+    window.ethereum.on('accountsChanged', async () => {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = ethers.utils.getAddress(accounts[0])
+      setAccount(account);
+    })
+  }
 
   async function connectDB(address_re){
     let db = new Polybase({
       defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,
     });
-    const collectionReference = db.collection("Contracts103");
+    const collectionReference = db.collection("Contracts105");
     const records = await collectionReference.where("real_estate_contract", "==", address_re).get();
     const escrow_contract = records.data[0].data.escrow_contract
     return escrow_contract;
@@ -83,7 +90,8 @@ export default function Home() {
   // }
 
   useEffect ( () => {
-    loadBlockchainData()
+    loadBlockchainData(),
+    changeWallet()
   }, [])
 
   const togglePop = (home) => {

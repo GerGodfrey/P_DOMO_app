@@ -1,2 +1,2 @@
 
-export const sc_factory_localhost = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853"
+export const sc_factory_localhost = "0xFCa5Bb3732185AE6AaFC65aD8C9A4fBFf21DbaaD"
