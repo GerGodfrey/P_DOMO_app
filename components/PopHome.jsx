@@ -58,11 +58,16 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
 
         console.log(signer)
         let transaction = await escrow.connect(signer).updateInspectionStatus(true)
-        // await transaction.wait()
+        await transaction.wait()
+        const inspectionPassed = (await escrow.inspectionPassed()).toString();
+        setInspectionPassed(inspectionPassed);
+    }
 
-       
-        // const inspectionPassed = (await escrow.inspectionPassed()).toString();
-        // setInspectionPassed(inspectionPassed);
+    const finish = async () => {
+        console.log("Finish:");
+        const signer = await provider.getSigner()
+        let transaction = await escrow.connect(signer).finalizeSale(1)
+        await transaction.wait()
     }
 
     useEffect(() => {
@@ -163,7 +168,7 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
                                     <button className='home__buy' onClick={buyHandler} >
                                         Buy
                                     </button>
-                                    <button className='home__contact'>
+                                    <button className='home__contact' >
                                         Buy FIAT
                                     </button>
                                 </div>
@@ -188,12 +193,14 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
                                 </li>
                             ))}
                         </ul>
+
                         {(account === inspector) ? (
+                            
                             <div>
                                 <p>Soud OUT : {isSouldOut}</p>
                                 <p>Inspection : {inspectionPassed}</p>
                                 <p>Balance: {balance} ETH</p>
-                                <button className='home__contact'> Finalize Sale </button>
+                                <button className='home__contact' onClick={finish}> Finalize Sale </button>
                             </div>
                             
                         ) : (
