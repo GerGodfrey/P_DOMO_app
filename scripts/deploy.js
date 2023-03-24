@@ -1,18 +1,30 @@
-
+const { ethPersonalSign } =  require('@polybase/eth');
 const {Polybase} = require('@polybase/client');
 const { ethers } = require("hardhat");
 const hre = require("hardhat");
+const { NEXT_PUBLIC_NAME_ESPACE } = process.env;
+require("dotenv").config();
 const tokens = (n) => {
   return ethers.utils.parseUnits(n.toString(), 'ether')
 }
 
-require("dotenv").config();
+let db = new Polybase({defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,});
+const collectionReference = db.collection("Contracts103");
+// db.signer((data) => {
+//   return {
+//     h: 'eth-personal-sign',
+//     sig: ethPersonalSign("0x31773a22aa55fa1b25fb74dc39930e15104e83a256bfa119d8f1808ec923bd37"), data
+//   }
+// });
+
 
 
 async function main() {
   // Setup accounts
   const [buyer, seller, inspector, lender, buyer_2] = await ethers.getSigners()
-  const { NEXT_PUBLIC_NAME_ESPACE } = process.env;
+  const supply = 6;
+  const price = 4;
+  
   let minting, transaction
 
   //Deploy Factory 
@@ -25,13 +37,14 @@ async function main() {
   const RealEstate = await ethers.getContractFactory('RealEstate');
   const Escrow = await ethers.getContractFactory('Escrow');
 
-  async function saveDB(id, real_estate_contract, escrow_contract  ){
-    let db = new Polybase({
-      defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,
-    });
-  
-    const collectionReference = db.collection("Contracts11");
-    const recordData = await collectionReference.create([
+  // async function deleteDB(){
+  //   let uri = await collectionReference.id()
+  //   console.log("id:",uri)
+  //   await collectionReference.delete();
+  // }
+
+  async function saveDB(id,real_estate_contract, escrow_contract  ){
+    let res = await collectionReference.create([
       id,
       real_estate_contract, 
       escrow_contract
@@ -39,8 +52,7 @@ async function main() {
   }
 
   // Mint Real Estate
-  const supply = 2;
-  const price = 4;
+  
   console.log("Minting 3 properties .... ")
   for (let i = 0; i < 3; i++) {
     minting = await factory.CreateNewRealEstate(
@@ -56,7 +68,7 @@ async function main() {
   const escrow_rs_1 = await Escrow.deploy(address_rs_1,supply,seller.address,inspector.address,lender.address);
   await escrow_rs_1.deployed();
   console.log(`Deployed Escrow Contract RS 1 at: ${escrow_rs_1.address}\n`);
-  saveDB("1",address_rs_1,escrow_rs_1.address)
+  saveDB("1",address_rs_1,escrow_rs_1.address);
 
 
 
@@ -80,13 +92,18 @@ async function main() {
   // Buy First proyect 
   for (let i = 0; i < 2; i++) {
     let real_estate_1 = await RealEstate.attach(address_rs_1);
+
     transaction = await real_estate_1.connect(buyer).mint();
     await transaction.wait();
     transaction = await real_estate_1.connect(buyer).approve(escrow_rs_1.address, i+1)
     await transaction.wait();
-    transaction = await escrow_rs_1.connect(buyer).list(i+1, buyer.address, tokens(10), tokens(5))
+
+    let price = await real_estate_1.publicPrice()
+
+    transaction = await escrow_rs_1.connect(buyer).list(i+1, buyer.address, tokens(price))
     await transaction.wait();
   }
+
   transaction = await escrow_rs_1.connect(inspector).updateInspectionStatus(true)
   await transaction.wait()
   
@@ -96,7 +113,9 @@ async function main() {
   await transaction.wait()
   transaction = await real_estate_2.connect(buyer_2).approve(escrow_rs_2.address, 1)
   await transaction.wait()
-  transaction = await escrow_rs_2.connect(buyer_2).list(1, buyer_2.address, tokens(10), tokens(5))
+
+  let price2 = await real_estate_2.publicPrice()
+  transaction = await escrow_rs_2.connect(buyer_2).list(1, buyer_2.address, tokens(price2))
   await transaction.wait()
 
   console.log(`Finished.`)

@@ -38,7 +38,7 @@ contract Escrow {
 
     mapping(uint256 => bool) public isListed;
     mapping(uint256 => uint256) public purchasePrice;
-    mapping(uint256 => uint256) public escrowAmount;
+    //mapping(uint256 => uint256) public escrowAmount;
     mapping(uint256 => address) public buyer;
     mapping(address => bool) public generic_approval;
     mapping(uint256 => mapping (address => bool)) public approval;
@@ -56,14 +56,12 @@ contract Escrow {
     function list(
         uint256 _nftID,
         address _buyer,
-        uint256 _purchasePrice,
-        uint256 _escrowAmount
+        uint256 _purchasePrice
     ) public payable {
 
         IERC721(address_rs).transferFrom(msg.sender, address(this),_nftID);
         isListed[_nftID] = true;
         purchasePrice[_nftID] = _purchasePrice;
-        escrowAmount[_nftID] = _escrowAmount;
         buyer[_nftID] = _buyer;
         if(_nftID >= maxSupply ){
             isSouldOut = true;
@@ -73,7 +71,7 @@ contract Escrow {
 
     // Put Under Contract (only buyer - payable scrow)
     function depositEarnest(uint256 _nftID) public payable onlyBuyer(_nftID){
-        require(msg.value >= escrowAmount[_nftID]);
+        require(msg.value >= purchasePrice[_nftID]);
     }
 
     function updateInspectionStatus(bool _passed) public onlyInspector {
@@ -89,18 +87,22 @@ contract Escrow {
     }
 
     function finalizeSale(uint256 _nftID) public {
+        console.log("finalizando:");
         require(isSouldOut);
         require(inspectionPassed);
-        require(approval[_nftID][buyer[_nftID]]);
-        require(generic_approval[seller]);
-        require(generic_approval[lender]);
-        require(address(this).balance >= purchasePrice[_nftID]*_nftID);
-        isListed[_nftID] = false;
-
+        require( address(this).balance >= purchasePrice[_nftID] * maxSupply); 
+        
+        // require(approval[_nftID][buyer[_nftID]]);
+        // require(generic_approval[seller]);
+        // require(generic_approval[lender]);
+               
         (bool success,) = payable(seller).call{value: address(this).balance}("");
         require(success);
 
+        // console.log("MANDANDO:");
         for (uint i = 1; i <= maxSupply ; i++) {
+            
+            isListed[_nftID] = false;
             IERC721(address_rs).transferFrom(address(this),buyer[i],i);
         }
         
