@@ -67,7 +67,8 @@ npx hardhat run scripts/deploy.js --network mumbai
 5) https://www.quicknode.com/guides/ethereum-development/smart-contracts/how-to-create-a-smart-contract-factory-in-solidity-using-hardhat/
 6) https://medium.com/coinmonks/smart-contract-factories-how-to-create-a-contract-to-create-another-contract-248a120f331a#:~:text=A%20Contract%20Factory%20is%20a,of%20the%20newly%20deployed%20contract.
 7) Chai Testing : https://www.chaijs.com/api/bdd/ 
-
+8) Suarmi : https://app.swaggerhub.com/apis/CUENTAS_1/suarmi_api/1.1.0#/info 
+9) Post Online : https://reqbin.com/
 ## TODO 
 
 Preguntas:
@@ -80,3 +81,6 @@ Investigar:
     https://github.com/The-Stripes-NFT/the-stripes-nft-contract/blob/main/TheStripesNFT.sol 
 
     Time : https://betterprogramming.pub/solidity-tutorial-all-about-time-units-b392324bea32
+
+
+    MultiCall -> Biconomy 
