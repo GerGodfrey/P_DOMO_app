@@ -19,6 +19,7 @@
     "ipfs-http-client": "^60.0.0",
     "next": "13.2.4",
     "react": "18.2.0",
+    "react-confetti": "^6.1.0",
     "react-dom": "18.2.0",
     "react-scroll": "^1.8.9",
     "web3modal": "^1.9.12"
