@@ -6,22 +6,21 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 // import axios from 'axios'
 // import Web3Modal from 'web3modal'
-import { sc_factory_localhost } from '../config'
-import Escrow from '../artifacts/contracts/Escrow.sol/Escrow.json'
-import Factory from '../artifacts/contracts/RealEstate.sol/Factory.json'
-import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
+import { sc_factory_localhost, sc_factory_tesnet } from '../config'
+// import Escrow from '../artifacts/contracts/Escrow.sol/Escrow.json'
+// import Factory from '../artifacts/contracts/RealEstate.sol/Factory.json'
+// import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
+import Escrow from '../constants/Escrow_metadata.json'
+import Factory from '../constants/Factory_metadata.json'
+import RealEstate from '../constants/RealEstate_metadata.json'
 import {Search, PopHome} from '../components'
 import { Polybase } from '@polybase/client'
 import { useRouter } from 'next/router';
 import {utils} from 'ethers';
 
-//
-// import { ethPersonalSign } from '@polybase/eth'
-// import * as eth from "@polybase/eth"
 const path = require('path');
 require('dotenv').config({ path: path.resolve('config.env'),});
 const NEXT_PUBLIC_NAME_ESPACE  = process.env.NEXT_PUBLIC_NAME_ESPACE;
-// const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter();
@@ -42,25 +41,18 @@ export default function Home() {
   
 
   const loadBlockchainData = async () => {
-
-    // window.ethereum.on('accountsChanged', async () => {
-    //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    //   const account = ethers.utils.getAddress(accounts[0])
-    //   setAccount(account);
-    // })
-
     
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
 
     //const network = await provider.getNetwork()
-    const factory = new ethers.Contract(sc_factory_localhost, Factory.abi, provider)
+    const factory = new ethers.Contract(sc_factory_tesnet, Factory.output.abi, provider)
     const total_rs = Number(await factory.totalRealEstate())
     const homes = []
 
     for( var i = 0 ; i< total_rs; i++){
       const address_re = await factory.RealEstateArray(i);
-      const realEstate = new ethers.Contract(address_re, RealEstate.abi, provider);
+      const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
 
       const totalSupply = Number(await realEstate.totalSupply());
       const maxSupply = Number(await realEstate.maxSupply());
@@ -90,18 +82,11 @@ export default function Home() {
     let db = new Polybase({
       defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,
     });
-    const collectionReference = db.collection("Contracts107");
+    const collectionReference = db.collection("Contracts109");
     const records = await collectionReference.where("real_estate_contract", "==", address_re).get();
     const escrow_contract = records.data[0].data.escrow_contract
     return escrow_contract;
   }
-
-  // async function connect() { 
-  //   const web3modal = new Web3Modal()
-  //   const connection = await web3modal.connect()
-  //   const provider = new ethers.providers.Web3Provider(connection)
-  //   const signer = provider.getSigner()
-  // }
 
   useEffect ( () => {
     loadBlockchainData(),
@@ -111,11 +96,11 @@ export default function Home() {
   const togglePop = (home) => {
     setHome(home);
     const escrow_contract = connectDB(home.address_re);
-    const escrow = new ethers.Contract(escrow_contract,Escrow.abi, provider);
+    const escrow = new ethers.Contract(escrow_contract,Escrow.output.abi, provider);
     setEscrow(escrow);
 
     if (!toggle && account){
-      const realEstate = new ethers.Contract(home.address_re, RealEstate.abi, provider);
+      const realEstate = new ethers.Contract(home.address_re, RealEstate.output.abi, provider);
       setRealEstate(realEstate);
     }
 

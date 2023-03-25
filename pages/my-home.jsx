@@ -1,13 +1,9 @@
 import { ethers } from 'ethers';
-import {Navbar} from '../components'
 import { useEffect, useState } from 'react'
 import { Polybase } from '@polybase/client'
 const path = require('path');
 require('dotenv').config({ path: path.resolve('config.env'),});
 const NEXT_PUBLIC_NAME_ESPACE  = process.env.NEXT_PUBLIC_NAME_ESPACE;
-import { sc_factory_localhost } from '../config'
-import Escrow from '../artifacts/contracts/Escrow.sol/Escrow.json'
-import Factory from '../artifacts/contracts/RealEstate.sol/Factory.json'
 import { useRouter } from 'next/router';
 import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
 import {utils} from 'ethers';
