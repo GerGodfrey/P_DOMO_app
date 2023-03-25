@@ -1,6 +1,7 @@
 // eslint-disable-next-line 
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
+import {PopCongrats} from '../components'
 
 const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {    
     const [lender,setLender] =useState(null)
@@ -30,25 +31,31 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
             const new_Supply = home.totalSupply+1
             const publicPrice = Number(await realEstate.publicPrice())
 
-            let transaction = await realEstate.connect(signer).mint();
-            await transaction.wait();
+            try{
+                let transaction = await realEstate.connect(signer).mint();
+                await transaction.wait();
+    
+                transaction = await realEstate.connect(signer).approve(escrow.address,new_Supply)
+                await transaction.wait()  
+                
+                transaction = await escrow.connect(signer).list(new_Supply, account, tokens(publicPrice))
+                await transaction.wait()
+    
+                // Buyer deposit earnest
+                transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(publicPrice) })
+                await transaction.wait()
+    
+                // Buyer approves...
+                transaction = await escrow.connect(signer).approveSale(new_Supply)
+                await transaction.wait()
+    
+                let escrow_balance = Number(await escrow.getBalance())
 
-            transaction = await realEstate.connect(signer).approve(escrow.address,new_Supply)
-            await transaction.wait()  
-            
-            transaction = await escrow.connect(signer).list(new_Supply, account, tokens(publicPrice))
-            await transaction.wait()
-
-            // Buyer deposit earnest
-            transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(publicPrice) })
-            await transaction.wait()
-
-            // Buyer approves...
-            transaction = await escrow.connect(signer).approveSale(new_Supply)
-            await transaction.wait()
-
-            let escrow_balance = Number(await escrow.getBalance())
-            // setHasBought(true)
+                console.log("hasBought",hasBought)
+                setHasBought(true)
+            } catch (error){
+                console.error(error);
+            }
         }
     }
 
@@ -88,25 +95,17 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
             // setHasBought(hasBought)
     
             const seller = await escrow.seller()
-            console.log("SELLER VS ACCOUNT: ",seller===account)
             setSeller(seller)
 
             const lender = await escrow.lender()
-
             setLender(lender)
 
             const inspector = await escrow.inspector()
             setInspector(inspector)
-            console.log("inspector VS inspector: ",inspector===account)
-            console.log("account",account)
-            console.log("inspector",inspector)
-            
             const hasSold = await escrow.approval(home.id, seller)
             setHasSold(hasSold)
-    
             const hasLended = await escrow.approval(home.id, lender)
             setHasLended(hasLended)
-
             const hasInspected = await escrow.inspectionPassed()
             setHasInspected(hasInspected)
         }
@@ -206,11 +205,15 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
                     </div>
                 </div>
                 <button onClick={togglePop} className='home__close'>
-                    <p className=' text-white'>
+                    <p className=' text-pink2 font-bold hover:text-pink3'>
                         X
                     </p>
                 </button>
+                
             </div>
+            {hasBought && (
+                <PopCongrats />
+            )}
         </div>
     );
 }
