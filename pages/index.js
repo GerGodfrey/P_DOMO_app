@@ -6,12 +6,16 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 // import axios from 'axios'
 // import Web3Modal from 'web3modal'
-import { sc_factory_localhost, sc_realState_localhost, sc_scrow_localhost } from '../config'
+import { sc_factory_localhost } from '../config'
 import Escrow from '../artifacts/contracts/Escrow.sol/Escrow.json'
 import Factory from '../artifacts/contracts/RealEstate.sol/Factory.json'
 import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
 import {Navbar, Search, PopHome} from '../components'
 import { Polybase } from '@polybase/client'
+import { useRouter } from 'next/router';
+import {utils} from 'ethers';
+
+//
 // import { ethPersonalSign } from '@polybase/eth'
 // import * as eth from "@polybase/eth"
 const path = require('path');
@@ -20,7 +24,15 @@ const NEXT_PUBLIC_NAME_ESPACE  = process.env.NEXT_PUBLIC_NAME_ESPACE;
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [account, setAccount] = useState(null)
+  const router = useRouter();
+  let data = router.query.data
+  if(data){
+    data = utils.getAddress(data)
+  }
+  const [account, setAccount] = useState(data)
+
+  console.log("ACCOUNT_INDEX:",account)
+
   const [provider, setProvider] = useState(null)
   const [homes, setHomes] = useState([])
   const [home, setHome] = useState([])
@@ -37,8 +49,10 @@ export default function Home() {
     //   setAccount(account);
     // })
 
+    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
+
     //const network = await provider.getNetwork()
     const factory = new ethers.Contract(sc_factory_localhost, Factory.abi, provider)
     const total_rs = Number(await factory.totalRealEstate())
@@ -76,7 +90,7 @@ export default function Home() {
     let db = new Polybase({
       defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,
     });
-    const collectionReference = db.collection("Contracts105");
+    const collectionReference = db.collection("Contracts107");
     const records = await collectionReference.where("real_estate_contract", "==", address_re).get();
     const escrow_contract = records.data[0].data.escrow_contract
     return escrow_contract;
@@ -110,9 +124,9 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar account={account} setAccount={setAccount} / >
-      <Search />
 
+      
+      <Search />
       <div className='cards__section'>
         <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Some Opportunities: </h1>
         <div className = 'cards'>
