@@ -53,6 +53,9 @@ function App({ Component, pageProps }) {
                 <p>
                   Secondary Market
                 </p>
+                <p>
+                  Instructions
+                </p>
               </div>
             </li>
             <li>
