@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import {PopCongrats} from '../components'
 
 const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {    
-    const [lender,setLender] =useState(null)
     const [inspector,setInspector] =useState(null)
     const [seller,setSeller] =useState(null)
     const[souldOut, setSouldOut] = useState(false)
@@ -14,7 +13,6 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
 
     const[owner, setOwner] = useState(null)
     const [hasBought, setHasBought] = useState(false)
-    const [hasLended, setHasLended] = useState(false)
     const [hasInspected, setHasInspected] = useState(false)
     const [hasSold, setHasSold] = useState(false)
     const [buyer,setBuyer] =useState(null)
@@ -96,16 +94,10 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
     
             const seller = await escrow.seller()
             setSeller(seller)
-
-            const lender = await escrow.lender()
-            setLender(lender)
-
             const inspector = await escrow.inspector()
             setInspector(inspector)
             const hasSold = await escrow.approval(home.id, seller)
             setHasSold(hasSold)
-            const hasLended = await escrow.approval(home.id, lender)
-            setHasLended(hasLended)
             const hasInspected = await escrow.inspectionPassed()
             setHasInspected(hasInspected)
         }
@@ -141,7 +133,7 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
                     <p> {home.address}</p>
                     
                     {
-                    (souldOut && (account !== inspector && account !== lender && account !== seller) ) ? (
+                    (souldOut && (account !== inspector && account !== seller) ) ? (
                         <div className='home__owned'>
                             Sould OUT !! 
                         </div>
@@ -150,10 +142,6 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
                             {(account === inspector) ? (
                                 <button className='home__buy' onClick={appInspection}>
                                     Approve Inspection
-                                </button>
-                            ) : ( account === lender) ? (
-                                <button className='home__buy'>
-                                    Approve & Lend 
                                 </button>
                             ) : (account === seller) ? (
                                 <button className='home__buy'>
