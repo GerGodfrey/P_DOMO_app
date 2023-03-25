@@ -9,7 +9,7 @@ const tokens = (n) => {
 }
 
 let db = new Polybase({defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,});
-const collectionReference = db.collection("Contracts108");
+const collectionReference = db.collection("Contracts110");
 // db.signer((data) => {
 //   return {
 //     h: 'eth-personal-sign',
@@ -21,7 +21,7 @@ const collectionReference = db.collection("Contracts108");
 
 async function main() {
   // Setup accounts
-  const [buyer, seller, inspector, lender, buyer_2] = await ethers.getSigners()
+  const [buyer, seller, inspector, buyer_2] = await ethers.getSigners()
   const supply = 10;
   const price = 4;
   
@@ -59,7 +59,10 @@ async function main() {
   const address_rs_1 = await factory.RealEstateArray(0);
   console.log(`Deployed RS 1 Contract at: ${address_rs_1}`);
 
-  const escrow_rs_1 = await Escrow.deploy(address_rs_1,supply,seller.address,inspector.address,lender.address);
+  console.log("seller.address", seller.address)
+  console.log("inspector.address",inspector.address)
+
+  const escrow_rs_1 = await Escrow.deploy(address_rs_1,supply,seller.address,inspector.address);
   await escrow_rs_1.deployed();
   console.log(`Deployed Escrow Contract RS 1 at: ${escrow_rs_1.address}\n`);
   saveDB("1",address_rs_1,escrow_rs_1.address);
@@ -67,7 +70,7 @@ async function main() {
   const address_rs_2 = await factory.RealEstateArray(1);
   console.log(`Deployed RS 2 Contract at: ${address_rs_2}`);
   
-  const escrow_rs_2 = await Escrow.deploy(address_rs_2,supply,seller.address,inspector.address,lender.address);
+  const escrow_rs_2 = await Escrow.deploy(address_rs_2,supply,seller.address,inspector.address);
   await escrow_rs_2.deployed();
   console.log(`Deployed Escrow Contract RS 2 at: ${escrow_rs_2.address}\n`);
   saveDB("2",address_rs_2,escrow_rs_2.address)
@@ -75,7 +78,7 @@ async function main() {
   const address_rs_3 = await factory.RealEstateArray(2);
   console.log(`Deployed RS 3 Contract at: ${address_rs_3} `)
   
-  const escrow_rs_3 = await Escrow.deploy(address_rs_3,supply,seller.address,inspector.address,lender.address)
+  const escrow_rs_3 = await Escrow.deploy(address_rs_3,supply,seller.address,inspector.address)
   await escrow_rs_3.deployed()
   console.log(`Deployed Escrow Contract RS 3 at: ${escrow_rs_3.address}\n`)
   saveDB("3",address_rs_3,escrow_rs_3.address)
