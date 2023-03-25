@@ -77,7 +77,9 @@ npx hardhat run scripts/deploy.js --network mumbai
 2) Build Full Stack Polygon Link: https://www.youtube.com/watch?v=GKJBEEXUha0
 3) Metadata Standars Link: https://docs.opensea.io/docs/metadata-standards
 4) How to deploy Polygon SC: https://docs.alchemy.com/docs/how-to-code-and-deploy-a-polygon-smart-contract
+
 5) https://www.quicknode.com/guides/ethereum-development/smart-contracts/how-to-create-a-smart-contract-factory-in-solidity-using-hardhat/
+
 6) https://medium.com/coinmonks/smart-contract-factories-how-to-create-a-contract-to-create-another-contract-248a120f331a#:~:text=A%20Contract%20Factory%20is%20a,of%20the%20newly%20deployed%20contract.
 7) Chai Testing : https://www.chaijs.com/api/bdd/ 
 8) Suarmi : https://app.swaggerhub.com/apis/CUENTAS_1/suarmi_api/1.1.0#/info 
