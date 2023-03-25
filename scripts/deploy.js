@@ -9,7 +9,7 @@ const tokens = (n) => {
 }
 
 let db = new Polybase({defaultNamespace: NEXT_PUBLIC_NAME_ESPACE,});
-const collectionReference = db.collection("Contracts105");
+const collectionReference = db.collection("Contracts107");
 // db.signer((data) => {
 //   return {
 //     h: 'eth-personal-sign',
