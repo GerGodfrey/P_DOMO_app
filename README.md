@@ -1,7 +1,20 @@
 # DOMO
-
+<p align="center">
+    <br>
+    <img src="assets/logo.svg" width="500"/>
+    <br>
+<p>
 INVEST IN REAL ESTATE FRACTIONS
 No more long processes. Relax and receive monthly income - DOMO takes care of everything!
+
+
+
+## How Works ? 
+<p align="center">
+    <br>
+    <img src="assets/diagrama.png" width="500"/>
+    <br>
+<p>
 
 ## Getting Started
 
