@@ -88,13 +88,18 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
             // setHasBought(hasBought)
     
             const seller = await escrow.seller()
+            console.log("SELLER VS ACCOUNT: ",seller===account)
             setSeller(seller)
 
             const lender = await escrow.lender()
+
             setLender(lender)
 
             const inspector = await escrow.inspector()
             setInspector(inspector)
+            console.log("inspector VS inspector: ",inspector===account)
+            console.log("account",account)
+            console.log("inspector",inspector)
             
             const hasSold = await escrow.approval(home.id, seller)
             setHasSold(hasSold)
@@ -121,15 +126,7 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
         fetchEscrow()
         .catch(console.error);;
 
-        // const fetchOwner = async () => {
-        //     const variable = await escrow.isListed(home.id) 
-        //     if (variable) {
-        //         const owner = await escrow.buyer(home.id)
-        //         setOwner(owner)
-        //     }
-        // }
-        // fetchOwner()        
-    }) 
+     }) 
 
     return (
         <div className="home">
