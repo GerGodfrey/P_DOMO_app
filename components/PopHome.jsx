@@ -30,9 +30,14 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
             const publicPrice = Number(await realEstate.publicPrice())
 
             try{
+                
                 let transaction = await realEstate.connect(signer).mint();
                 await transaction.wait();
-    
+
+
+                console.log("escrow.address",escrow.address)
+                console.log("new_Supply",new_Supply)
+                
                 transaction = await realEstate.connect(signer).approve(escrow.address,new_Supply)
                 await transaction.wait()  
                 
