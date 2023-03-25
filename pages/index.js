@@ -10,7 +10,7 @@ import { sc_factory_localhost } from '../config'
 import Escrow from '../artifacts/contracts/Escrow.sol/Escrow.json'
 import Factory from '../artifacts/contracts/RealEstate.sol/Factory.json'
 import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
-import {Navbar, Search, PopHome} from '../components'
+import {Search, PopHome} from '../components'
 import { Polybase } from '@polybase/client'
 import { useRouter } from 'next/router';
 import {utils} from 'ethers';
