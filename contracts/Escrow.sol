@@ -16,7 +16,6 @@ contract Escrow {
     address public address_rs;
     address payable public seller; 
     address public inspector;
-    address public lender;
     uint256 public maxSupply;
     bool public isSouldOut = false;
     bool public inspectionPassed = false;
@@ -44,12 +43,11 @@ contract Escrow {
     mapping(uint256 => mapping (address => bool)) public approval;
 
 
-    constructor(address _address_rs, uint256 _maxSupply ,address payable _seller, address _inspector, address _lender){
+    constructor(address _address_rs, uint256 _maxSupply ,address payable _seller, address _inspector){
         address_rs = _address_rs;
         maxSupply = _maxSupply;
         seller = _seller;
         inspector = _inspector;
-        lender = _lender;
     }
 
     // Transferir el NFT con ese ID del RealEstate a este contrato y guardar quien lo compró

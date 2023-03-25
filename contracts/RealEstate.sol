@@ -9,8 +9,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract RealEstate is ERC721URIStorage {
     
-    //marketplace 
-    
     address contractAddress;
     address creator;
     string public tokenDATA;
@@ -61,6 +59,7 @@ contract Factory {
    RealEstate[] public RealEstateArray;
    
    function CreateNewRealEstate(uint256 _maxSupply, string memory _tokenURI, uint256 _publicPrice) public {
+    console.log("msg.sender",msg.sender);
     RealEstate realestate = new RealEstate(_maxSupply, _tokenURI, msg.sender, _publicPrice);
     RealEstateArray.push(realestate);
    }
