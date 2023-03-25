@@ -6,13 +6,13 @@ const tokens = (n) => {
 }
 
 describe('Escrow', () => {
-    let seller, inspector, lender,buyer, second_buyer, address_rs_1
+    let seller, inspector,buyer, second_buyer, address_rs_1
     let factory,escrow_rs_1,real_estate_1
     let total_rs, max_supply_rs_1, total_supply_rs_1, pre_Balance
 
     beforeEach(async () => {
         // Setup accounts
-        [buyer, seller, inspector, lender,second_buyer,creator] = await ethers.getSigners()
+        [buyer, seller, inspector,second_buyer,creator] = await ethers.getSigners()
         
         // Deploy Factory
         const Factory = await ethers.getContractFactory('Factory')
@@ -46,8 +46,7 @@ describe('Escrow', () => {
             address_rs_1,
             max_supply_rs_1,
             seller.address,
-            inspector.address,
-            lender.address
+            inspector.address
         ) 
         console.log(`Deployed Escrow Contract at: ${escrow_rs_1.address}`)
 
@@ -118,11 +117,6 @@ describe('Escrow', () => {
         it('Returns inspector', async() => {
             const result = await escrow_rs_1.inspector()
             expect(result).to.be.equal(inspector.address)
-        })
-    
-        it('Returns lender', async() => {
-            const result = await escrow_rs_1.lender()
-            expect(result).to.be.equal(lender.address)
         })
 
     })
