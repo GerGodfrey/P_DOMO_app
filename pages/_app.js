@@ -53,9 +53,12 @@ function App({ Component, pageProps }) {
                 <p>
                   Secondary Market
                 </p>
-                <p>
+                <Link href={{pathname: "/Doubts", query: { data: account, data2 : provider }}} legacyBehavior>
+                  <a className='mr-4 text-pink2 hover:text-pink3'>
                   Instructions
-                </p>
+                  </a>
+                </Link>
+
               </div>
             </li>
             <li>

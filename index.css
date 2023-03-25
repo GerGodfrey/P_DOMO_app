@@ -56,6 +56,10 @@ nav {
   font-weight: 800;
 }
 
+.instructions {
+  background-color: white
+}
+
 .nav__links {
   display: flex;
   justify-content: center;
