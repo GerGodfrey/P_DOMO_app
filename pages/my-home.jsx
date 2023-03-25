@@ -5,7 +5,9 @@ const path = require('path');
 require('dotenv').config({ path: path.resolve('config.env'),});
 const NEXT_PUBLIC_NAME_ESPACE  = process.env.NEXT_PUBLIC_NAME_ESPACE;
 import { useRouter } from 'next/router';
-import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
+import RealEstate from '../constants/RealEstate_metadata.json'
+//import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
+
 import {utils} from 'ethers';
 
 export default function My_home (){
@@ -54,7 +56,7 @@ export default function My_home (){
               console.log("Casas Vacias:",homes)
               for(var i=0 ; i< len ; i++){
                 const address_re = records.data[i].data.real_estate_contract
-                const realEstate = new ethers.Contract(address_re, RealEstate.abi, provider);
+                const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
                 const newBalance = Number (await realEstate.balanceOf(account));
                 console.log("balance:",newBalance)
                 if(newBalance !== 0){
