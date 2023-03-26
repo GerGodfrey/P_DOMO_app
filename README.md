@@ -20,14 +20,10 @@ Just enter into https://domo-app.vercel.app/ and enjoy !!
 
 ### Sections 
 
-#### Home
-You can see All Real Estate in sell into the DOMO
-#### My Home
-You see yours NFTs 
-#### Instructions 
-Don't know how to start? Read this!!
-#### Market Place 
-Stay Stun !! 
+- *Home:* You can see All Real Estate in sell into the DOMO
+- *My Home:* You see yours NFTs 
+- *Instructions:* Don't know how to start? Read this!!
+- *Market Place:* Stay Stun !! 
 
 
 ## Smart Contracts Deployed
@@ -45,14 +41,14 @@ Stay Stun !!
 ### Tech Flow 
 <p align="center">
     <br>
-    <img src="assets/diagrama.png" width="500"/>
+    <img src="assets/diagrama.png"/>
     <br>
 <p>
 
 ### User Flow
 <p align="center">
     <br>
-    <img src="assets/flow2.png" width="500"/>
+    <img src="assets/flow2.png" width="800"/>
     <br>
 <p>
 
