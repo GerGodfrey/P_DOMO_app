@@ -42,11 +42,23 @@ Stay Stun !!
 | Escrow 3 | 0xE8b3C3fdeD68D359B857b5899E8920c57938Ef1C |
 
 ## How Works ? 
+### Tech Flow 
 <p align="center">
     <br>
     <img src="assets/diagrama.png" width="500"/>
     <br>
 <p>
+
+### User Flow
+<p align="center">
+    <br>
+    <img src="assets/flow2.png" width="500"/>
+    <br>
+<p>
+
+## Others Links 
+[Eth Scaling App ]()  
+[escalidraw ](https://excalidraw.com/#room=eed41750993fbf3d5acd,WK2xKC5PZBkeo6M0nGj9fw)
 
 ## Next Steps 
 ### Blockchain Tech 
