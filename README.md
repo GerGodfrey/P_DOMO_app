@@ -53,8 +53,9 @@ Just enter into https://domo-app.vercel.app/ and enjoy !!
 <p>
 
 ## Others Links 
-[Eth Scaling App ]()  
+[Eth Scaling App ](https://ethglobal.com/showcase/domo-5kv83)  
 [escalidraw ](https://excalidraw.com/#room=eed41750993fbf3d5acd,WK2xKC5PZBkeo6M0nGj9fw)
+[Pitch ](https://ethglobal.com/showcase/domo-5kv83)  
 
 ## Next Steps 
 ### Blockchain Tech 
