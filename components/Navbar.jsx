@@ -20,13 +20,12 @@ const Navbar = () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setAccount(accounts[0]);
     
-    const prov = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(prov);
+    // const prov = new ethers.providers.Web3Provider(window.ethereum)
+    // setProvider(prov);
   }
 
   return (
-    <div>
-      
+    <div> 
       <nav className={`flex bg-[#1E2022] p-[15px]`}>
         <ul className={`flex justify-evenly w-full items-center`}>
           <li>
