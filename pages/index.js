@@ -13,7 +13,7 @@ import { sc_factory_localhost, sc_factory_tesnet } from '../config'
 import Escrow from '../constants/Escrow_metadata.json'
 import Factory from '../constants/Factory_metadata.json'
 import RealEstate from '../constants/RealEstate_metadata.json'
-import {Search, PopHome} from '../components'
+import {Search, PopHome, Navbar} from '../components'
 import { Polybase } from '@polybase/client'
 import { useRouter } from 'next/router';
 import {utils} from 'ethers';
@@ -110,7 +110,7 @@ export default function Home() {
   return (
     <div>
 
-      
+      <Navbar />
       <Search />
       <div className='cards__section'>
         <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Some Opportunities: </h1>

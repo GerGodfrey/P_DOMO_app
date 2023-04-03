@@ -1,11 +1,12 @@
 import { ethers } from 'ethers';
-import { useEffect, useState } from 'react'
-import { Polybase } from '@polybase/client'
+import { useEffect, useState } from 'react';
+import { Polybase } from '@polybase/client';
 const path = require('path');
 require('dotenv').config({ path: path.resolve('config.env'),});
 const NEXT_PUBLIC_NAME_ESPACE  = process.env.NEXT_PUBLIC_NAME_ESPACE;
 import { useRouter } from 'next/router';
-import RealEstate from '../constants/RealEstate_metadata.json'
+import RealEstate from '../constants/RealEstate_metadata.json';
+import {Navbar} from '../components';
 //import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
 
 import {utils} from 'ethers';
@@ -84,8 +85,9 @@ export default function My_home (){
     }
 
     return (
+        
         <div>
-            
+            <Navbar/>
             {(account) ? (
                 <div>
                     <p className="flex text-white"> Hola {account.slice(0, 6) + '...' + account.slice(38, 42)} el valor de tu hogar es {balance} ETH</p>
