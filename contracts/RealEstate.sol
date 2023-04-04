@@ -7,6 +7,26 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 
+//TODO:
+    // Agregar un internal/private al CreateNewRealEstate 
+    // Agregar el marketplaceAddress al consutrctor de RealEstate
+
+
+contract Factory {
+   RealEstate[] public RealEstateArray;
+   
+   function CreateNewRealEstate(uint256 _maxSupply, string memory _tokenURI, uint256 _publicPrice) public {
+    //console.log("msg.sender",msg.sender);
+    RealEstate realestate = new RealEstate(_maxSupply, _tokenURI, msg.sender, _publicPrice);
+    RealEstateArray.push(realestate);
+   }
+
+   function totalRealEstate() public view returns (uint256){
+        uint256 res = RealEstateArray.length ; 
+        return res;
+   }
+}
+
 contract RealEstate is ERC721URIStorage {
     
     address contractAddress;
@@ -18,7 +38,6 @@ contract RealEstate is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    //TODO : address marketplaceAddress
     constructor(uint256 _maxSupply, string memory _tokenDATA, address _creator, uint256 _publicPrice) ERC721("Real Estate", "REAL"){  
         maxSupply = _maxSupply;
         tokenDATA = _tokenDATA;
@@ -52,20 +71,4 @@ contract RealEstate is ERC721URIStorage {
         return _tokenIds.current();
     }
 
-}
-
-
-contract Factory {
-   RealEstate[] public RealEstateArray;
-   
-   function CreateNewRealEstate(uint256 _maxSupply, string memory _tokenURI, uint256 _publicPrice) public {
-    console.log("msg.sender",msg.sender);
-    RealEstate realestate = new RealEstate(_maxSupply, _tokenURI, msg.sender, _publicPrice);
-    RealEstateArray.push(realestate);
-   }
-
-   function totalRealEstate() public view returns (uint256){
-        uint256 res = RealEstateArray.length ; 
-        return res;
-   }
 }
