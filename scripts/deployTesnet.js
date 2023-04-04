@@ -12,7 +12,7 @@ async function main() {
   const seller = "0xF7E81CDD73c3C5309a9a346E365BdDC21CF67Df1"
   const inspector = "0x5281007dD0E66984A6E68e11039Fda8f038B5195"
   const supply = 6;
-  const price = 1;
+  const price = 0.1;
   
   let minting, transaction
 
