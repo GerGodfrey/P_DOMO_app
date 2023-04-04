@@ -8,6 +8,7 @@ import { ethers } from 'ethers';
 
 function App({ Component, pageProps }) {
   const [account, setAccount] = useState()
+  const [toggle, setToggle] = useState(false);
   // const [provider, setProvider] = useState(null)
   
   // const connectHandler = async () => {

@@ -13,24 +13,25 @@ import { sc_factory_localhost, sc_factory_tesnet } from '../config'
 import Escrow from '../constants/Escrow_metadata.json'
 import Factory from '../constants/Factory_metadata.json'
 import RealEstate from '../constants/RealEstate_metadata.json'
-import {Search, PopHome, Navbar} from '../components'
+import { Search, PopHome, Navbar } from '../components'
 import { Polybase } from '@polybase/client'
 import { useRouter } from 'next/router';
-import {utils} from 'ethers';
+import { utils } from 'ethers';
+import search from '../assets/search.jpeg';
 
 const path = require('path');
-require('dotenv').config({ path: path.resolve('config.env'),});
-const NEXT_PUBLIC_NAME_ESPACE  = process.env.NEXT_PUBLIC_NAME_ESPACE;
+require('dotenv').config({ path: path.resolve('config.env'), });
+const NEXT_PUBLIC_NAME_ESPACE = process.env.NEXT_PUBLIC_NAME_ESPACE;
 
 export default function Home() {
   const router = useRouter();
   let data = router.query.data
-  if(data){
+  if (data) {
     data = utils.getAddress(data)
   }
   const [account, setAccount] = useState(data)
 
-  console.log("ACCOUNT_INDEX:",account)
+  console.log("ACCOUNT_INDEX:", account)
 
   const [provider, setProvider] = useState(null)
   const [homes, setHomes] = useState([])
@@ -38,10 +39,10 @@ export default function Home() {
   const [toggle, setToggle] = useState(false)
   const [escrow, setEscrow] = useState(null)
   const [realEstate, setRealEstate] = useState(null)
-  
+
 
   const loadBlockchainData = async () => {
-    
+
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
 
@@ -50,7 +51,7 @@ export default function Home() {
     const total_rs = Number(await factory.totalRealEstate())
     const homes = []
 
-    for( var i = 0 ; i< total_rs; i++){
+    for (var i = 0; i < total_rs; i++) {
       const address_re = await factory.RealEstateArray(i);
       const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
 
@@ -78,7 +79,7 @@ export default function Home() {
     })
   }
 
-  async function connectDB(address_re){
+  async function connectDB(address_re) {
     let db = new Polybase({
       defaultNamespace: "pk/0x7fd09c2b6e44027ed2b6e478a5ff36e201317a6d4734e3ae4868827740ecf53265bff10a510904fc12fd98e277fb8af107f463425346ae359b19f25754bbf9fb/DOMO",
     });
@@ -88,18 +89,18 @@ export default function Home() {
     return escrow_contract;
   }
 
-  useEffect ( () => {
+  useEffect(() => {
     loadBlockchainData(),
-    changeWallet()
+      changeWallet()
   }, [])
 
   const togglePop = (home) => {
     setHome(home);
     const escrow_contract = connectDB(home.address_re);
-    const escrow = new ethers.Contract(escrow_contract,Escrow.output.abi, provider);
+    const escrow = new ethers.Contract(escrow_contract, Escrow.output.abi, provider);
     setEscrow(escrow);
 
-    if (!toggle && account){
+    if (!toggle && account) {
       const realEstate = new ethers.Contract(home.address_re, RealEstate.output.abi, provider);
       setRealEstate(realEstate);
     }
@@ -109,16 +110,17 @@ export default function Home() {
 
   return (
     <div>
-
-      <Navbar />
-      <Search />
-      <div className='cards__section'>
+      <div style={{ backgroundImage:`url(${search.src})`, backgroundPosition:'center', backgroundSize:'cover'}}>
+        <Navbar />
+        <Search />
+      </div>
+      <div className='cards__section card1 pb-[5rem]'>
         <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Some Opportunities: </h1>
-        <div className = 'cards'>
-          {homes.map((home,index) => (
-            <div className='card' key={index} onClick={() => togglePop(home)}> 
+        <div className='cards'>
+          {homes.map((home, index) => (
+            <div className='card' key={index} onClick={() => togglePop(home)}>
               <div className='card__image relative'>
-                <img src={home.image} alt='Home' className=' rounded-[30px]'/>
+                <img src={home.image} alt='Home' className=' rounded-[30px]' />
                 <div className='info'>
                   <h4> {home.name} </h4>
                   <p> {home.address}</p>
@@ -141,8 +143,8 @@ export default function Home() {
       </div>
 
       {toggle && (
-        <PopHome home={home} provider={provider} account={account} escrow={escrow} real 
-          realEstate = {realEstate} togglePop={togglePop} />
+        <PopHome home={home} provider={provider} account={account} escrow={escrow} real
+          realEstate={realEstate} togglePop={togglePop} />
       )}
     </div>
   );
