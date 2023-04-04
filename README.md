@@ -146,3 +146,12 @@ npx hardhat run scripts/deploy.js --network mumbai
 9) [SC Molde](https://github.com/The-Stripes-NFT/the-stripes-nft-contract/blob/main/TheStripesNFT.sol ) 
 10) [Post Online](https://reqbin.com/) 
 11) [Time in SC](https://betterprogramming.pub/solidity-tutorial-all-about-time-units-b392324bea32) 
+12) https://github.com/magiclabs/example-nextjs
+13) https://github.com/hedgehold/prode-front 
+14) https://docs.replit.com/tutorials/web3/escrow-contract-with-solidity 
+15) https://medium.com/@shuffledex/eventos-en-la-blockchain-c%C3%B3mo-emitirlos-con-solidity-y-recepcionarlos-con-web3-js-6411dafee8b7
+
+### TO DO 
+https://www.youtube.com/watch?v=c_-b_isI4vg
+https://ethereum.stackexchange.com/questions/146974/how-to-start-with-erc-4337
+https://docs.alchemy.com/docs/solidity-payable-functions 
