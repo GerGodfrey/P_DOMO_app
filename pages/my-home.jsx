@@ -2,23 +2,17 @@ import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { Polybase } from '@polybase/client';
 import {Navbar} from '../components';
-
-
 import { useRouter } from 'next/router';
-
+import {utils} from 'ethers';
 //import RealEstate from '../constants/RealEstate_metadata.json'; // RealEstate.output.abi 
 import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
+const polybase_name = "Contracts118"
 
-import {utils} from 'ethers';
-
-const polybase_name = "Contracts116"
 
 export default function My_home (){
     const router = useRouter();
     let data = router.query.data
-    if(data){
-        data = utils.getAddress(data)
-      }
+    if(data){data = utils.getAddress(data)}
     const [account, setAccount] = useState(data)
     const [provider, setProvider] = useState(null)
     const [balance, setBalance] = useState(0)

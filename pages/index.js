@@ -20,7 +20,7 @@ import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json
 // require('dotenv').config({ path: path.resolve('config.env'), });
 // const NEXT_POLYBASE_NAME = process.env.NEXT_POLYBASE_NAME;
 // console.log("index NEXT_POLYBASE_NAME",NEXT_POLYBASE_NAME)
-const polybase_name = "Contracts116"
+const polybase_name = "Contracts118"
 
 // import Head from 'next/head'
 // import Image from 'next/image'
@@ -70,6 +70,7 @@ export default function Home() {
       const data = await realEstate.tokenDATA();
       const response = await fetch(data);
       var metadata = await response.json();
+      metadata["address_escrow"] = address_escrow;
       metadata["address_re"] = address_re;
       metadata["totalSupply"] = totalSupply;
       metadata["maxSupply"] = maxSupply;
@@ -105,6 +106,7 @@ export default function Home() {
   }, [])
 
   const togglePop = (home) => {
+    
     setHome(home);
     const escrow_contract = connectDB(home.address_re);
     const escrow = new ethers.Contract(escrow_contract, Escrow_LH.abi, provider);
@@ -113,6 +115,10 @@ export default function Home() {
     if (!toggle && account) {
       const realEstate = new ethers.Contract(home.address_re, RealEstate_LH.abi, provider);
       setRealEstate(realEstate);
+      const escrow = new ethers.Contract(home.address_escrow, Escrow_LH.abi, provider);
+      setEscrow(escrow)
+
+      console.log(escrow.address)
     }
 
     toggle ? setToggle(false) : setToggle(true)
@@ -153,8 +159,7 @@ export default function Home() {
       </div>
 
       {toggle && (
-        <PopHome home={home} provider={provider} account={account} escrow={escrow} real
-          realEstate={realEstate} togglePop={togglePop} />
+        <PopHome home={home} provider={provider} escrow={escrow} realEstate={realEstate} togglePop={togglePop} />
       )}
     </div>
   );
