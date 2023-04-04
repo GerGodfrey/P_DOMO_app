@@ -26,6 +26,7 @@ async function main() {
   const [creator, seller, inspector, buyer, buyer_2] = await ethers.getSigners()
   const supply = 10;
   const price = 1;
+  const howDecimals = 10 ;
   
   let minting, transaction
 
@@ -54,7 +55,8 @@ async function main() {
     minting = await factory.CreateNewRealEstate(
       supply,
       `https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${i + 1}.json`,
-      price
+      price,
+      howDecimals
     )
   }
 
@@ -122,10 +124,13 @@ async function main() {
   // Buy 100% - First proyect 
   for (let i = 1; i <= supply; i++) {
     
-    let price = await real_estate_1.publicPrice()
-    transaction = await escrow_rs_1.connect(buyer).list(i, buyer.address, tokens(price))
+    let price = Number(await real_estate_1.publicPrice())
+    let decimals_price = Number( await real_estate_1.decimals())
+    let real_price = (price/decimals_price)
+
+    transaction = await escrow_rs_1.connect(buyer).list(i, buyer.address, tokens(real_price))
     await transaction.wait();
-    transaction = await escrow_rs_1.connect(buyer).depositEarnest(i, {value:tokens(price) })
+    transaction = await escrow_rs_1.connect(buyer).depositEarnest(i, {value:tokens(real_price) })
     await transaction.wait();
   }
   transaction = await escrow_rs_1.connect(inspector).updateInspectionStatus(true)
@@ -135,10 +140,14 @@ async function main() {
   // Buy 50% - First proyect
 
   for (let i = 1; i <= 5; i++) {
-    let price2 = await real_estate_2.publicPrice();
-    transaction = await escrow_rs_2.connect(buyer_2).list(i, buyer_2.address, tokens(price2))
+
+    let price2 = Number(await real_estate_2.publicPrice())
+    let decimals_price2 = Number( await real_estate_2.decimals())
+    let real_price2 = (price2/decimals_price2)
+
+    transaction = await escrow_rs_2.connect(buyer_2).list(i, buyer_2.address, tokens(real_price2))
     await transaction.wait()
-    transaction = await escrow_rs_2.connect(buyer_2).depositEarnest(i, {value:tokens(price2) })
+    transaction = await escrow_rs_2.connect(buyer_2).depositEarnest(i, {value:tokens(real_price2) })
     await transaction.wait();
   }
   

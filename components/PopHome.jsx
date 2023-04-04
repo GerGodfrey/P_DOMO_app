@@ -34,12 +34,16 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
             //const account8 = ethers.utils.getAddress(accounts[0])
             let new_Supply = home.totalSupply+1
             const publicPrice = Number(await realEstate.publicPrice())
+                
+            let price = Number(await realEstate.publicPrice())
+            let decimals_price = Number( await realEstate.decimals())
+            let real_price = (price/decimals_price)
             try{        
-                let transaction = await escrow.connect(signer).list(new_Supply, account, tokens(publicPrice))
+                let transaction = await escrow.connect(signer).list(new_Supply, account, tokens(real_price))
                 await transaction.wait()
     
                 // Buyer deposit earnest
-                transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(publicPrice) })
+                transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(real_price) })
                 await transaction.wait()
 
                 let escrow_balance = Number(await escrow.getBalance())

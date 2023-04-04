@@ -20,7 +20,7 @@ import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json
 // require('dotenv').config({ path: path.resolve('config.env'), });
 // const NEXT_POLYBASE_NAME = process.env.NEXT_POLYBASE_NAME;
 // console.log("index NEXT_POLYBASE_NAME",NEXT_POLYBASE_NAME)
-const polybase_name = "Contracts118"
+const polybase_name = "Contracts120"
 
 // import Head from 'next/head'
 // import Image from 'next/image'

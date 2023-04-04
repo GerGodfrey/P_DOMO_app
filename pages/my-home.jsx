@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import {utils} from 'ethers';
 //import RealEstate from '../constants/RealEstate_metadata.json'; // RealEstate.output.abi 
 import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
-const polybase_name = "Contracts118"
+const polybase_name = "Contracts120"
 
 
 export default function My_home (){
