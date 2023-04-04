@@ -71,6 +71,8 @@ export default function My_home (){
             }
             setHomes(homes);
           }
+
+          console.log(homes)
     }
 
 
