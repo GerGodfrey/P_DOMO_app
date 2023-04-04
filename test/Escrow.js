@@ -18,8 +18,7 @@ describe('Escrow', () => {
     beforeEach(async () => {
         // Setup accounts
         [creator, seller, inspector, buyer, second_buyer] = await ethers.getSigners()
-        //console.log("creato:",creator.address)
-        // Deploy Factory
+
         const Factory = await ethers.getContractFactory('Factory')
         factory = await Factory.deploy()
         total_rs = Number(await factory.totalRealEstate())
