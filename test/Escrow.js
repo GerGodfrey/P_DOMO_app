@@ -12,13 +12,13 @@ describe('Escrow', () => {
 
     beforeEach(async () => {
         // Setup accounts
-        [buyer, seller, inspector,second_buyer,creator] = await ethers.getSigners()
-        
+        [creator, seller, inspector, buyer, second_buyer] = await ethers.getSigners()
+        //console.log("creato:",creator.address)
         // Deploy Factory
         const Factory = await ethers.getContractFactory('Factory')
         factory = await Factory.deploy()
         total_rs = Number(await factory.totalRealEstate())
-        console.log(`Deployed Factory Contract at: ${factory.address}`)
+        //console.log(`Deployed Factory Contract at: ${factory.address}`)
 
         // Mint first Real Estate 
         const supply = 3;
@@ -28,7 +28,7 @@ describe('Escrow', () => {
             supply,
             "https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/1.json",
             price
-        );
+        ); 
 
         // Deploy Real Estate
         const RealEstate = await ethers.getContractFactory('RealEstate');
@@ -48,35 +48,31 @@ describe('Escrow', () => {
             seller.address,
             inspector.address
         ) 
-        console.log(`Deployed Escrow Contract at: ${escrow_rs_1.address}`)
+        //console.log(`Deployed Escrow Contract at: ${escrow_rs_1.address}`)
+
+
+        // Pre Sale 
+        for(var i = 1; i<=max_supply_rs_1 ; i++){
+            let transaction = await real_estate_1.connect(creator).mint()
+            await transaction.wait()
+            transaction = await real_estate_1.connect(creator).approve(escrow_rs_1.address, i)
+            await transaction.wait()
+            transaction = await escrow_rs_1.connect(creator).preList(i)
+            await transaction.wait()
+        }
+        
 
         // BUY THE FIRST HOUSE 
-        let transaction = await real_estate_1.connect(buyer).mint()
-        await transaction.wait()
-        // Approve Property
-        transaction = await real_estate_1.connect(buyer).approve(escrow_rs_1.address, 1)
-        await transaction.wait()
-        // list property
-
         let precio = await real_estate_1.publicPrice()
-
         transaction = await escrow_rs_1.connect(buyer).list(1, buyer.address, tokens(precio))
         await transaction.wait()
-
         transaction = await escrow_rs_1.connect(buyer).depositEarnest(1,{value: tokens(precio)})
         await transaction.wait();
 
         
         // BUY THE SECOND HOUSE
-        let transaction2 = await real_estate_1.connect(second_buyer).mint()
-        await transaction2.wait()
-        // Approve Property
-        transaction2 = await real_estate_1.connect(second_buyer).approve(escrow_rs_1.address, 2)
-        await transaction2.wait()
-        // list property
         transaction2 = await escrow_rs_1.connect(second_buyer).list(2, second_buyer.address, tokens(precio))
         await transaction2.wait()
-
         transaction = await escrow_rs_1.connect(second_buyer).depositEarnest(2,{value: tokens(precio)})
         await transaction.wait();
         
@@ -204,11 +200,6 @@ describe('Escrow', () => {
         beforeEach(async () => {
             let price = await real_estate_1.publicPrice()
 
-            let transaction1 = await real_estate_1.connect(buyer).mint()
-            await transaction1.wait();
-
-            transaction = await real_estate_1.connect(buyer).approve(escrow_rs_1.address,3)
-            await transaction.wait();
 
             transaction = await escrow_rs_1.connect(buyer).list(3, buyer.address, tokens(price))
             await transaction.wait();
