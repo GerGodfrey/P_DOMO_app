@@ -4,9 +4,9 @@ import { Polybase } from '@polybase/client';
 import {Navbar} from '../components';
 import { useRouter } from 'next/router';
 import {utils} from 'ethers';
-//import RealEstate from '../constants/RealEstate_metadata.json'; // RealEstate.output.abi 
-import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
-const polybase_name = "Contracts120"
+import RealEstate from '../constants/RealEstate_metadata.json'; // RealEstate.output.abi 
+//import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json' RealEstate_LH.abi 
+const polybase_name = "Tesnet02"
 
 
 export default function My_home (){
@@ -53,7 +53,7 @@ export default function My_home (){
               console.log("Casas Vacias:",homes)
               for(var i=0 ; i< len ; i++){
                 const address_re = records.data[i].data.real_estate_contract
-                const realEstate = new ethers.Contract(address_re, RealEstate_LH.abi, provider);
+                const realEstate = new ethers.Contract(address_re, RealEstate.output.abi , provider);
                 const newBalance = Number (await realEstate.balanceOf(account));
                 console.log("balance:",newBalance)
                 if(newBalance !== 0){

@@ -8,19 +8,19 @@ import search from '../assets/search.jpeg';
 
 
 import { sc_factory_localhost, sc_factory_tesnet } from '../config'
-import Escrow_LH from '../artifacts/contracts/Escrow.sol/Escrow.json'
-import Factory_LH from '../artifacts/contracts/RealEstate.sol/Factory.json'
-import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
+//import Escrow_LH from '../artifacts/contracts/Escrow.sol/Escrow.json'
+//import Factory_LH from '../artifacts/contracts/RealEstate.sol/Factory.json' Factory_LH.abi
+//import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json' RealEstate_LH.abi
 
-// import Escrow from '../constants/Escrow_metadata.json' // Escrow.output.abi
-// import Factory from '../constants/Factory_metadata.json' //Factory.output.abi
-// import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.output.abi
+import Escrow from '../constants/Escrow_metadata.json' // Escrow.output.abi
+import Factory from '../constants/Factory_metadata.json' //Factory.output.abi
+import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.output.abi
 
 // const path = require('path');
 // require('dotenv').config({ path: path.resolve('config.env'), });
 // const NEXT_POLYBASE_NAME = process.env.NEXT_POLYBASE_NAME;
 // console.log("index NEXT_POLYBASE_NAME",NEXT_POLYBASE_NAME)
-const polybase_name = "Contracts120"
+const polybase_name = "Tesnet02"
 
 // import Head from 'next/head'
 // import Image from 'next/image'
@@ -52,7 +52,7 @@ export default function Home() {
     setProvider(provider)
 
     //const network = await provider.getNetwork()
-    const factory = new ethers.Contract(sc_factory_localhost, Factory_LH.abi, provider)
+    const factory = new ethers.Contract(sc_factory_tesnet, Factory.output.abi, provider)
     const total_rs = Number(await factory.totalRealEstate())
     const homes = []
 
@@ -60,10 +60,10 @@ export default function Home() {
     const records = await collectionReference.get("escrow_contract");
     for (var i = 0; i < total_rs; i++){
       const address_re = await factory.RealEstateArray(i);
-      const realEstate = new ethers.Contract(address_re, RealEstate_LH.abi, provider);
+      const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
 
       const address_escrow = records.data[i].data.escrow_contract
-      const escrow = new ethers.Contract(address_escrow, Escrow_LH.abi, provider);
+      const escrow = new ethers.Contract(address_escrow, Escrow.output.abi, provider);
       const totalSupply = Number(await escrow.totalSupply());
       const maxSupply = Number(await escrow.maxSupply());
 
@@ -109,13 +109,13 @@ export default function Home() {
     
     setHome(home);
     const escrow_contract = connectDB(home.address_re);
-    const escrow = new ethers.Contract(escrow_contract, Escrow_LH.abi, provider);
+    const escrow = new ethers.Contract(escrow_contract, Escrow.output.abi, provider);
     setEscrow(escrow);
 
     if (!toggle && account) {
-      const realEstate = new ethers.Contract(home.address_re, RealEstate_LH.abi, provider);
+      const realEstate = new ethers.Contract(home.address_re, RealEstate.output.abi, provider);
       setRealEstate(realEstate);
-      const escrow = new ethers.Contract(home.address_escrow, Escrow_LH.abi, provider);
+      const escrow = new ethers.Contract(home.address_escrow, Escrow.output.abi, provider);
       setEscrow(escrow)
 
       console.log(escrow.address)
@@ -131,7 +131,18 @@ export default function Home() {
         <Search />
       </div>
       <div className='cards__section card1 pb-[5rem]'>
-        <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Some Opportunities: </h1>
+        {
+          (provider) ? (
+            (provider.provider.networkVersion === "80001") ? (
+              <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Some Opportunities: </h1>
+            ) : (
+              <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, connect to Polygon Mumbai Blockchain </h1>
+            )
+          ): (
+            <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, install Some Wallet</h1>
+          ) 
+        }
+        
         <div className='cards'>
           {homes.map((home, index) => (
             <div className='card' key={index} onClick={() => togglePop(home)}>
