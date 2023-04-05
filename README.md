@@ -37,6 +37,18 @@ Just enter into https://domo-app.vercel.app/ and enjoy !!
 |  Real Estate 3 | 0xB8016AD7E4aBB6E4dc0f2162265C6257Dcd01fFf |
 | Escrow 3 | 0xE8b3C3fdeD68D359B857b5899E8920c57938Ef1C |
 
+Segundo Batch 
+ 
+| ¿What? | Link |
+|---|---|
+| Factory SC | 0xF42e36F81106f029f7d3BF013F7cA5Cd755857d6  |
+| Real Estate 1 |  |
+| Escrow 1 |  |
+| Real Estate 2 |  |
+| Escrow 2 |  |
+|  Real Estate 3 |  |
+| Escrow 3 |  |
+
 ## How Works ? 
 ### Tech Flow 
 <p align="center">
