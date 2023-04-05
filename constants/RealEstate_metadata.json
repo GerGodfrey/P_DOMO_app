@@ -26,6 +26,11 @@
 						"internalType": "uint256",
 						"name": "_publicPrice",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_decimals",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -133,6 +138,19 @@
 					}
 				],
 				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -610,11 +628,11 @@
 			]
 		},
 		"contracts/RealEstate.sol": {
-			"keccak256": "0x4dc6dce2e9709c296758d1c65bf4ced23bf150dd3354a063dc1fb9ef6fbde5f2",
+			"keccak256": "0x1784952c0001aff4a8577899571ca534b7447c499075ad793fdd1b751848aec2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7ba274781b87e06f3ee7eabe246538f5411a1bc84f23bc591cf03f9f98ed5b2a",
-				"dweb:/ipfs/QmNRMV7uz1daakPqoe4dAKdVcapRvtriq67aWnrNctMuMt"
+				"bzz-raw://6d6139d40b361da11e4eb35daae86b3f29c2443db2c51c9d52a1b9433eb0cc11",
+				"dweb:/ipfs/QmZjSCAsw5MJ2SGrob8ME4FUvxpDNhRkHhcfRruVXz1ygY"
 			]
 		},
 		"hardhat/console.sol": {

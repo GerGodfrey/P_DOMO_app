@@ -12,11 +12,11 @@ interface IERC721 {
 }
 
 contract Escrow {
-    
     address public address_rs;
-    address payable public seller; 
+    address payable public seller;  
     address public inspector;
     uint256 public maxSupply;
+    uint256 public totalSupply;
     bool public isSouldOut = false;
     bool public inspectionPassed = false;
 
@@ -55,15 +55,24 @@ contract Escrow {
         uint256 _nftID,
         address _buyer,
         uint256 _purchasePrice
-    ) public payable {
+    ) public {
 
-        IERC721(address_rs).transferFrom(msg.sender, address(this),_nftID);
+        //IERC721(address_rs).transferFrom(msg.sender, address(this),_nftID);
         isListed[_nftID] = true;
+        //uint256 new_purchasePrice =_purchasePrice; // * 10**17 
+        
         purchasePrice[_nftID] = _purchasePrice;
         buyer[_nftID] = _buyer;
+        totalSupply = _nftID ; 
+        
         if(_nftID >= maxSupply ){
             isSouldOut = true;
         }
+    }
+
+    function preList (uint256 _nftID) public {
+
+        IERC721(address_rs).transferFrom(msg.sender, address(this),_nftID);
 
     }
 

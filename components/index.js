@@ -7,6 +7,5 @@ export{
     Navbar,
     Search,
     PopHome,
-    PopCongrats
-    
+    PopCongrats   
 };

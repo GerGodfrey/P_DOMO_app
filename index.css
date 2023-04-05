@@ -111,12 +111,7 @@ nav {
 /* ------------------------------------------------------ */
 /* -- HEADER -- */
 
-header {
 
-  background-image: url("./assets/search.jpeg");
-  background-position: center;
-  background-size: cover;
-}
 
 .header__title {
   font-family: Russo One, sans-serif;
@@ -158,8 +153,8 @@ header {
   outline: 1px solid var(--clr-blue);
 }
 
-@media (max-width: 600px){
-  .header__search{
+@media (max-width: 600px) {
+  .header__search {
     width: 300px;
   }
 
@@ -175,10 +170,15 @@ header {
 
 }
 
+.card1 {
+  background:linear-gradient(to right bottom, #21142E, #21142E, #0B0B23, #040112, #060517, #060517, #040112, #040112, #040112, #040112, #040112, #040112);
+  ;
+}
+
 .card {
   border: 1px solid #FFFFFF;
   cursor: pointer;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 30px;
   position: relative;
 }
@@ -187,7 +187,7 @@ header {
   width: 500px;
 }
 
-.info{
+.info {
   position: absolute;
   width: 500px;
   height: 100%;
@@ -205,7 +205,8 @@ header {
   border-radius: 30px;
   opacity: .8;
 }
-.info2{
+
+.info2 {
   text-align: center;
   display: none;
   flex-direction: column;
@@ -217,31 +218,34 @@ header {
 }
 
 @media (hover: hover) {
-  .card__image:hover .info{
+  .card__image:hover .info {
     display: flex;
   }
 
   .card:hover {
-    box-shadow: 1px 1px 5px var(--clr-grey);
-  } 
-
+    box-shadow: 2px 2px 2px 2px var(--clr-grey);
+    padding: 2.5rem;
+  }
 }
 
-@media (max-width: 600px){
-  .info2{
+@media (max-width: 600px) {
+  .info2 {
     display: flex;
   }
-  .card__image{
+
+  .card__image {
     width: 300px;
   }
-  .info{
+
+  .info {
     width: 300px;
   }
-  .cards{
+
+  .cards {
     justify-content: center;
   }
 
-  .card{
+  .card {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -350,14 +354,15 @@ header {
 }
 
 @media screen and (max-width: 900px) {
-  .home__details{
+  .home__details {
     flex-direction: column;
     gap: 5rem;
   }
-  .home__image{
+
+  .home__image {
     width: 300px;
   }
-  
+
 }
 
 

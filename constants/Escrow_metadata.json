@@ -256,7 +256,7 @@
 				],
 				"name": "list",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -270,6 +270,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_nftID",
+						"type": "uint256"
+					}
+				],
+				"name": "preList",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -299,6 +312,19 @@
 						"internalType": "address payable",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -350,11 +376,11 @@
 	},
 	"sources": {
 		"contracts/Escrow.sol": {
-			"keccak256": "0xbcd20d834336f2cf410e9473a796fbb46e5e7e7309bbf4edf76bdf99df46d120",
+			"keccak256": "0xbc888c6cacf67dd422e00e157134e07d22ca6ec573fda467b30792ff5c2c4940",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e80f5a4b7b0a788bc18e675feabfbfbfb37ea5fe5bcbffb0b0a7a1b6044e2708",
-				"dweb:/ipfs/QmReEKDVAWmmqVpVrozv1DDg31ro3Lg15nhmRukFFSZSm6"
+				"bzz-raw://d47bce5c893a63eae75511d61a171c20b05c0c095bb98391a2cd98a5f2a84bc9",
+				"dweb:/ipfs/QmZuNrHEpbJy22yMMUU9pMqneTS2vJHLygxRNTHRhxYodm"
 			]
 		},
 		"hardhat/console.sol": {

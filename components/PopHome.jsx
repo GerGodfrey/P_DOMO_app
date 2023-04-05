@@ -1,17 +1,23 @@
-// eslint-disable-next-line 
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
-import {PopCongrats} from '../components'
+import { useRouter } from 'next/router';
+import {PopCongrats} from '../components';
+import {utils} from 'ethers';
 
-const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {    
+const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => { 
+    const router = useRouter();
+    let data = router.query.data
+    if(data){data = utils.getAddress(data)}
+    const [account, setAccount] = useState(data)
+    
     const [inspector,setInspector] =useState(null)
     const [seller,setSeller] =useState(null)
-    const[souldOut, setSouldOut] = useState(false)
+    const [souldOut, setSouldOut] = useState(false)
     const [isSouldOut,setIsSouldOut] = useState(false)
     const [inspectionPassed,setInspectionPassed] = useState(false)
     const [balance,setBalance] = useState(null)
 
-    const[owner, setOwner] = useState(null)
+    const [owner, setOwner] = useState(null)
     const [hasBought, setHasBought] = useState(false)
     const [hasInspected, setHasInspected] = useState(false)
     const [hasSold, setHasSold] = useState(false)
@@ -24,41 +30,32 @@ const PopHome = ({ home, provider,account, escrow, realEstate, togglePop }) => {
     const buyHandler = async () => {
         if(account){
             const signer = await provider.getSigner()
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const account = ethers.utils.getAddress(accounts[0])
-            const new_Supply = home.totalSupply+1
+            //const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            //const account8 = ethers.utils.getAddress(accounts[0])
+            let new_Supply = home.totalSupply+1
             const publicPrice = Number(await realEstate.publicPrice())
-
-            try{
                 
-                let transaction = await realEstate.connect(signer).mint();
-                await transaction.wait();
-
-
-                console.log("escrow.address",escrow.address)
-                console.log("new_Supply",new_Supply)
-                
-                transaction = await realEstate.connect(signer).approve(escrow.address,new_Supply)
-                await transaction.wait()  
-                
-                transaction = await escrow.connect(signer).list(new_Supply, account, tokens(publicPrice))
+            let price = Number(await realEstate.publicPrice())
+            let decimals_price = Number( await realEstate.decimals())
+            let real_price = (price/decimals_price)
+            try{        
+                let transaction = await escrow.connect(signer).list(new_Supply, account, tokens(real_price))
                 await transaction.wait()
     
                 // Buyer deposit earnest
-                transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(publicPrice) })
+                transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(real_price) })
                 await transaction.wait()
-    
-                // Buyer approves...
-                transaction = await escrow.connect(signer).approveSale(new_Supply)
-                await transaction.wait()
-    
+
                 let escrow_balance = Number(await escrow.getBalance())
+                console.log("escrow_balance",escrow_balance)
 
                 console.log("hasBought",hasBought)
                 setHasBought(true)
             } catch (error){
                 console.error(error);
             }
+        }else{
+            console.log("Conecta una Wallet")
         }
     }
 

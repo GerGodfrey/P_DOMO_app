@@ -1,21 +1,18 @@
 import { ethers } from 'ethers';
-import { useEffect, useState } from 'react'
-import { Polybase } from '@polybase/client'
-const path = require('path');
-require('dotenv').config({ path: path.resolve('config.env'),});
-const NEXT_PUBLIC_NAME_ESPACE  = process.env.NEXT_PUBLIC_NAME_ESPACE;
+import { useEffect, useState } from 'react';
+import { Polybase } from '@polybase/client';
+import {Navbar} from '../components';
 import { useRouter } from 'next/router';
-import RealEstate from '../constants/RealEstate_metadata.json'
-//import RealEstate from '../artifacts/contracts/RealEstate.sol/RealEstate.json'
-
 import {utils} from 'ethers';
+import RealEstate from '../constants/RealEstate_metadata.json'; // RealEstate.output.abi 
+//import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json' RealEstate_LH.abi 
+const polybase_name = "Tesnet02"
+
 
 export default function My_home (){
     const router = useRouter();
     let data = router.query.data
-    if(data){
-        data = utils.getAddress(data)
-      }
+    if(data){data = utils.getAddress(data)}
     const [account, setAccount] = useState(data)
     const [provider, setProvider] = useState(null)
     const [balance, setBalance] = useState(0)
@@ -47,7 +44,7 @@ export default function My_home (){
         let db = new Polybase({
             defaultNamespace: "pk/0x7fd09c2b6e44027ed2b6e478a5ff36e201317a6d4734e3ae4868827740ecf53265bff10a510904fc12fd98e277fb8af107f463425346ae359b19f25754bbf9fb/DOMO",
           });
-          const collectionReference = db.collection("Tesnet01");
+          const collectionReference = db.collection(polybase_name);
           const records = await collectionReference.where("real_estate_contract").get();          
           const len = records.data.length
 
@@ -56,7 +53,7 @@ export default function My_home (){
               console.log("Casas Vacias:",homes)
               for(var i=0 ; i< len ; i++){
                 const address_re = records.data[i].data.real_estate_contract
-                const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
+                const realEstate = new ethers.Contract(address_re, RealEstate.output.abi , provider);
                 const newBalance = Number (await realEstate.balanceOf(account));
                 console.log("balance:",newBalance)
                 if(newBalance !== 0){
@@ -70,6 +67,8 @@ export default function My_home (){
             }
             setHomes(homes);
           }
+
+          console.log(homes)
     }
 
 
@@ -84,8 +83,9 @@ export default function My_home (){
     }
 
     return (
+        
         <div>
-            
+            <Navbar/>
             {(account) ? (
                 <div>
                     <p className="flex text-white"> Hola {account.slice(0, 6) + '...' + account.slice(38, 42)} el valor de tu hogar es {balance} ETH</p>

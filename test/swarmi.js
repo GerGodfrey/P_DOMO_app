@@ -30,40 +30,40 @@
 // requestSuarmi()
 
 
-const http = require("https");
+// const http = require("https");
 
-const url = 'https://www.suarmi.com/api/v1/order';
+// const url = 'https://www.suarmi.com/api/v1/order';
 
-const options = {
-    method: 'POST',
-    'Content-Type': 'application/json',
-};
+// const options = {
+//     method: 'POST',
+//     'Content-Type': 'application/json',
+// };
 
-const data = `{"user": "viajandoencriptos@gmail.com",
- "from_currency": "MXN",
- "from_amount": "3500",
- "to_currency": "USDC",
- "to_address": "0xd0BCe03Bb2e0703BE66eF15DBDBf4c6B258e3DA6",
- "network": "MATIC"
-}`;
+// const data = `{"user": "viajandoencriptos@gmail.com",
+//  "from_currency": "MXN",
+//  "from_amount": "3500",
+//  "to_currency": "USDC",
+//  "to_address": "0xd0BCe03Bb2e0703BE66eF15DBDBf4c6B258e3DA6",
+//  "network": "MATIC"
+// }`;
 
-let result = '';
-const req = http.request(url, options, (res) => {
-    console.log(res.statusCode);
+// let result = '';
+// const req = http.request(url, options, (res) => {
+//     console.log(res.statusCode);
 
-    res.setEncoding('utf8');
-    res.on('data', (chunk) => {
-        result += chunk;
-    });
+//     res.setEncoding('utf8');
+//     res.on('data', (chunk) => {
+//         result += chunk;
+//     });
 
-    res.on('end', () => {
-        console.log(result);
-    });
-});
+//     res.on('end', () => {
+//         console.log(result);
+//     });
+// });
 
-req.on('error', (e) => {
-    console.error(e);
-});
+// req.on('error', (e) => {
+//     console.error(e);
+// });
 
-req.write(data);
-req.end();
+// req.write(data);
+// req.end();

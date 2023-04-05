@@ -37,6 +37,18 @@ Just enter into https://domo-app.vercel.app/ and enjoy !!
 |  Real Estate 3 | 0xB8016AD7E4aBB6E4dc0f2162265C6257Dcd01fFf |
 | Escrow 3 | 0xE8b3C3fdeD68D359B857b5899E8920c57938Ef1C |
 
+Segundo Batch 
+ 
+| ¿What? | Link |
+|---|---|
+| Factory SC | 0xF42e36F81106f029f7d3BF013F7cA5Cd755857d6  |
+| Real Estate 1 |  |
+| Escrow 1 |  |
+| Real Estate 2 |  |
+| Escrow 2 |  |
+|  Real Estate 3 |  |
+| Escrow 3 |  |
+
 ## How Works ? 
 ### Tech Flow 
 <p align="center">
@@ -146,3 +158,12 @@ npx hardhat run scripts/deploy.js --network mumbai
 9) [SC Molde](https://github.com/The-Stripes-NFT/the-stripes-nft-contract/blob/main/TheStripesNFT.sol ) 
 10) [Post Online](https://reqbin.com/) 
 11) [Time in SC](https://betterprogramming.pub/solidity-tutorial-all-about-time-units-b392324bea32) 
+12) https://github.com/magiclabs/example-nextjs
+13) https://github.com/hedgehold/prode-front 
+14) https://docs.replit.com/tutorials/web3/escrow-contract-with-solidity 
+15) https://medium.com/@shuffledex/eventos-en-la-blockchain-c%C3%B3mo-emitirlos-con-solidity-y-recepcionarlos-con-web3-js-6411dafee8b7
+
+### TO DO 
+https://www.youtube.com/watch?v=c_-b_isI4vg
+https://ethereum.stackexchange.com/questions/146974/how-to-start-with-erc-4337
+https://docs.alchemy.com/docs/solidity-payable-functions 
