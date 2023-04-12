@@ -5,14 +5,12 @@ import { Polybase } from '@polybase/client'
 import { useRouter } from 'next/router';
 import { utils } from 'ethers';
 import Image from 'next/image';
+import Footer from '@/components/Footer';
 import backgroundDaap from '../assets/backgroundDaap.png';
-
-
 import { sc_factory_localhost, sc_factory_tesnet } from '../config'
 //import Escrow_LH from '../artifacts/contracts/Escrow.sol/Escrow.json'
 //import Factory_LH from '../artifacts/contracts/RealEstate.sol/Factory.json' Factory_LH.abi
 //import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json' RealEstate_LH.abi
-
 import Escrow from '../constants/Escrow_metadata.json' // Escrow.output.abi
 import Factory from '../constants/Factory_metadata.json' //Factory.output.abi
 import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.output.abi
@@ -132,7 +130,7 @@ export default function Home() {
         <Navbar />
         <Search />
       </div>
-      <div className=''>
+      <div className='mb-[85px]'>
         {
           (provider) ? (
             (provider.provider.networkVersion === "80001") ? (
@@ -144,22 +142,29 @@ export default function Home() {
             <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, install Some Wallet</h1>
           )
         }
-
-        <div className='flex justify-center flex-wrap gap-[140px]'>
+        <div className='flex justify-center flex-wrap gap-[140px] mt-[120px] mb-[120px]'>
           {homes.map((home, index) => (
-            <div className='card flex flex-col items-center gap-[26px]' key={index} onClick={() => togglePop(home)}>
+            <div className='card flex flex-col items-center gap-[26px] hover:bg-[#F986B7] hover:cursor-pointer' key={index} onClick={() => togglePop(home)}>
               <div className='card__image mt-[32px]'>
                 <img src={home.image} alt='Home' className=' rounded-[100px]' />
               </div>
               <div className='info mr-[88px] ml-[88px] flex flex-col gap-[26px]'>
                 <h4 className='cardtittle'> {home.name} </h4>
                 <p className='cardadress'> {home.address}</p>
+                <div className="bg-[#F7559A] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: `${home.percentage}%` }}>
+                  {home.percentage}%
+                </div>
               </div>
             </div>
           ))}
         </div>
+        <div className='w-full flex justify-center'>
+          <button className='cardbutton'>
+            LEARN MORE
+          </button>
+        </div>
       </div>
-
+      <Footer />
       {toggle && (
         <PopHome home={home} provider={provider} escrow={escrow} realEstate={realEstate} togglePop={togglePop} />
       )}
