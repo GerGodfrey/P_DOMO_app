@@ -4,7 +4,8 @@ import { Search, PopHome, Navbar } from '../components'
 import { Polybase } from '@polybase/client'
 import { useRouter } from 'next/router';
 import { utils } from 'ethers';
-import search from '../assets/search.jpeg';
+import Image from 'next/image';
+import backgroundDaap from '../assets/backgroundDaap.png';
 
 
 import { sc_factory_localhost, sc_factory_tesnet } from '../config'
@@ -34,7 +35,7 @@ const polybase_name = "Tesnet02"
 export default function Home() {
   const router = useRouter();
   let data = router.query.data
-  if (data) { data = utils.getAddress(data)}
+  if (data) { data = utils.getAddress(data) }
   const [account, setAccount] = useState(data)
   const [provider, setProvider] = useState(null)
   const [homes, setHomes] = useState([])
@@ -58,7 +59,7 @@ export default function Home() {
 
     const collectionReference = dataBase_sc.collection(polybase_name);
     const records = await collectionReference.get("escrow_contract");
-    for (var i = 0; i < total_rs; i++){
+    for (var i = 0; i < total_rs; i++) {
       const address_re = await factory.RealEstateArray(i);
       const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
 
@@ -79,7 +80,7 @@ export default function Home() {
       homes.push(metadata);
     }
     setHomes(homes)
-    
+
   }
 
   const changeWallet = async () => {
@@ -102,11 +103,11 @@ export default function Home() {
 
   useEffect(() => {
     changeWallet(),
-    loadData()
+      loadData()
   }, [])
 
   const togglePop = (home) => {
-    
+
     setHome(home);
     const escrow_contract = connectDB(home.address_re);
     const escrow = new ethers.Contract(escrow_contract, Escrow.output.abi, provider);
@@ -126,9 +127,10 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ backgroundImage:`url(${search.src})`, backgroundPosition:'center', backgroundSize:'cover'}}>
-        <Navbar />
-        <Search />
+      <div className='relative h-[71vh] flex flex-col gap-[145px]'>
+        <Image src={backgroundDaap} alt='Background' className='absolute top-0 bottom-0 z-[-1]' />
+          <Navbar/>
+          <Search/>
       </div>
       <div className='cards__section card1 pb-[5rem]'>
         {
@@ -138,11 +140,11 @@ export default function Home() {
             ) : (
               <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, connect to Polygon Mumbai Blockchain </h1>
             )
-          ): (
+          ) : (
             <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, install Some Wallet</h1>
-          ) 
+          )
         }
-        
+
         <div className='cards'>
           {homes.map((home, index) => (
             <div className='card' key={index} onClick={() => togglePop(home)}>

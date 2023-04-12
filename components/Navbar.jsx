@@ -27,23 +27,25 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className={`hidden bg-transparent p-[15px] sm:flex`}>
-        <ul className={`flex justify-evenly w-full items-center`}>
+      <nav className={`hidden bg-transparent mt-[42px] sm:flex`}>
+        <ul className='flex justify-around w-full items-center'>
           <li>
-            <div className={`flex font-russo text-[#E5E5E5] gap-10 text-[18px] items-center`}>
-              <Link href={{ pathname: "/", query: { data: account } }} legacyBehavior>
-                <Image src={logo} alt="" className='logonav' />
-              </Link>
+            <Link href={{ pathname: "/", query: { data: account } }} legacyBehavior>
+              <Image src={logo} alt="" className='logonav' />
+            </Link>
+          </li>
+          <li>
+            <div className='flex justify-between gap-[30px]'>
               <Link href={{ pathname: "/my-home", query: { data: account } }} legacyBehavior>
-                <a className='mr-4 text-[#FFFFFF] hover:text-pink3'>
+                <a className='navmenu'>
                   My Home
                 </a>
               </Link>
-              <p>
+              <p className='navmenu'>
                 Secondary Market
               </p>
               <Link href={{ pathname: "/Doubts", query: { data: account } }} legacyBehavior>
-                <a className='mr-4 text-[#FFFFFF] hover:text-pink3'>
+                <a className='navmenu'>
                   Instructions
                 </a>
               </Link>
@@ -53,14 +55,14 @@ const Navbar = () => {
           <li>
             {
               account ? (
-                <div className='flex border-solid border-[#F7559A] border-[1px] p-3 rounded-lg'>
+                <div className='navwallet flex items-center justify-center gap-[8px]'>
                   <Image src={metamask} alt='metamask' className='w-[15%]' />
                   <button type='button' className='nav__connect'>
                     {account.slice(0, 6) + '...' + account.slice(38, 42)}
                   </button>
                 </div>
               ) : (
-                <div className='flex border-solid border-[#F7559A] border-[1px] p-3 rounded-lg'>
+                <div className='navwallet flex items-center justify-center gap-[8px]'>
                   <Image src={metamask} alt='metamask' className='w-[15%]' />
                   <button type='button' className='nav__connect' onClick={connectHandler} >
                     Connect
@@ -71,7 +73,7 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-      <nav className={`flex bg-transparent p-[15px] sm:hidden`}>
+      <nav className={`flex bg-transparent sm:hidden`}>
         <ul className={`flex justify-evenly w-full items-center`}>
           <li>
             <Link href={{ pathname: "/", query: { data: account } }} legacyBehavior>
