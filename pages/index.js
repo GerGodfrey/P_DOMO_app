@@ -127,16 +127,16 @@ export default function Home() {
 
   return (
     <div>
-      <div className='relative h-[71vh] flex flex-col gap-[145px]'>
+      <div className='relative min-h-[1000px] flex flex-col gap-[145px]'>
         <Image src={backgroundDaap} alt='Background' className='absolute top-0 bottom-0 z-[-1]' />
-          <Navbar/>
-          <Search/>
+        <Navbar />
+        <Search />
       </div>
-      <div className='cards__section card1 pb-[5rem]'>
+      <div className=''>
         {
           (provider) ? (
             (provider.provider.networkVersion === "80001") ? (
-              <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Some Opportunities: </h1>
+              <h1 className='maintittle ml-[60px] mt-[40px]'> Some Opportunities: </h1>
             ) : (
               <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, connect to Polygon Mumbai Blockchain </h1>
             )
@@ -145,26 +145,15 @@ export default function Home() {
           )
         }
 
-        <div className='cards'>
+        <div className='flex justify-center flex-wrap gap-[140px]'>
           {homes.map((home, index) => (
-            <div className='card' key={index} onClick={() => togglePop(home)}>
-              <div className='card__image relative'>
-                <img src={home.image} alt='Home' className=' rounded-[30px]' />
-                <div className='info'>
-                  <h4> {home.name} </h4>
-                  <p> {home.address}</p>
-                </div>
+            <div className='card flex flex-col items-center gap-[26px]' key={index} onClick={() => togglePop(home)}>
+              <div className='card__image mt-[32px]'>
+                <img src={home.image} alt='Home' className=' rounded-[100px]' />
               </div>
-
-              <div className='info2 mt-[1rem]'>
-                <h4 className='card__info'> {home.name} </h4>
-                <p className='card__info'> {home.address}</p>
-              </div>
-
-              <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 mt-[2rem]">
-                <div className="bg-[#F7559A] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: `${home.percentage}%` }}>
-                  {home.percentage}%
-                </div>
+              <div className='info mr-[88px] ml-[88px] flex flex-col gap-[26px]'>
+                <h4 className='cardtittle'> {home.name} </h4>
+                <p className='cardadress'> {home.address}</p>
               </div>
             </div>
           ))}

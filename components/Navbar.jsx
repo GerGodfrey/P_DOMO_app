@@ -10,6 +10,7 @@ import { ethers } from 'ethers';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../lib/context.js';
 import menu2 from '../assets/menu2.svg';
+import metamask2 from '../assets/metamask2.svg';
 
 
 const Navbar = () => {
@@ -37,7 +38,7 @@ const Navbar = () => {
           <li>
             <div className='flex justify-between gap-[30px]'>
               <Link href={{ pathname: "/my-home", query: { data: account } }} legacyBehavior>
-                <a className='navmenu'>
+                <a className='navmenu hover:text-[#EE2A7B]'>
                   My Home
                 </a>
               </Link>
@@ -45,7 +46,7 @@ const Navbar = () => {
                 Secondary Market
               </p>
               <Link href={{ pathname: "/Doubts", query: { data: account } }} legacyBehavior>
-                <a className='navmenu'>
+                <a className='navmenu hover:text-[#EE2A7B]'>
                   Instructions
                 </a>
               </Link>
@@ -55,16 +56,16 @@ const Navbar = () => {
           <li>
             {
               account ? (
-                <div className='navwallet flex items-center justify-center gap-[8px]'>
-                  <Image src={metamask} alt='metamask' className='w-[15%]' />
-                  <button type='button' className='nav__connect'>
+                <div className='navwalletS flex items-center justify-center gap-[8px]'>
+                  <Image src={metamask2} alt='metamask' className='w-[15%]' />
+                  <button type='button' className='nav__connect' style={{color:'#1FE72E'}}>
                     {account.slice(0, 6) + '...' + account.slice(38, 42)}
                   </button>
                 </div>
               ) : (
-                <div className='navwallet flex items-center justify-center gap-[8px]'>
+                <div className='navwallet flex items-center justify-center gap-[8px] hover:bg-[#EE2A7B] hover:border-[#EE2A7B] hover:cursor-pointer' onClick={connectHandler}>
                   <Image src={metamask} alt='metamask' className='w-[15%]' />
-                  <button type='button' className='nav__connect' onClick={connectHandler} >
+                  <button type='button' className='nav__connect'>
                     Connect
                   </button>
                 </div>

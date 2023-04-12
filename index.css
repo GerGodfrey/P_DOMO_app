@@ -45,6 +45,14 @@ body {
   height: 65px;
 }
 
+.navwalletS {
+  border: 4px solid #1FE72E;
+  border-radius: 10px;
+  width: 223px;
+  height: 65px;
+
+}
+
 .nav__connect {
   font-family: 'Alegreya Sans', sans-serif;
   font-weight: 400;
@@ -53,12 +61,13 @@ body {
   letter-spacing: 2.11px;
 }
 
-@media (hover: hover) {
-  .navmenu {
-    color: #EE2A7B;
-  }
+.maintittle {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 900;
+  font-size: 48px;
+  color: #FFFFFF;
+  letter-spacing: 4.82px;
 }
-
 
 /* ------------------------------------------------------ */
 /* -- HEADER -- */
@@ -84,6 +93,11 @@ body {
   background-image: linear-gradient(180deg, rgba(64, 67, 71, 0.74) 0%, rgba(30, 32, 34, 0.74) 100%);
   border-radius: 10px;
   border-style: none;
+  color: #E6E6E6;
+  font-size: 24px;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 900;
+  padding-left: 2rem;
 }
 
 .header_adress {
@@ -104,13 +118,9 @@ body {
 
 
 .header__search::placeholder {
-  font-family: "Russo One', sans-serif";
-  font-size: 1.25em;
-  font-weight: 600;
-}
-
-.header__search:hover {
-  outline: 1px solid var(--clr-blue);
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 900;
+  font-size: 21px;
 }
 
 @media (max-width: 600px) {
@@ -122,58 +132,37 @@ body {
 
 /* ------------------------------------------------------ */
 /* -- CARDS -- */
-.cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-
-}
-
-.card1 {
-  background-color: #000000;
-}
-
 .card {
-  border: 1px solid #FFFFFF;
-  cursor: pointer;
-  padding: 2rem;
-  border-radius: 30px;
+  border-radius: 100px 100px 100px 0 /100px;
+  width: 450px;
+  height: 700px;
   position: relative;
+  background-image: linear-gradient(0deg, rgba(249, 134, 183, 0.15) 0%, rgba(244, 244, 244, 0.15) 100%, rgba(0, 0, 0, 0.15) 100%);
+  box-shadow: inset 0 3px 13px 0 rgba(255, 255, 255, 0.50);
+
 }
 
 .card__image {
-  width: 500px;
+  width: 375.43px;
+  height: 275px;
 }
 
-.info {
-  position: absolute;
-  width: 500px;
-  height: 100%;
-  top: 0;
-  left: 0;
+.cardtittle {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  color: #FFFFFF;
+  letter-spacing: 3.62px;
   text-align: center;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: "Russo One', sans-serif";
+}
+
+.cardadress {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 900;
   font-size: 24px;
   color: #FFFFFF;
-  background-color: #1E2022;
-  border-radius: 30px;
-  opacity: .8;
-}
-
-.info2 {
+  letter-spacing: 2.41px;
   text-align: center;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: "Russo One', sans-serif";
-  font-size: 18px;
-  color: #FFFFFF;
 }
 
 @media (hover: hover) {
