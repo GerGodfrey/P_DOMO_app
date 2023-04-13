@@ -147,7 +147,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                 </button>
                             ) : (account === seller) ? (
                                 <button className='home__buy'>
-                                    Approve & Sell
+                                    Approve & S ell
                                 </button>
                             ) : (
                                 <div>
