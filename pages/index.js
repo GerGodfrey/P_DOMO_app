@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { utils } from 'ethers';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
-import backgroundDaap from '../assets/search.svg';
+import backgroundDaap from '../assets/search.png';
 import arrowDown from '../assets/arrow-down.svg';
 import glass from '../assets/glass.svg';
 import { sc_factory_localhost, sc_factory_tesnet } from '../config'
