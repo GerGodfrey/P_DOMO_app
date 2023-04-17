@@ -1,493 +1,117 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-}
-
-:root {
-  --clr-grey: #707070;
-  --clr-blue: #6C63FF;
-  --clr-blue-2: #4c46b6;
-  --clr-green: #4fb646;
-
-  --clr-black: #1E2022;
-  --clr-white: #ffffff;
-  --clr-grey: #E6E6E6;
-  --clr-pink3: #F5247D;
-  --clr-pink2: #F7559A;
-  --clr-pink1: #F986B7;
-}
-
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: #1E2022;
 }
 
-/* ------------------------------------------------------ */
-/* -- NAVIGATION -- */
-.navmenu {
-  font-weight: 700;
-  font-size: 16px;
-  color: #FFFFFF;
-  letter-spacing: 1.61px;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.navwallet {
-  border: 4px solid #FFFFFF;
-  border-radius: 10px;
-  width: 223px;
-  height: 65px;
-}
+@layer base {
+  /* ? Navbar */
 
-.navwalletS {
-  border: 4px solid #1FE72E;
-  border-radius: 10px;
-  width: 223px;
-  height: 65px;
+  .textmenu {
+    @apply font-bold text-[16px] text-white1 tracking-[1.61px];
+  }
 
-}
-
-.nav__connect {
-  font-weight: 700;
-  font-size: 18px;
-  color: #FFFFFF;
-  letter-spacing: 2.11px;
-}
-
-.maintittle {
-  font-weight: 700;
-  font-size: 48px;
-  color: #FFFFFF;
-  letter-spacing: 4.82px;
-}
-
-/* ------------------------------------------------------ */
-/* -- HEADER -- */
-
-
-
-.header__title {
-  font-weight: 700;
-  color: var(--clr-white);
-  text-transform: uppercase;
-  font-size: 48px;
-  color: #FFFFFF;
-  letter-spacing: 4.82px;
-  text-align: center;
-}
-
-.header__search {
-  width: 524px;
-  height: 80px;
-  background-image: linear-gradient(180deg, rgba(64, 67, 71, 0.74) 0%, rgba(30, 32, 34, 0.74) 100%);
-  border-radius: 10px;
-  border-style: none;
-  color: #E6E6E6;
-  font-size: 24px;
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
-  padding-left: 2rem;
-}
-
-.header_adress {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
-  font-size: 21px;
-  color: #FFFFFF;
-  letter-spacing: 2.11px;
-}
-
-
-@media (hover: hover) {
-  .header__search:hover {
-    cursor: pointer;
+  .textWallet {
+    @apply font-bold text-[12px] text-white1 tracking-[2.11px];
+  }
+  /* ? Header (component search) */
+  .tittleHeader{
+    @apply font-bold text-[24px] text-white1 tracking-[4.82px] text-center
+  }
+  .textInput {
+    @apply font-bold text-[12px] text-white1 tracking-[2.11px] text-center;
+  }
+  .placeholder1{
+    @apply placeholder:font-bold placeholder:text-[21px]
+  }
+  .tittleCard {
+    @apply font-bold text-[18px] text-white1 tracking-[4.38px] text-center
+  }
+  .tittlePop{
+    @apply font-bold text-[36px] text-pink2 tracking-[3.62px] text-center
+  }
+  .collage{
+   @apply w-full h-[500px] grid grid-cols-6 auto-rows-[82px] gap-[20px]
+  }
+  .textFacts{
+    @apply font-bold text-[24px] text-white tracking-[2.41px] text-left
   }
 }
 
-
-
-.header__search::placeholder {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
-  font-size: 21px;
-}
-
-@media (max-width: 600px) {
-  .header__search {
-    width: 300px;
+@layer components {
+  /* ? Navbar */
+  .walletConnect {
+    @apply border-solid border-4 border-white1 rounded-[10px] w-[131.17px] h-[38.23px] hover:bg-pink1 hover:border-pink1 hover:cursor-pointer
   }
 
-}
-
-/* ------------------------------------------------------ */
-/* -- CARDS -- */
-
-.degradtop {
-  width: 100%;
-  height: 94px;
-  background: #1E2022;
-  filter: blur(8px);
-}
-
-.card {
-  width: 440px;
-  height: 720px;
-  position: relative;
-  background-image: linear-gradient(0deg, rgba(238, 42, 123, 0.15) 0%, rgba(244, 244, 244, 0.15) 100%, rgba(0, 0, 0, 0.15) 100%);
-  box-shadow: inset 0 3px 13px 0 rgba(255, 255, 255, 0.50);
-  border-radius: 20px;
-
-}
-
-.card__image {
-  width: 440px;
-  height: 240px;
-}
-
-.cardtittle {
-  font-weight: 700;
-  font-size: 21px;
-  color: #FFFFFF;
-  letter-spacing: 4.38px;
-  text-align: center;
-}
-
-.adress {
-  font-weight: 700;
-  font-size: 18px;
-  color: #FFFFFF;
-  letter-spacing: 1.81px;
-  text-align: left;
-}
-
-.cardadress {
-  font-weight: 400;
-  font-size: 18px;
-  color: #FFFFFF;
-  letter-spacing: 1.81px;
-}
-
-.cardbutton1 {
-  width: 200px;
-  height: 37px;
-  background: #EE2A7B;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 18px;
-  color: #FFFFFF;
-  letter-spacing: 2.78px;
-  text-align: center;
-  line-height: 30px;
-}
-
-.cardbutton {
-  width: 350px;
-  height: 100px;
-  background: #EE2A7B;
-  border-radius: 50px;
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
-  font-size: 28px;
-  color: #FFFFFF;
-  letter-spacing: 2.81px;
-  text-align: center;
-}
-
-
-@media (hover: hover) {}
-
-@media (max-width: 600px) {
-  .info2 {
-    display: flex;
+  .walletSucces {
+    @apply border-solid border-4 border-green1 rounded-[10px] w-[131.17px] h-[38.23px];
   }
-
-  .card__image {
-    width: 300px;
+/* ? Header (component search) */
+  .inputSearch{
+    @apply w-[290px] h-[50px] bg-gradientGray rounded-[10px] border-none text-[24px] font-bold text-white1 pl-[2rem]
   }
-
-  .info {
-    width: 300px;
+  .card{
+    @apply w-[300px] h-[500px] relative bg-gradientPink shadow-13xl rounded-[20px] 
   }
-
-  .cards {
-    justify-content: center;
+  .progressBar{
+    @apply bg-pink1 text-xs font-bold textmenu text-center p-[5px] leading-none rounded-full
   }
-
-  .card {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+  .cardButton{
+    @apply w-[150px] h-[30px] bg-pink1 rounded-[50px] textWallet text-center
+  }
+  .buttonMain {
+    @apply w-[250px] h-[60px] bg-pink1 rounded-[50px] font-bold text-[18px] text-white1 tracking-[2.81px] text-center
+  }
+  .degradFooter{
+    @apply w-full h-[600px] bg-gradientPink2
+  }
+  .modal{
+    @apply w-[100vw] h-[100vh] bg-rgbaBlack fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex items-center justify-center
+  }
+  .cardModal{
+    @apply relative w-[1120px] h-[80%] z-[2] bg-background rounded-[30px] p-[80px] pt-[60px] flex flex-col items-center gap-[60px] overflow-scroll
+  }
+  .cardInfo{
+    @apply w-[357px] h-[790px] bg-gradientGray2 rounded-[10px]
+  }
+  .soldOut {
+    @apply h-[48px] w-[240px] bg-pink2 rounded-[4px] flex justify-center items-center cursor-default text-white1 text-[16px] font-bold cursor-pointer
+  }
+  .btnContact{
+    @apply cursor-default w-[150px] h-[50px] bg-transparent text-white1 text-[16px] font-bold cursor-pointer
+  }
+  .btnBuy{
+    @apply w-[225px] h-[50px] cursor-default text-white1 text-[16px] font-bold cursor-pointer
+  }
+  .inputMain{
+    @apply w-[300px] h-[60px] border-[1px] border-solid border-white1 rounded-[40px] bg-transparent
   }
 }
 
-.footerdegrad {
-  background-image: linear-gradient(0deg, rgba(249, 134, 183, 0.41) 0%, rgba(43, 38, 43, 0.41) 62%, rgba(30, 32, 34, 0.41) 72%, rgba(30, 32, 34, 0.41) 99%, rgba(30, 32, 34, 0.41) 100%, rgba(6, 3, 5, 0.41) 100%, rgba(0, 0, 0, 0.41) 100%);
-  width: 100%;
-  height: 522px;
-}
-
-.footertitle {
-  font-weight: 700;
-  font-size: 21px;
-  color: #F986B7;
-  letter-spacing: 2.11px;
-  text-align: left;
-}
-
-.footertext {
-  font-weight: 400;
-  font-size: 16px;
-  color: #FFFFFF;
-  letter-spacing: 1.61px;
-  text-align: left;
-}
-
-
-/* ------------------------------------------------------ */
-/* -- HOMES -- */
-
-.home {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.home__details {
-  /* grid-template-columns: repeat(2, 1fr); */
-  position: relative;
-  width: 1120px;
-  height: 80%;
-  z-index: 2;
-  background: #1E2022;
-  border-radius: 30px;
-  padding: 80px;
-  padding-top: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 60px;
-  overflow: scroll;
-}
-
-
-
-.home__close {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.home__buy,
-.home__contact,
-.home__owned {
-  margin: 20px 5px;
-  background-color: var(--clr-blue);
-  color: var(--clr-white);
-  border: none;
-  border-radius: 4px;
-  font-family: "Russo One', sans-serif";
-  font-size: 1.10em;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.home__buy {
-  width: 225px;
-  height: 50px;
-}
-
-.home__buy:hover {
-  background-color: var(--clr-blue-2);
-}
-
-.home__contact {
-  width: 150px;
-  height: 50px;
-  background-color: transparent;
-  color: var(--clr-blue);
-}
-
-.home__contact:hover {
-  background-color: #f7f7f7;
-  color: var(--clr-blue-2);
-}
-
-.home__owned {
-  height: 48px;
-  width: 240px;
-  background: #F986B7;
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: default;
-}
-
-.tittlepop {
-  font-weight: 700;
-  font-size: 36px;
-  color: #F986B7;
-  letter-spacing: 3.62px;
-  text-align: center;
-}
-
-.facts {
-  font-weight: 700;
-  font-size: 24px;
-  color: #FFFFFF;
-  letter-spacing: 2.41px;
-  text-align: left;
-}
-
-@media screen and (max-width: 900px) {
-  .home__details {
-    flex-direction: column;
-    gap: 5rem;
+@layer utilities {
+  .imageStyle{
+   @apply object-cover w-full h-full rounded-[10px]
   }
+  .select{
+    @apply w-[177px] h-[72px] font-bold text-[18px] text-white1 tracking-[1.81px] text-center flex items-center justify-center
 
-  .home__image {
-    width: 300px;
   }
 
 }
 
 
-.btn-launch {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 24px 16px;
-  gap: 5.4px;
-  width: 140px;
-  height: 55px;
-  background: #FFFFFF;
-  border: 1px solid #F986B7;
-  border-radius: 200px;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: -0.02em;
-  color: #F986B7;
-}
 
-.psearch {
-  font-weight: 700;
-  font-size: 24px;
-  color: #FFFFFF;
-  letter-spacing: 2.41px;
-}
 
-.input1 {
-  width: 557px;
-  height: 68.19px;
-  border: 1px solid #FFFFFF;
-  border-radius: 40px;
-  background-color: transparent;
-}
 
-.inputt {
-  width: 159.63px;
-  height: 68.19px;
-  border: 1px solid #FFFFFF;
-  border-radius: 40px;
-  background-color: transparent;
-}
 
-.pricedetail {
-  width: 357px;
-  height: 790px;
-  background-image: linear-gradient(180deg, #404347 0%, #1E2022 100%);
-  border-radius: 10px;
-}
 
-.atritype {
-  font-weight: 400;
-  font-size: 16px;
-  color: #FFFFFF;
-  letter-spacing: 1.61px;
-  text-align: center;
 
-}
 
-.atrivalue {
-  font-weight: 700;
-  font-size: 36px;
-  color: #FFFFFF;
-  letter-spacing: 3.62px;
-  text-align: center;
-}
 
-.getinfo {
-  width: 177px;
-  height: 72px;
-  background: #1E2022;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
-  color: #FFFFFF;
-  letter-spacing: 1.81px;
-  text-align: center;
-}
 
-.pricede {
-  width: 177px;
-  height: 72px;
-  font-weight: 700;
-  font-size: 18px;
-  color: #FFFFFF;
-  letter-spacing: 1.81px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tnft {
-  font-weight: 700;
-  font-size: 16px;
-  color: #FFFFFF;
-  letter-spacing: 1.61px;
-}
-
-.tprice {
-  font-weight: 400;
-  font-size: 16px;
-  color: #FFFFFF;
-  letter-spacing: 1.61px;
-  text-align: center;
-}
-
-.description {
-  font-weight: 700;
-  font-size: 24px;
-  color: #FFFFFF;
-  letter-spacing: 2.41px;
-}
-
-.descrip {
-  font-weight: 400;
-  font-size: 18px;
-  color: #FFFFFF;
-  letter-spacing: 1.81px;
-}

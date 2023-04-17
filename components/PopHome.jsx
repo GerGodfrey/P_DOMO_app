@@ -131,117 +131,119 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
     })
 
     return (
-        <div className="home">
-            <div className='home__details'>
-                <Image src={close1} alt="close" onClick={togglePop} className='home__close' />
-                <h1 className='tittlepop'>{home.name}</h1>
-                <div className=' w-full h-[500px] grid grid-cols-6 auto-rows-[82px] gap-[20px]'>
+        <div className="modal">
+            <div className='cardModal'>
+                <Image src={close1} alt="close" onClick={togglePop} className='absolute top-[30px] right-[30px] cursor-pointer' />
+                <h1 className='tittlePop'>
+                    {home.name}
+                </h1>
+                <div className='collage'>
                     <div className=' overflow-hidden col-span-2 row-span-5'>
-                        <img src={home.image} alt='Home' className=' object-cover w-full h-full rounded-[10px] ' />
+                        <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-2 row-span-2'>
-                        <img src={home.image} alt='Home' className=' object-cover w-full h-full rounded-[10px]' />
+                        <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-2 row-span-2'>
-                        <img src={home.image} alt='Home' className='object-cover w-full h-full rounded-[10px] ' />
+                        <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-2 row-span-3'>
-                        <img src={home.image} alt='Home' className='object-cover w-full h-full rounded-[10px] ' />
+                        <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-1 row-span-1'>
-                        <img src={home.image} alt='Home' className='object-cover w-full h-full rounded-[10px]' />
+                        <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-1 row-span-1'>
-                        <img src={home.image} alt='Home' className=' object-cover w-full h-full rounded-[10px]' />
+                        <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-2 row-span-2'>
-                        <img src={home.image} alt='Home' className=' object-cover w-full h-full rounded-[10px]' />
+                        <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                 </div>
                 <div className='flex flex-col gap-10 w-full'>
-                    <h1 className='facts'>
+                    <h1 className='textFacts'>
                         Facts and features
                     </h1>
                     <div className='flex justify-between'>
-                        <div className='grid grid-cols-2 gap-x-[150px] items-center text-center w'>
+                        <div className='grid grid-cols-2 gap-x-[150px] items-center text-center'>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={price} alt='Price' />
-                                <p className='atritype'>
+                                <p className='textmenu font-normal text-center'>
                                     {home.attributes[0]?.trait_type}
                                 </p>
-                                <h1 className='atrivalue'>
+                                <h1 className='tittlePop text-white1'>
                                     {home.attributes[0]?.value} ETH
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={type1} alt='Type' />
-                                <p className='atritype'>
+                                <p className='textmenu font-normal text-center'>
                                     {home.attributes[1]?.trait_type}
                                 </p>
-                                <h1 className='atrivalue'>
+                                <h1 className='tittlePop text-white1'>
                                     {home.attributes[1]?.value}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={bed} alt='Bedroom' />
-                                <p className='atritype'>
+                                <p className='textmenu font-normal text-center'>
                                     {home.attributes[2]?.trait_type}
                                 </p>
-                                <h1 className='atrivalue'>
+                                <h1 className='tittlePop text-white1'>
                                     {home.attributes[2]?.value}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={bath} alt='Bathroom' />
-                                <p className='atritype'>
+                                <p className='textmenu font-normal text-center'>
                                     {home.attributes[3]?.trait_type}
                                 </p>
-                                <h1 className='atrivalue'>
+                                <h1 className='tittlePop text-white1'>
                                     {home.attributes[3]?.value}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={square} alt='Calendar' />
-                                <p className='atritype'>
+                                <p className='textmenu font-normal text-center'>
                                     {home.attributes[4]?.trait_type}
                                 </p>
-                                <h1 className='atrivalue'>
+                                <h1 className='tittlePop text-white1'>
                                     {home.attributes[4]?.value}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={calendar} alt='Price' />
-                                <p className='atritype'>
+                                <p className='textmenu font-normal text-centers'>
                                     {home.attributes[5]?.trait_type}
                                 </p>
-                                <h1 className='atrivalue'>
+                                <h1 className='tittlePop text-white1'>
                                     {home.attributes[5]?.value}
                                 </h1>
                             </div>
                         </div>
-                        <div className='pricedetail'>
+                        <div className='cardInfo'>
                             <div className='flex w-full justify-between'>
-                                <p className='pricede'>
+                                <p className='select'>
                                     Price detail
                                 </p>
-                                <p className='getinfo'>
+                                <p className='select bg-background'>
                                     Get info
                                 </p>
                             </div>
                             <div className='flex flex-col gap-[55px] mt-[75px]'>
                                 <div className='flex justify-around'>
-                                    <h1 className='tnft'>
+                                    <h1 className='textmenu'>
                                         Total NFT
                                     </h1>
-                                    <span className='tprice'>
+                                    <span className='textmenu font-normal text-center'>
                                         {home.totalSupply} / {home.maxSupply}
                                     </span>
                                 </div>
                                 <div className='flex justify-around'>
-                                    <h1 className='tnft'>
+                                    <h1 className='textmenu'>
                                         Total price
                                     </h1>
-                                    <span className='tprice'>
+                                    <span className='textmenu font-normal text-center'>
                                         {home.attributes[0].value} ETH
                                     </span>
                                 </div>
@@ -249,26 +251,26 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                     (souldOut && (account !== inspector && account !== seller)) ? (
 
                                         <div className='flex w-full items-center justify-center'>
-                                            <span  className='home__owned'>
+                                            <span className='soldOut'>
                                                 Sould OUT !!
                                             </span>
                                         </div>
                                     ) : (
                                         <div>
                                             {(account === inspector) ? (
-                                                <button className='home__buy' onClick={appInspection}>
+                                                <button className='btnBuy' onClick={appInspection}>
                                                     Approve Inspection
                                                 </button>
                                             ) : (account === seller) ? (
-                                                <button className='home__buy'>
+                                                <button className='btnBuy'>
                                                     Approve & Sell
                                                 </button>
                                             ) : (
                                                 <div>
-                                                    <button className='home__buy' onClick={buyHandler} >
+                                                    <button className='btnBuy' onClick={buyHandler} >
                                                         Buy
                                                     </button>
-                                                    <button className='home__contact' >
+                                                    <button className='btnContact' >
                                                         Buy FIAT
                                                     </button>
                                                 </div>
@@ -284,7 +286,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                             <p>Soud OUT : {isSouldOut}</p>
                                             <p>Inspection : {inspectionPassed}</p>
                                             <p>Balance: {balance} ETH</p>
-                                            <button className='home__contact' onClick={finish}> Finalize Sale </button>
+                                            <button className='btnContact' onClick={finish}> Finalize Sale </button>
                                         </div>
 
                                     ) : (
@@ -295,10 +297,10 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                         </div>
                     </div>
                     <div className='flex flex-col gap-[25px]'>
-                        <h1 className='description'>
+                        <h1 className='textFacts'>
                             Description
                         </h1>
-                        <p className='descrip'>
+                        <p className='textWallet font-normal'>
                             {home.description}
                         </p>
                     </div>
