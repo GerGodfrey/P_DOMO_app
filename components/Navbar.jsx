@@ -14,10 +14,10 @@ import metamask2 from '../assets/metamask2.svg';
 
 
 const Navbar = () => {
-
-  const [account, setAccount] = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
-
+  const [account, setAccount] = useContext(UserContext);
+ 
+  console.log(toggle)
   const connectHandler = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setAccount(accounts[0]);
@@ -81,7 +81,7 @@ const Navbar = () => {
               <Image src={logo} alt="" className='logonav' />
             </Link>
           </li>
-          <li>
+          <li onClick={()=> setToggle(true)}>
             <Image src={menu2} alt='menu' />
           </li>
         </ul>

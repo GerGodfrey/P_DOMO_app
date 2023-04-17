@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 :root {
@@ -22,20 +23,19 @@
 
 body {
   margin: 0;
-  font-family: 'Alegreya Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000000;
+  background-color: #1E2022;
 }
 
 /* ------------------------------------------------------ */
 /* -- NAVIGATION -- */
 .navmenu {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
-  font-size: 21px;
+  font-weight: 700;
+  font-size: 16px;
   color: #FFFFFF;
-  letter-spacing: 2.11px;
+  letter-spacing: 1.61px;
 }
 
 .navwallet {
@@ -54,16 +54,14 @@ body {
 }
 
 .nav__connect {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 400;
-  font-size: 21px;
+  font-weight: 700;
+  font-size: 18px;
   color: #FFFFFF;
   letter-spacing: 2.11px;
 }
 
 .maintittle {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 48px;
   color: #FFFFFF;
   letter-spacing: 4.82px;
@@ -75,16 +73,13 @@ body {
 
 
 .header__title {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
+  font-weight: 700;
   color: var(--clr-white);
-  font-size: 60px;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 60px;
-  color: #FFFFFF;
-  letter-spacing: 6.03px;
   text-transform: uppercase;
+  font-size: 48px;
+  color: #FFFFFF;
+  letter-spacing: 4.82px;
+  text-align: center;
 }
 
 .header__search {
@@ -132,43 +127,68 @@ body {
 
 /* ------------------------------------------------------ */
 /* -- CARDS -- */
+
+.degradtop {
+  width: 100%;
+  height: 94px;
+  background: #1E2022;
+  filter: blur(8px);
+}
+
 .card {
-  border-radius: 10px 100px 10px /100px;
-  width: 450px;
-  height: 700px;
+  width: 440px;
+  height: 720px;
   position: relative;
-  background-image: linear-gradient(0deg, rgba(249, 134, 183, 0.15) 0%, rgba(244, 244, 244, 0.15) 100%, rgba(0, 0, 0, 0.15) 100%);
+  background-image: linear-gradient(0deg, rgba(238, 42, 123, 0.15) 0%, rgba(244, 244, 244, 0.15) 100%, rgba(0, 0, 0, 0.15) 100%);
   box-shadow: inset 0 3px 13px 0 rgba(255, 255, 255, 0.50);
-  background-color: transparent;
+  border-radius: 20px;
 
 }
 
 .card__image {
-  width: 375.43px;
-  height: 275px;
+  width: 440px;
+  height: 240px;
 }
 
 .cardtittle {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
-  font-size: 36px;
+  font-weight: 700;
+  font-size: 21px;
   color: #FFFFFF;
-  letter-spacing: 3.62px;
+  letter-spacing: 4.38px;
   text-align: center;
 }
 
-.cardadress {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
-  font-size: 24px;
+.adress {
+  font-weight: 700;
+  font-size: 18px;
   color: #FFFFFF;
-  letter-spacing: 2.41px;
+  letter-spacing: 1.81px;
+  text-align: left;
+}
+
+.cardadress {
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+  letter-spacing: 1.81px;
+}
+
+.cardbutton1 {
+  width: 200px;
+  height: 37px;
+  background: #EE2A7B;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #FFFFFF;
+  letter-spacing: 2.78px;
   text-align: center;
+  line-height: 30px;
 }
 
 .cardbutton {
   width: 350px;
-  height: 80px;
+  height: 100px;
   background: #EE2A7B;
   border-radius: 50px;
   font-family: 'Alegreya Sans', sans-serif;
@@ -207,14 +227,13 @@ body {
 }
 
 .footerdegrad {
-  background-image: linear-gradient(0deg, rgba(249, 134, 183, 0.41) 0%, rgba(6, 3, 5, 0.41) 89%, rgba(0, 0, 0, 0.41) 89%);
+  background-image: linear-gradient(0deg, rgba(249, 134, 183, 0.41) 0%, rgba(43, 38, 43, 0.41) 62%, rgba(30, 32, 34, 0.41) 72%, rgba(30, 32, 34, 0.41) 99%, rgba(30, 32, 34, 0.41) 100%, rgba(6, 3, 5, 0.41) 100%, rgba(0, 0, 0, 0.41) 100%);
   width: 100%;
-  height: 648px;
+  height: 522px;
 }
 
 .footertitle {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 21px;
   color: #F986B7;
   letter-spacing: 2.11px;
@@ -222,7 +241,6 @@ body {
 }
 
 .footertext {
-  font-family: 'Alegreya Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #FFFFFF;
@@ -248,39 +266,30 @@ body {
 }
 
 .home__details {
-  display: flex;
   /* grid-template-columns: repeat(2, 1fr); */
-  align-items: center;
   position: relative;
-  width: 80%;
-  height: 70%;
-  padding: 20px;
+  width: 1120px;
+  height: 80%;
   z-index: 2;
   background: #1E2022;
   border-radius: 30px;
-  justify-content: space-around;
-  border: solid 1px #FFFFFF;
+  padding: 80px;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  overflow: scroll;
 }
 
-.home__image {
-  width: 500px;
-}
+
 
 .home__close {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 30px;
+  right: 30px;
   cursor: pointer;
   font-size: 20px;
-}
-
-.home__overview {
-  overflow-y: scroll;
-  color: #FFFFFF;
-  font-family: "Russo One', sans-serif";
-  border: solid 1px #FFFFFF;
-  border-radius: 30px;
-  padding: 1rem;
 }
 
 .home__buy,
@@ -309,11 +318,8 @@ body {
 .home__contact {
   width: 150px;
   height: 50px;
-
   background-color: transparent;
   color: var(--clr-blue);
-
-  border: 1px solid var(--clr-blue);
 }
 
 .home__contact:hover {
@@ -322,14 +328,30 @@ body {
 }
 
 .home__owned {
-  height: 50px;
-  background-color: var(--clr-green);
-
+  height: 48px;
+  width: 240px;
+  background: #F986B7;
+  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-
   cursor: default;
+}
+
+.tittlepop {
+  font-weight: 700;
+  font-size: 36px;
+  color: #F986B7;
+  letter-spacing: 3.62px;
+  text-align: center;
+}
+
+.facts {
+  font-weight: 700;
+  font-size: 24px;
+  color: #FFFFFF;
+  letter-spacing: 2.41px;
+  text-align: left;
 }
 
 @media screen and (max-width: 900px) {
@@ -365,4 +387,107 @@ body {
   text-align: center;
   letter-spacing: -0.02em;
   color: #F986B7;
+}
+
+.psearch {
+  font-weight: 700;
+  font-size: 24px;
+  color: #FFFFFF;
+  letter-spacing: 2.41px;
+}
+
+.input1 {
+  width: 557px;
+  height: 68.19px;
+  border: 1px solid #FFFFFF;
+  border-radius: 40px;
+  background-color: transparent;
+}
+
+.inputt {
+  width: 159.63px;
+  height: 68.19px;
+  border: 1px solid #FFFFFF;
+  border-radius: 40px;
+  background-color: transparent;
+}
+
+.pricedetail {
+  width: 357px;
+  height: 790px;
+  background-image: linear-gradient(180deg, #404347 0%, #1E2022 100%);
+  border-radius: 10px;
+}
+
+.atritype {
+  font-weight: 400;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 1.61px;
+  text-align: center;
+
+}
+
+.atrivalue {
+  font-weight: 700;
+  font-size: 36px;
+  color: #FFFFFF;
+  letter-spacing: 3.62px;
+  text-align: center;
+}
+
+.getinfo {
+  width: 177px;
+  height: 72px;
+  background: #1E2022;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: #FFFFFF;
+  letter-spacing: 1.81px;
+  text-align: center;
+}
+
+.pricede {
+  width: 177px;
+  height: 72px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #FFFFFF;
+  letter-spacing: 1.81px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tnft {
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 1.61px;
+}
+
+.tprice {
+  font-weight: 400;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 1.61px;
+  text-align: center;
+}
+
+.description {
+  font-weight: 700;
+  font-size: 24px;
+  color: #FFFFFF;
+  letter-spacing: 2.41px;
+}
+
+.descrip {
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+  letter-spacing: 1.81px;
 }

@@ -1,11 +1,16 @@
 import Image from 'next/image';
 import house from '../assets/house.svg';
 import arrow from '../assets/arrow.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Search = () => {
 
+    const [directionsResponse, setDirectionsResponse] = useState(null)
+
+
     const [search, setSearch] = useState(true);
+
 
     return (
         <header className='flex flex-col justify-center gap-[62px] items-center'>

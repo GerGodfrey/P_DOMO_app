@@ -6,7 +6,9 @@ import { useRouter } from 'next/router';
 import { utils } from 'ethers';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
-import backgroundDaap from '../assets/backgroundDaap.png';
+import backgroundDaap from '../assets/search.svg';
+import arrowDown from '../assets/arrow-down.svg';
+import glass from '../assets/glass.svg';
 import { sc_factory_localhost, sc_factory_tesnet } from '../config'
 //import Escrow_LH from '../artifacts/contracts/Escrow.sol/Escrow.json'
 //import Factory_LH from '../artifacts/contracts/RealEstate.sol/Factory.json' Factory_LH.abi
@@ -142,19 +144,58 @@ export default function Home() {
             <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, install Some Wallet</h1>
           )
         }
-        <div className='flex justify-center flex-wrap gap-[140px] mt-[120px] mb-[120px]'>
+        <div className='flex justify-around mt-[80px]'>
+          <div className='flex flex-col gap-[30px]'>
+            <p className='psearch'>
+              Search
+            </p>
+            <div className='relative'>
+              <input type='text' className='input1 text-[#FFFFFF] pl-[60px]' />
+              <Image src={glass} alt='magnificy glass' className='absolute top-[30%] left-5' />
+            </div>
+          </div>
+          <div className='flex flex-col gap-[30px]'>
+            <p className='psearch'>
+              Select state
+            </p>
+            <div className='relative'>
+              <option className='inputt'>
+              </option>
+              <Image src={arrowDown} alt='arrow down' className='absolute right-5 top-[40%]' />
+            </div>
+          </div>
+          <div className='flex flex-col gap-[30px]'>
+            <p className='psearch'>
+              Order by
+            </p>
+            <div className='relative'>
+              <option className='inputt'>
+              </option>
+              <Image src={arrowDown} alt='arrow down' className='absolute right-5 top-[40%]' />
+            </div>
+          </div>
+        </div>
+        <div className='flex justify-around flex-wrap  mt-[120px] mb-[120px]'>
           {homes.map((home, index) => (
-            <div className='card flex flex-col items-center gap-[26px] hover:bg-[#F986B7] hover:cursor-pointer' key={index} onClick={() => togglePop(home)}>
-              <div className='card__image mt-[32px]'>
-                <img src={home.image} alt='Home' className=' rounded-[100px]' />
+            <div className='card flex flex-col justify-evenly items-center hover:bg-[#F986B7] hover:cursor-pointer' key={index} onClick={() => togglePop(home)}>
+              <div className='card__image'>
+                <img src={home.image} alt='Home' className='w-[440px] h-[240px] ' />
               </div>
               <div className='info mr-[88px] ml-[88px] flex flex-col gap-[26px]'>
                 <h4 className='cardtittle'> {home.name} </h4>
-                <p className='cardadress'> {home.address}</p>
+                <div>
+                  <p className='adress'>
+                    Adress:
+                  </p>
+                  <p className='cardadress'> {home.address}</p>
+                </div>
                 <div className="bg-[#F7559A] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: `${home.percentage}%` }}>
                   {home.percentage}%
                 </div>
               </div>
+              <button className='cardbutton1'>
+                LEARN MORE
+              </button>
             </div>
           ))}
         </div>
