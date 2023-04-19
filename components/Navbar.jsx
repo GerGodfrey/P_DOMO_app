@@ -10,13 +10,13 @@ import { ethers } from 'ethers';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../lib/context.js';
 import menu2 from '../assets/menu2.svg';
-
+import metamask2 from '../assets/metamask2.svg';
 
 const Navbar = () => {
-
-  const [account, setAccount] = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
+  const [account, setAccount] = useContext(UserContext);
 
+  console.log(toggle)
   const connectHandler = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setAccount(accounts[0]);
@@ -27,42 +27,43 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className={`hidden bg-transparent p-[15px] sm:flex`}>
-        <ul className={`flex justify-evenly w-full items-center`}>
+      <nav className='hidden bg-transparent mt-[42px] sm:flex'>
+        <ul className='flex justify-around w-full items-center'>
           <li>
-            <div className={`flex font-russo text-[#E5E5E5] gap-10 text-[18px] items-center`}>
-              <Link href={{ pathname: "/", query: { data: account } }} legacyBehavior>
-                <Image src={logo} alt="" className='logonav' />
-              </Link>
+            <Link href={{ pathname: "/", query: { data: account } }} legacyBehavior>
+              <Image src={logo} alt="Logo DOMO" className=' hover:cursor-pointer  sm:w-[80%]' />
+            </Link>
+          </li>
+          <li>
+            <div className='flex justify-between gap-[10px] md:gap-[30px]'>
               <Link href={{ pathname: "/my-home", query: { data: account } }} legacyBehavior>
-                <a className='mr-4 text-[#FFFFFF] hover:text-pink3'>
+                <a className='textmenu hover:text-pink1'>
                   My Home
                 </a>
               </Link>
-              <p>
+              <p className='textmenu'>
                 Secondary Market
               </p>
               <Link href={{ pathname: "/Doubts", query: { data: account } }} legacyBehavior>
-                <a className='mr-4 text-[#FFFFFF] hover:text-pink3'>
+                <a className='textmenu hover:text-pink1'>
                   Instructions
                 </a>
               </Link>
-
             </div>
           </li>
           <li>
             {
               account ? (
-                <div className='flex border-solid border-[#F7559A] border-[1px] p-3 rounded-lg'>
-                  <Image src={metamask} alt='metamask' className='w-[15%]' />
-                  <button type='button' className='nav__connect'>
+                <div className='walletSucces flex items-center justify-center gap-[8px] textWallet md:w-[223px] md:h-[65px] md:text-[18px]'>
+                  <Image src={metamask2} alt='metamask' className='w-[10%] md:w-[15%]' />
+                  <button type='button' style={{ color: '#1FE72E' }}>
                     {account.slice(0, 6) + '...' + account.slice(38, 42)}
                   </button>
                 </div>
               ) : (
-                <div className='flex border-solid border-[#F7559A] border-[1px] p-3 rounded-lg'>
+                <div className='walletConnect flex items-center justify-center gap-[8px] hoverWallet textWallet md:w-[223px] md:h-[65px] md:text-[18px]' onClick={connectHandler}>
                   <Image src={metamask} alt='metamask' className='w-[15%]' />
-                  <button type='button' className='nav__connect' onClick={connectHandler} >
+                  <button type='button'>
                     Connect
                   </button>
                 </div>
@@ -71,17 +72,57 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-      <nav className={`flex bg-transparent p-[15px] sm:hidden`}>
+      <nav className={`flex bg-transparent sm:hidden mt-[30px]`}>
         <ul className={`flex justify-evenly w-full items-center`}>
           <li>
             <Link href={{ pathname: "/", query: { data: account } }} legacyBehavior>
               <Image src={logo} alt="" className='logonav' />
             </Link>
           </li>
-          <li>
+          <li onClick={() => setToggle(!toggle)}>
             <Image src={menu2} alt='menu' />
           </li>
         </ul>
+        {toggle && (
+          <ul className='absolute top-[85px] left-0 h-[100vh] bg-background w-full z-[10] flex flex-col justify-evenly'>
+            <li>
+              <div className='flex flex-col h-[30vh] items-center justify-between'>
+                <Link href={{ pathname: "/my-home", query: { data: account } }} legacyBehavior>
+                  <a className='textmenu hover:text-pink1'>
+                    My Home
+                  </a>
+                </Link>
+                <p className='textmenu'>
+                  Secondary Market
+                </p>
+                <Link href={{ pathname: "/Doubts", query: { data: account } }} legacyBehavior>
+                  <a className='textmenu hover:text-pink1'>
+                    Instructions
+                  </a>
+                </Link>
+              </div>
+            </li>
+            <li className=' flex justify-center'>
+              {
+                account ? (
+                  <div className='walletSucces flex items-center justify-center gap-[8px] textWallet md:w-[223px] md:h-[65px] md:text-[18px]'>
+                    <Image src={metamask2} alt='metamask' className='w-[10%] md:w-[15%]' />
+                    <button type='button' style={{ color: '#1FE72E' }}>
+                      {account.slice(0, 6) + '...' + account.slice(38, 42)}
+                    </button>
+                  </div>
+                ) : (
+                  <div className='walletConnect flex items-center justify-center gap-[8px] hoverWallet textWallet md:w-[223px] md:h-[65px] md:text-[18px]' onClick={connectHandler}>
+                    <Image src={metamask} alt='metamask' className='w-[15%]' />
+                    <button type='button'>
+                      Connect
+                    </button>
+                  </div>
+                )
+              }
+            </li>
+          </ul>
+        )}
       </nav>
     </div>
   );

@@ -1,0 +1,19 @@
+
+<svg width="69px" height="75px" viewBox="0 0 69 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="DOMO-APP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Small-Copy" transform="translate(-508.000000, -1263.000000)" stroke="#F986B7" stroke-width="5">
+            <g id="calendar-svgrepo-com" transform="translate(511.000000, 1266.000000)">
+                <line x1="18" y1="0" x2="18" y2="10" id="Path"></line>
+                <line x1="45" y1="0" x2="45" y2="10" id="Path"></line>
+                <line x1="3" y1="24" x2="62" y2="24" id="Path"></line>
+                <path d="M63,22.2972973 L63,51.7027027 C63,62.0810811 57.75,69 45.5,69 L17.5,69 C5.25,69 0,62.0810811 0,51.7027027 L0,22.2972973 C0,11.9189189 5.25,5 17.5,5 L45.5,5 C57.75,5 63,11.9189189 63,22.2972973 Z" id="Path"></path>
+                <line x1="44.982" y1="40" x2="45.018" y2="40" id="Path"></line>
+                <line x1="44.982" y1="51" x2="45.018" y2="51" id="Path"></line>
+                <line x1="30.982" y1="40" x2="31.018" y2="40" id="Path"></line>
+                <line x1="30.982" y1="51" x2="31.018" y2="51" id="Path"></line>
+                <line x1="18.98204" y1="40" x2="19.01796" y2="40" id="Path"></line>
+                <line x1="18.98204" y1="51" x2="19.01796" y2="51" id="Path"></line>
+            </g>
+        </g>
+    </g>
+</svg>
