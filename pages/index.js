@@ -4,14 +4,15 @@ import { Search, PopHome, Navbar } from '../components'
 import { Polybase } from '@polybase/client'
 import { useRouter } from 'next/router';
 import { utils } from 'ethers';
-import search from '../assets/search.jpeg';
-
-
+import Image from 'next/image';
+import Footer from '@/components/Footer';
+import backgroundDaap from '../assets/search.png';
+import arrowDown from '../assets/arrow-down.svg';
+import glass from '../assets/glass.svg';
 import { sc_factory_localhost, sc_factory_tesnet } from '../config'
 //import Escrow_LH from '../artifacts/contracts/Escrow.sol/Escrow.json'
 //import Factory_LH from '../artifacts/contracts/RealEstate.sol/Factory.json' Factory_LH.abi
 //import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json' RealEstate_LH.abi
-
 import Escrow from '../constants/Escrow_metadata.json' // Escrow.output.abi
 import Factory from '../constants/Factory_metadata.json' //Factory.output.abi
 import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.output.abi
@@ -34,7 +35,7 @@ const polybase_name = "Tesnet02"
 export default function Home() {
   const router = useRouter();
   let data = router.query.data
-  if (data) { data = utils.getAddress(data)}
+  if (data) { data = utils.getAddress(data) }
   const [account, setAccount] = useState(data)
   const [provider, setProvider] = useState(null)
   const [homes, setHomes] = useState([])
@@ -58,7 +59,7 @@ export default function Home() {
 
     const collectionReference = dataBase_sc.collection(polybase_name);
     const records = await collectionReference.get("escrow_contract");
-    for (var i = 0; i < total_rs; i++){
+    for (var i = 0; i < total_rs; i++) {
       const address_re = await factory.RealEstateArray(i);
       const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
 
@@ -79,7 +80,7 @@ export default function Home() {
       homes.push(metadata);
     }
     setHomes(homes)
-    
+
   }
 
   const changeWallet = async () => {
@@ -102,11 +103,11 @@ export default function Home() {
 
   useEffect(() => {
     changeWallet(),
-    loadData()
+      loadData()
   }, [])
 
   const togglePop = (home) => {
-    
+
     setHome(home);
     const escrow_contract = connectDB(home.address_re);
     const escrow = new ethers.Contract(escrow_contract, Escrow.output.abi, provider);
@@ -126,49 +127,89 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ backgroundImage:`url(${search.src})`, backgroundPosition:'center', backgroundSize:'cover'}}>
+      <div className='relative min-h-[500px] sm:min-h-[700px] md:min-h-[1000px] flex flex-col gap-[145px]'>
+        <Image src={backgroundDaap} alt='Background' className='absolute top-0 bottom-0 z-[-1]' />
         <Navbar />
         <Search />
       </div>
-      <div className='cards__section card1 pb-[5rem]'>
+      <div className='mb-[85px]'>
         {
           (provider) ? (
             (provider.provider.networkVersion === "80001") ? (
-              <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Some Opportunities: </h1>
+              <h1 className='tittleHeader text-left ml-[60px] mt-[40px]'> Some Opportunities: </h1>
             ) : (
-              <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, connect to Polygon Mumbai Blockchain </h1>
+              <h1 className='tittleHeader'> Please, connect to Polygon Mumbai Blockchain </h1>
             )
-          ): (
-            <h1 className='text-[#FFFFFF] p-10 font-russo text-[40px] text-center'> Please, install Some Wallet</h1>
-          ) 
+          ) : (
+            <h1 className='tittleHeader'> Please, install Some Wallet</h1>
+          )
         }
-        
-        <div className='cards'>
+        <div className='flex flex-col md:justify-around md:flex md:flex-row items-center gap-10 mt-[80px]'>
+          <div className='flex flex-col gap-[30px]'>
+            <p className='textInput md:text-[21px] md:text-left'>
+              Search
+            </p>
+            <div className='relative'>
+              <input type='text' className='inputMain text-[#FFFFFF] pl-[60px] md:w-[557px] md:h-[68.19px]' />
+              <Image src={glass} alt='magnificy glass' className='absolute top-[30%] left-5' />
+            </div>
+          </div>
+          <div className='flex flex-col gap-[30px]'>
+            <p className='textInput md:text-[21px] md:text-left'>
+              Select state
+            </p>
+            <div className='relative'>
+              <option className='inputMain md:w-[159.63px] md:h-[68.19px] w-[120px] h-[60px]'>
+              </option>
+              <Image src={arrowDown} alt='arrow down' className='absolute right-5 top-[40%]' />
+            </div>
+          </div>
+          <div className='flex flex-col gap-[30px]'>
+            <p className='textInput md:text-[21px] md:text-left'>
+              Order by
+            </p>
+            <div className='relative'>
+              <option className='inputMain md:w-[159.63px] md:h-[68.19px] w-[120px] h-[60px]'>
+              </option>
+              <Image src={arrowDown} alt='arrow down' className='absolute right-5 top-[40%]' />
+            </div>
+          </div>
+        </div>
+        <div className='flex justify-around flex-wrap  mt-[120px] mb-[120px]'>
           {homes.map((home, index) => (
-            <div className='card' key={index} onClick={() => togglePop(home)}>
-              <div className='card__image relative'>
-                <img src={home.image} alt='Home' className=' rounded-[30px]' />
-                <div className='info'>
-                  <h4> {home.name} </h4>
-                  <p> {home.address}</p>
+            <div className='card sm:w-[440px] sm:h-[720px] flex flex-col justify-evenly items-center hover:bg-[#F986B7] hover:cursor-pointer' key={index} onClick={() => togglePop(home)}>
+              <div>
+                <img src={home.image} alt='Home' className='sm:w-[440px] w-[300px] sm:h-[240px] h-[140px] ' />
+              </div>
+              <div className='info mr-[88px] ml-[88px] flex flex-col gap-[26px]'>
+                <h4 className='tittleCard sm:text-[21px]'>
+                  {home.name}
+                </h4>
+                <div>
+                  <p className='textWallet'>
+                    Adress:
+                  </p>
+                  <p className='textWallet font-normal'>
+                    {home.address}
+                  </p>
                 </div>
-              </div>
-
-              <div className='info2 mt-[1rem]'>
-                <h4 className='card__info'> {home.name} </h4>
-                <p className='card__info'> {home.address}</p>
-              </div>
-
-              <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 mt-[2rem]">
-                <div className="bg-[#F7559A] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: `${home.percentage}%` }}>
+                <div className="progressBar" style={{ width: `${home.percentage}%` }}>
                   {home.percentage}%
                 </div>
               </div>
+              <button className='cardButton sm:w-[200px] sm:h-[37px]'>
+                LEARN MORE
+              </button>
             </div>
           ))}
         </div>
+        <div className='w-full flex justify-center'>
+          <button className='buttonMain sm:w-[350px] sm:h-[100px] sm:text-[28px]'>
+            LOAD MORE
+          </button>
+        </div>
       </div>
-
+      <Footer />
       {toggle && (
         <PopHome home={home} provider={provider} escrow={escrow} realEstate={realEstate} togglePop={togglePop} />
       )}

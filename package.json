@@ -22,12 +22,13 @@
     "react-confetti": "^6.1.0",
     "react-dom": "18.2.0",
     "react-notion": "^0.10.0",
-    "react-scroll": "^1.8.9"
+    "react-scroll": "^1.8.9",
+    "@react-google-maps/api": "^2.7.0"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
     "@ethersproject/providers": "^5.4.7",
-    "@nomicfoundation/hardhat-chai-matchers": "^1.0.0", 
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "@nomiclabs/hardhat-ethers": "^2.0.0",
