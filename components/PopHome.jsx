@@ -138,25 +138,19 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                     {home.name}
                 </h1>
                 <div className='collage'>
-                    <div className=' overflow-hidden col-span-2 row-span-5'>
+                    <div className=' overflow-hidden col-span-2 row-span-5 brightness-75  hover:brightness-100'>
                         <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-2 row-span-2'>
+                    <div className='overflow-hidden col-span-2 row-span-2 brightness-75  hover:brightness-100'>
                         <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-2 row-span-2'>
+                    <div className='overflow-hidden col-span-2 row-span-3 brightness-75  hover:brightness-100'>
                         <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-2 row-span-3'>
+                    <div className='overflow-hidden col-span-2 row-span-3 brightness-75  hover:brightness-100'>
                         <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-1 row-span-1'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
-                    </div>
-                    <div className='overflow-hidden col-span-1 row-span-1'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
-                    </div>
-                    <div className='overflow-hidden col-span-2 row-span-2'>
+                    <div className='overflow-hidden col-span-2 row-span-2 brightness-75  hover:brightness-100'>
                         <img src={home.image} alt='Home' className='imageStyle' />
                     </div>
                 </div>
@@ -172,7 +166,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                     {home.attributes[0]?.trait_type}
                                 </p>
                                 <h1 className='tittlePop text-white1'>
-                                    {home.attributes[0]?.value} ETH
+                                    {home.attributes[0]?.value} MXN
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
@@ -244,7 +238,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                         Total price
                                     </h1>
                                     <span className='textmenu font-normal text-center'>
-                                        {home.attributes[0].value} ETH
+                                        {home.attributes[0].value} MXN
                                     </span>
                                 </div>
                                 {

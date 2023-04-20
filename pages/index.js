@@ -175,39 +175,36 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className='flex justify-around flex-wrap  mt-[120px] mb-[120px]'>
+
+          
+
           {homes.map((home, index) => (
-            <div className='card sm:w-[440px] sm:h-[720px] flex flex-col justify-evenly items-center hover:bg-[#F986B7] hover:cursor-pointer' key={index} onClick={() => togglePop(home)}>
-              <div>
-                <img src={home.image} alt='Home' className='sm:w-[440px] w-[300px] sm:h-[240px] h-[140px] ' />
-              </div>
-              <div className='info mr-[88px] ml-[88px] flex flex-col gap-[26px]'>
-                <h4 className='tittleCard sm:text-[21px]'>
-                  {home.name}
-                </h4>
-                <div>
-                  <p className='textWallet'>
-                    Adress:
-                  </p>
-                  <p className='textWallet font-normal'>
-                    {home.address}
-                  </p>
+
+            <div class="card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-evenly hover:bg-[#EE2A7B] hover:cursor-pointer" key={index} onClick={() => togglePop(home)}>
+                <a href="#">
+                    <img class="rounded-t-lg" src={home.image} alt="Home" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{home.name}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                    <div className="progressBar" style={{ width: `${home.percentage}%` }}>
+                      {home.percentage}%
+                    </div>
+
+                    
                 </div>
-                <div className="progressBar" style={{ width: `${home.percentage}%` }}>
-                  {home.percentage}%
-                </div>
-              </div>
-              <button className='cardButton sm:w-[200px] sm:h-[37px]'>
-                LEARN MORE
-              </button>
             </div>
           ))}
         </div>
-        <div className='w-full flex justify-center'>
+        {/* <div className='w-full flex justify-center'>
           <button className='buttonMain sm:w-[350px] sm:h-[100px] sm:text-[28px]'>
             LOAD MORE
           </button>
-        </div>
+        </div> */}
       </div>
       <Footer />
       {toggle && (
