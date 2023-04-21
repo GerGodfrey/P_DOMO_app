@@ -23,14 +23,6 @@ import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.outp
 // console.log("index NEXT_POLYBASE_NAME",NEXT_POLYBASE_NAME)
 const polybase_name = "Tesnet02"
 
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import { Inter } from '@next/font/google'
-// import styles from '@/styles/Home.module.css'
-// import axios from 'axios'
-// import Web3Modal from 'web3modal'
-
-
 
 export default function Home() {
   const router = useRouter();
