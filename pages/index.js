@@ -169,11 +169,7 @@ export default function Home() {
         </div>
 
         <div className='flex justify-around flex-wrap  mt-[120px] mb-[120px]'>
-
-          
-
           {homes.map((home, index) => (
-
             <div class="card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-evenly hover:bg-[#EE2A7B] hover:cursor-pointer" key={index} onClick={() => togglePop(home)}>
                 <a href="#">
                     <img class="rounded-t-lg" src={home.image} alt="Home" />
@@ -192,11 +188,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-        {/* <div className='w-full flex justify-center'>
-          <button className='buttonMain sm:w-[350px] sm:h-[100px] sm:text-[28px]'>
-            LOAD MORE
-          </button>
-        </div> */}
       </div>
       <Footer />
       {toggle && (

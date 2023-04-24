@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { inputInfo } from '../constants';
 import { motion } from 'framer-motion';
@@ -6,62 +7,108 @@ import {Navbar} from '../components';
 //import styles from '../style';
 import { ethers } from 'ethers';
 import { create } from 'ipfs-http-client';
+import { utils } from 'ethers';
+import { sc_factory_tesnet } from '../config';
+import Factory from '../constants/Factory_metadata.json'; //Factory.output.abi
+import Escrow from '../constants/Escrow_metadata.json';
+import RealEstate from '../constants/RealEstate_metadata.json';
+
 
 const Create = () => {
+    const router = useRouter();
+    let data = router.query.data
+    if (data) { data = utils.getAddress(data) }
+    const [account, setAccount] = useState(data)
+    const [provider, setProvider] = useState(null)
 
-    const [fileUrl, setFileUrl] = useState(null);
+
+    //const [fileUrl, setFileUrl] = useState(null);
     const { handleSubmit, register } = useForm();
 
 
-    async function onchange(e){
-        const file = e.target.files[0]
-        try{
-            const added = await client.add(
-                file,
-                {
-                    progress: (prog) => {
-                        console.log(prog)
-                    }
-                }
-            )
-            const url = 'https://ipfs.infura.io/ipfs/${added.path}'
-            setFileUrl(url)
-
-        }catch(e){
-            console.log(e)
-        }
-    }
 
     async function createItem(data){
         console.log('Creating')
-
         const auth = 'Basic ' + Buffer.from("2OhsFmhCv72vOMT2Lr2pnJZBGnf" + ':' + "8d1c6baacb1ee0ca248ca7e151a9a8d2").toString('base64');
-
         const client = create({
             host: 'ipfs.infura.io',
             port: 5001,
-            protocol: 'https',
-            headers: {
-                authorization: auth,
-            }, 
+           protocol: 'https',
         });
-
-        console.log(client)
         try{
-            const new_data = JSON.stringify(data)
-            const added = await client.add(new_data)
-            const url = 'https://ipfs.io/ipfs/'+added.path+""
-            console.log(url)
-            // createSale(url)
+            //const new_data = JSON.stringify(data)
+            //const added = await client.add(new_data)
+            //const url = 'https://ipfs.io/ipfs/'+added.path+""
+            createinSC(data,"https://ipfs.io/ipfs/QmPxaRBAM4Zu4kcq65xs4LmcVASkFyLLYozLqE2VcY83FC")
         }catch (error){
             console.log("Error uploading file:",error)
         }
     }
 
+    async function createinSC(data,url){
+        const seller = "0xF7E81CDD73c3C5309a9a346E365BdDC21CF67Df1"
+        const inspector = "0x5281007dD0E66984A6E68e11039Fda8f038B5195"
+        
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(provider);
+        const signer = await provider.getSigner();
+        console.log(signer)
+
+        const Contract_factory = new ethers.Contract(sc_factory_tesnet, Factory.output.abi, provider);
+        const Contract_escrow = new ethers.ContractFactory(Escrow.output.abi, Escrow.bytecode, signer);
+        const Contract_real_estate = new ethers.ContractFactory(RealEstate.output.abi, RealEstate.bytecode,signer);
+
+        const total_rs = Number(await Contract_factory.totalRealEstate());
+        const supply = parseInt(data.fractions)
+        const price = parseInt(data.purchase_price)
+        const decimals = parseInt(data.decimals)
+
+        console.log("TOTAL DE CASAS:", total_rs)
+
+        // const minting = await Contract_factory.connect(signer).CreateNewRealEstate(
+        //     supply,
+        //     url,
+        //     price,
+        //     decimals
+        // );
+        
+        const address_rs = await Contract_factory.RealEstateArray(total_rs-1);
+        console.log(`Deployed RS 1 Contract at: ${address_rs}`);
+
+        setTimeout(() => {
+            console.log("10 Segundos de espera . . . ")
+          }, 10000);
+
+        const escrow = await Contract_escrow.deploy(address_rs,supply,seller,inspector);
+        await escrow.deployed()
+        console.log(`Deployed Escrow Contract RS 1 at: ${escrow.address}\n`);
+
+        //TODO : Save info in polybase 
+
+        setTimeout(() => {
+            console.log("15 Segundos de espera . . . ")
+          }, 15000);
+
+        let real_estate = Contract_real_estate.attach(address_rs);
+        console.log("real_estate",real_estate)
+
+        for (let i = 1; i<= supply; i++){
+            let transaction = await real_estate.connect(signer).mint();
+            await transaction.wait();
+            transaction = await real_estate.connect(signer).approve(escrow.address, i)
+            await transaction.wait();
+            transaction = await escrow.connect(signer).preList(i)
+            await transaction.wait()
+        }
+    }
+
     const submit = (data) => {
-        console.log(data);
-        //sendInfo(data);
-        createItem(data);
+        if (account) {
+            createItem(data);
+        } else{
+            console.log('No account selected')
+        }
+        
     }
 
     return (
@@ -103,7 +150,12 @@ const Create = () => {
                         className='w-[200px] mt-10 text-white text-2xl rounded-xl p-7 bg-black-gradient-2 my-4'>
                         Enviar
                     </button>
+                    
+                    
                 </form>
+                <button className='w-[200px] mt-10 text-white text-2xl rounded-xl p-7 bg-black-gradient-2 my-4'>
+                        Mint
+                </button>
             </motion.div>
         </div>
     );
