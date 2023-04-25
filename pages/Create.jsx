@@ -11,6 +11,8 @@ import { sc_factory_tesnet } from '../config';
 import Factory from '../constants/Factory_metadata.json'; //Factory.output.abi
 import Escrow from '../constants/Escrow_metadata.json';
 import RealEstate from '../constants/RealEstate_metadata.json';
+const {Polybase} = require('@polybase/client');
+import { Auth } from '@polybase/auth'
 
 
 const Create = () => {
@@ -19,16 +21,33 @@ const Create = () => {
     if (data) { data = utils.getAddress(data) }
     const [account, setAccount] = useState(data)
     const [provider, setProvider] = useState(null)
-
-
-    //const [fileUrl, setFileUrl] = useState(null);
     const { handleSubmit, register } = useForm();
 
 
 
+    async function savePolyBase(data,address_rs, address_escrow ){
+        const auth = new Auth()
+        let db = new Polybase({defaultNamespace: process.env.NEXT_PUBLIC_NAME_ESPACE});
+
+        // db.signer(async(dataSigner) => {
+        //     return {
+        //       h: 'eth-personal-sign',
+        //       sig: await auth.ethPersonalSign(dataSigner)
+        //     }
+        // })
+        const collectionReference = db.collection(process.env.NEXT_PUBLIC_POLYBASE_NAME);
+
+        console.log("data", data)
+        let res = await collectionReference.create([
+            data.id, 
+            address_rs,
+            address_escrow
+        ])
+    }
+
     async function createItem(data){
         console.log('Creating')
-        const auth = 'Basic ' + Buffer.from("2OhsFmhCv72vOMT2Lr2pnJZBGnf" + ':' + "8d1c6baacb1ee0ca248ca7e151a9a8d2").toString('base64');
+        const auth = 'Basic ' + Buffer.from(process.env.NEXT_PUBLIC_INFURA_ID + ':' + process.env.NEXT_PUBLIC_INFURA_SECRET_KEY).toString('base64');
         const client = create({
             host: 'ipfs.infura.io',
             port: 5001,
@@ -39,10 +58,10 @@ const Create = () => {
         });
         try{
             
-            //const new_data = JSON.stringify(data)
-            //const added = await client.add(new_data)
-            //const url = 'https://ipfs.io/ipfs/'+added.path+""
-            console.log("NUEVA URL:", "https://ipfs.io/ipfs/QmbGPwR7tfLxLPXg6DEq9H6HqjiS5sixGyo4NnvFpcvmKr")
+            const new_data = JSON.stringify(data)
+            const added = await client.add(new_data)
+            const url = 'https://ipfs.io/ipfs/'+added.path+""
+            console.log("NUEVA URL:", url)
             //https://ipfs.io/ipfs/QmPxaRBAM4Zu4kcq65xs4LmcVASkFyLLYozLqE2VcY83FC 10 cachos 
             // https://ipfs.io/ipfs/QmbGPwR7tfLxLPXg6DEq9H6HqjiS5sixGyo4NnvFpcvmKr 3 cachos 
             createinSC(data,"https://ipfs.io/ipfs/QmbGPwR7tfLxLPXg6DEq9H6HqjiS5sixGyo4NnvFpcvmKr")
@@ -52,8 +71,8 @@ const Create = () => {
     }
 
     async function createinSC(data,url){
-        const seller = "0xF7E81CDD73c3C5309a9a346E365BdDC21CF67Df1"
-        const inspector = "0x5281007dD0E66984A6E68e11039Fda8f038B5195"
+        const seller = process.env.NEXT_PUBLIC_SELLER 
+        const inspector = process.env.NEXT_PUBLIC_INSPECTOR
         
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         setProvider(provider);
@@ -80,7 +99,7 @@ const Create = () => {
             console.log("result: ",result)
         });
 
-        const delayInMilliseconds = 60000; //30 second
+        const delayInMilliseconds = 1000; //60 second 60000
 
         setTimeout(async function() {
             const total_rs = Number(await Contract_factory.totalRealEstate());
@@ -96,8 +115,6 @@ const Create = () => {
             await escrow.deployed()
             console.log(`Deployed Escrow Contract RS 1 at: ${escrow.address}\n`); //0x66eb0b5595cAfD6EB8578052B490A303ba3370cC
 
-            //TODO : Save info in polybase 
-
             let real_estate = Contract_real_estate.attach(address_rs);
             console.log("real_estate",real_estate)
 
@@ -109,6 +126,10 @@ const Create = () => {
                 transaction = await escrow.connect(signer).preList(i)
                 await transaction.wait()
             }
+
+
+            savePolyBase(data,address_rs,escrow.address)
+
         }, delayInMilliseconds);
     }
 
