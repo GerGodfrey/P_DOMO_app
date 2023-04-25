@@ -51,7 +51,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                 let transaction = await escrow.connect(signer).list(new_Supply, account, tokens(real_price))
                 await transaction.wait()
 
-                // Buyer deposit earnest
+                // Buyer deposit earnconst signer = await provider.getSigner()est
                 transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(real_price) })
                 await transaction.wait()
 
