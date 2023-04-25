@@ -171,6 +171,10 @@ https://docs.infura.io/infura/networks/ipfs/how-to/make-requests
 https://github.com/ipfs/js-ipfs/tree/master/packages/ipfs-http-client#url-source
 https://community.infura.io/t/how-to-upload-multiple-files-on-ipfs-under-the-same-cid-with-curl/5202/3
 
+ABI 
+https://blog.chain.link/what-are-abi-and-bytecode-in-solidity/
+https://docs.ethers.org/v5/api/contract/contract-factory/
+https://ethereum.stackexchange.com/questions/139213/differences-between-ethers-getcontractfactory-new-ethers-contract-and-ne
 
 
 ### TO DO 
