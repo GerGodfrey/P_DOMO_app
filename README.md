@@ -42,7 +42,7 @@ Segundo Batch
 | ¿What? | Link |
 |---|---|
 | Factory SC | 0xF42e36F81106f029f7d3BF013F7cA5Cd755857d6  |
-| Real Estate 1 |  |
+| Real Estate 1 | 0xE734151C1dff574c9A57Bd58e92DeAEb5E1D677b |
 | Escrow 1 |  |
 | Real Estate 2 |  |
 | Escrow 2 |  |
@@ -142,6 +142,9 @@ npx hardhat run scripts/deploy.js --network mumbai
  yarn add web3modal
  yarn add @polybase/client
  yarn add @polybase/auth
+
+ yarn add react-hook-form
+ yarn add framer-motion
 ```  
  <!-- yarn add web3modal  -->
 ## Tutorials 
@@ -163,7 +166,31 @@ npx hardhat run scripts/deploy.js --network mumbai
 14) https://docs.replit.com/tutorials/web3/escrow-contract-with-solidity 
 15) https://medium.com/@shuffledex/eventos-en-la-blockchain-c%C3%B3mo-emitirlos-con-solidity-y-recepcionarlos-con-web3-js-6411dafee8b7
 
+IPFS 
+https://docs.infura.io/infura/networks/ipfs/how-to/make-requests
+https://github.com/ipfs/js-ipfs/tree/master/packages/ipfs-http-client#url-source
+https://community.infura.io/t/how-to-upload-multiple-files-on-ipfs-under-the-same-cid-with-curl/5202/3
+
+ABI 
+https://blog.chain.link/what-are-abi-and-bytecode-in-solidity/
+https://docs.ethers.org/v5/api/contract/contract-factory/
+https://ethereum.stackexchange.com/questions/139213/differences-between-ethers-getcontractfactory-new-ethers-contract-and-ne
+
+
 ### TO DO 
 https://www.youtube.com/watch?v=c_-b_isI4vg
 https://ethereum.stackexchange.com/questions/146974/how-to-start-with-erc-4337
 https://docs.alchemy.com/docs/solidity-payable-functions 
+
+Magic Link
+
+
+https://magic.link/docs/home/welcome
+https://magic.link/docs/connect/getting-started/quickstart
+https://magic.link/docs/connect/wallet-api-reference/javascript-client-sdk
+https://magic.link/docs/connect/wallet-api-reference/javascript-client-sdk#showui()
+https://codesandbox.io/s/github/magiclabs/magic-demo-react-web3?file=/src/libs/magic.ts
+
+
+
+

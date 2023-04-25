@@ -17,18 +17,7 @@ import Escrow from '../constants/Escrow_metadata.json' // Escrow.output.abi
 import Factory from '../constants/Factory_metadata.json' //Factory.output.abi
 import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.output.abi
 
-// const path = require('path');
-// require('dotenv').config({ path: path.resolve('config.env'), });
-// const NEXT_POLYBASE_NAME = process.env.NEXT_POLYBASE_NAME;
-// console.log("index NEXT_POLYBASE_NAME",NEXT_POLYBASE_NAME)
-const polybase_name = "Tesnet02"
 
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import { Inter } from '@next/font/google'
-// import styles from '@/styles/Home.module.css'
-// import axios from 'axios'
-// import Web3Modal from 'web3modal'
 
 
 
@@ -43,8 +32,11 @@ export default function Home() {
   const [toggle, setToggle] = useState(false)
   const [escrow, setEscrow] = useState(null)
   const [realEstate, setRealEstate] = useState(null)
+
+  const polybase_name = process.env.NEXT_PUBLIC_POLYBASE_NAME
+
   const dataBase_sc = new Polybase({
-    defaultNamespace: "pk/0x7fd09c2b6e44027ed2b6e478a5ff36e201317a6d4734e3ae4868827740ecf53265bff10a510904fc12fd98e277fb8af107f463425346ae359b19f25754bbf9fb/DOMO",
+    defaultNamespace: process.env.NEXT_PUBLIC_NAME_ESPACE,
   });
 
 
@@ -59,6 +51,7 @@ export default function Home() {
 
     const collectionReference = dataBase_sc.collection(polybase_name);
     const records = await collectionReference.get("escrow_contract");
+
     for (var i = 0; i < total_rs; i++) {
       const address_re = await factory.RealEstateArray(i);
       const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
@@ -69,8 +62,11 @@ export default function Home() {
       const maxSupply = Number(await escrow.maxSupply());
 
       const data = await realEstate.tokenDATA();
+      console.log("DATA",data)
       const response = await fetch(data);
+      console.log("RESPONSE",response)
       var metadata = await response.json();
+      console.log("METADATA",metadata)
       metadata["address_escrow"] = address_escrow;
       metadata["address_re"] = address_re;
       metadata["totalSupply"] = totalSupply;
@@ -175,38 +171,26 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className='flex justify-around flex-wrap  mt-[120px] mb-[120px]'>
           {homes.map((home, index) => (
-            <div className='card sm:w-[440px] sm:h-[720px] flex flex-col justify-evenly items-center hover:bg-[#F986B7] hover:cursor-pointer' key={index} onClick={() => togglePop(home)}>
-              <div>
-                <img src={home.image} alt='Home' className='sm:w-[440px] w-[300px] sm:h-[240px] h-[140px] ' />
-              </div>
-              <div className='info mr-[88px] ml-[88px] flex flex-col gap-[26px]'>
-                <h4 className='tittleCard sm:text-[21px]'>
-                  {home.name}
-                </h4>
-                <div>
-                  <p className='textWallet'>
-                    Adress:
-                  </p>
-                  <p className='textWallet font-normal'>
-                    {home.address}
-                  </p>
+            <div class="card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-evenly hover:bg-[#EE2A7B] hover:cursor-pointer" key={index} onClick={() => togglePop(home)}>
+                <a href="#">
+                    <img class="rounded-t-lg" src={home.principal_image} alt="Home" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{home.name}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> {home.description}</p>
+                    <div className="progressBar" style={{ width: `${home.percentage}%` }}>
+                      {home.percentage}%
+                    </div>
+
+                    
                 </div>
-                <div className="progressBar" style={{ width: `${home.percentage}%` }}>
-                  {home.percentage}%
-                </div>
-              </div>
-              <button className='cardButton sm:w-[200px] sm:h-[37px]'>
-                LEARN MORE
-              </button>
             </div>
           ))}
-        </div>
-        <div className='w-full flex justify-center'>
-          <button className='buttonMain sm:w-[350px] sm:h-[100px] sm:text-[28px]'>
-            LOAD MORE
-          </button>
         </div>
       </div>
       <Footer />

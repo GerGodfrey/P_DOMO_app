@@ -41,12 +41,14 @@ const Navbar = () => {
                   My Home
                 </a>
               </Link>
-              <p className='textmenu'>
-                Secondary Market
-              </p>
               <Link href={{ pathname: "/Doubts", query: { data: account } }} legacyBehavior>
                 <a className='textmenu hover:text-pink1'>
                   Instructions
+                </a>
+              </Link>
+              <Link href={{ pathname: "Create", query: { data: account } }} legacyBehavior>
+                <a className='textmenu hover:text-pink1'>
+                  Create
                 </a>
               </Link>
             </div>

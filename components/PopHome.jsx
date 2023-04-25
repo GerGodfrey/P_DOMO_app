@@ -51,7 +51,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                 let transaction = await escrow.connect(signer).list(new_Supply, account, tokens(real_price))
                 await transaction.wait()
 
-                // Buyer deposit earnest
+                // Buyer deposit earnconst signer = await provider.getSigner()est
                 transaction = await escrow.connect(signer).depositEarnest(new_Supply, { value: tokens(real_price) })
                 await transaction.wait()
 
@@ -138,102 +138,96 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                     {home.name}
                 </h1>
                 <div className='collage'>
-                    <div className=' overflow-hidden col-span-2 row-span-5'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
+                    <div className=' overflow-hidden col-span-2 row-span-5 brightness-75  hover:brightness-100'>
+                        <img src={home.principal_image} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-2 row-span-2'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
+                    <div className='overflow-hidden col-span-2 row-span-2 brightness-75  hover:brightness-100'>
+                        <img src={home.img_bed_rooms} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-2 row-span-2'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
+                    <div className='overflow-hidden col-span-2 row-span-3 brightness-75  hover:brightness-100'>
+                        <img src={home.img_bathrooms} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-2 row-span-3'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
+                    <div className='overflow-hidden col-span-2 row-span-3 brightness-75  hover:brightness-100'>
+                        <img src={home.principal_image} alt='Home' className='imageStyle' />
                     </div>
-                    <div className='overflow-hidden col-span-1 row-span-1'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
-                    </div>
-                    <div className='overflow-hidden col-span-1 row-span-1'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
-                    </div>
-                    <div className='overflow-hidden col-span-2 row-span-2'>
-                        <img src={home.image} alt='Home' className='imageStyle' />
+                    <div className='overflow-hidden col-span-2 row-span-2 brightness-75  hover:brightness-100'>
+                        <img src={home.principal_image} alt='Home' className='imageStyle' />
                     </div>
                 </div>
                 <div className='flex flex-col gap-10 w-full'>
                     <h1 className='textFacts'>
-                        Facts and features
+                        Características
                     </h1>
                     <div className='flex justify-between'>
                         <div className='grid grid-cols-2 gap-x-[150px] items-center text-center'>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={price} alt='Price' />
                                 <p className='textmenu font-normal text-center'>
-                                    {home.attributes[0]?.trait_type}
+                                    Precio
                                 </p>
                                 <h1 className='tittlePop text-white1'>
-                                    {home.attributes[0]?.value} ETH
+                                    {home.purchase_price} MXN
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={type1} alt='Type' />
                                 <p className='textmenu font-normal text-center'>
-                                    {home.attributes[1]?.trait_type}
+                                    Tipo de residencia
                                 </p>
                                 <h1 className='tittlePop text-white1'>
-                                    {home.attributes[1]?.value}
+                                    {home.residence}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={bed} alt='Bedroom' />
                                 <p className='textmenu font-normal text-center'>
-                                    {home.attributes[2]?.trait_type}
+                                    Recámaras
                                 </p>
                                 <h1 className='tittlePop text-white1'>
-                                    {home.attributes[2]?.value}
+                                {home.bed_rooms}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={bath} alt='Bathroom' />
                                 <p className='textmenu font-normal text-center'>
-                                    {home.attributes[3]?.trait_type}
+                                    bathrooms
                                 </p>
                                 <h1 className='tittlePop text-white1'>
-                                    {home.attributes[3]?.value}
+                                    {home.bathrooms}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={square} alt='Calendar' />
                                 <p className='textmenu font-normal text-center'>
-                                    {home.attributes[4]?.trait_type}
+                                    Metros Cuadrados
                                 </p>
                                 <h1 className='tittlePop text-white1'>
-                                    {home.attributes[4]?.value}
+                                    {home.square_feet}
                                 </h1>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={calendar} alt='Price' />
                                 <p className='textmenu font-normal text-centers'>
-                                    {home.attributes[5]?.trait_type}
+                                    Año Construcción
                                 </p>
                                 <h1 className='tittlePop text-white1'>
-                                    {home.attributes[5]?.value}
+                                    {home.year_built}
                                 </h1>
                             </div>
                         </div>
                         <div className='cardInfo'>
                             <div className='flex w-full justify-between'>
                                 <p className='select'>
-                                    Price detail
+                                    Precio
                                 </p>
                                 <p className='select bg-background'>
-                                    Get info
+                                    Más Info
                                 </p>
                             </div>
                             <div className='flex flex-col gap-[55px] mt-[75px]'>
                                 <div className='flex justify-around'>
                                     <h1 className='textmenu'>
-                                        Total NFT
+                                        Total Fracciones
                                     </h1>
                                     <span className='textmenu font-normal text-center'>
                                         {home.totalSupply} / {home.maxSupply}
@@ -241,10 +235,10 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                 </div>
                                 <div className='flex justify-around'>
                                     <h1 className='textmenu'>
-                                        Total price
+                                        Precio
                                     </h1>
                                     <span className='textmenu font-normal text-center'>
-                                        {home.attributes[0].value} ETH
+                                        {home.purchase_price} MXN
                                     </span>
                                 </div>
                                 {

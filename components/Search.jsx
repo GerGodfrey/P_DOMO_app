@@ -33,7 +33,8 @@ const Search = () => {
                     </div>
                     : null}
             </div>
-            <Image src={arrow} alt='Arrow' className='sm:mt-[62px] mt-[10px] w-[7%]' />
+            <Image src={arrow} alt='Arrow' className='sm:mt-[62px] mt-[10px] w-[7%] animate-bounce w-6 h-6' />
+                        
         </header>
     );
 }
