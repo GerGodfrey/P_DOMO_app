@@ -47,33 +47,27 @@ async function main() {
   }
 
   const address_rs_1 = await factory.RealEstateArray(0);
-  // address_rs_1 = 0x4B77d0D8743453c4F626AB14e9513316F76DD76C 
   console.log(`Deployed RS 1 Contract at: ${address_rs_1}`);
 
   const escrow_rs_1 = await Escrow.deploy(address_rs_1,supply,seller.address,inspector.address);
   await escrow_rs_1.deployed();
   console.log(`Deployed Escrow Contract RS 1 at: ${escrow_rs_1.address}\n`);
-  // escrow_rs_1 = 0x5F6365f4aF0194bd0c65486802aE10c63A0771Bd
   //saveDB("1",address_rs_1,escrow_rs_1.address);
 
   const address_rs_2 = await factory.RealEstateArray(1);
-  // address_rs_2 = 0x04bb5CA925D2Bc8405286cb349B4A85595dc21e2
   console.log(`Deployed RS 2 Contract at: ${address_rs_2}`);
   
   const escrow_rs_2 = await Escrow.deploy(address_rs_2,supply,seller.address,inspector.address);
   await escrow_rs_2.deployed();
   console.log(`Deployed Escrow Contract RS 2 at: ${escrow_rs_2.address}\n`);
-  // escrow_rs_2 = 0x495ecAA89AEDB59d493D047761B6D7740E94EF7D
   //saveDB("2",address_rs_2,escrow_rs_2.address)
 
   const address_rs_3 = await factory.RealEstateArray(2);
-  // address_rs_3 = 0xB8016AD7E4aBB6E4dc0f2162265C6257Dcd01fFf
   console.log(`Deployed RS 3 Contract at: ${address_rs_3} `)
   
   const escrow_rs_3 = await Escrow.deploy(address_rs_3,supply,seller.address,inspector.address)
   await escrow_rs_3.deployed()
   console.log(`Deployed Escrow Contract RS 3 at: ${escrow_rs_3.address}\n`)
-  // escrow_rs_3 = 0xE8b3C3fdeD68D359B857b5899E8920c57938Ef1C
   //saveDB("3",address_rs_3,escrow_rs_3.address)
   
   console.log(`Finished.`)
