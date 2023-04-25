@@ -1,0 +1,3 @@
+style={{ backgroundImage:`url(${backgroundDaap.src})`, backgroundPosition:'center', backgroundSize:'cover'}}
+
+font-family: 'Alegreya Sans', sans-serif;

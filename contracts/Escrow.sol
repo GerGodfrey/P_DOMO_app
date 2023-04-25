@@ -93,15 +93,15 @@ contract Escrow {
         generic_approval[msg.sender] = true; 
     }
 
-    function finalizeSale(uint256 _nftID) public {
+    // TODO : ver que los precios coincidan con lo que se tiene en el fondo 
+    function finalizeSale(uint256 _nftID) public onlyInspector {
         require(isSouldOut);
         require(inspectionPassed);
-        require( address(this).balance >= purchasePrice[_nftID] * maxSupply);                
+        //require( address(this).balance >= purchasePrice[_nftID] * maxSupply);                
         (bool success,) = payable(seller).call{value: address(this).balance}("");
         require(success);
 
         for (uint i = 1; i <= maxSupply ; i++) {
-            
             isListed[_nftID] = false;
             IERC721(address_rs).transferFrom(address(this),buyer[i],i);
         }
