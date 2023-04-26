@@ -32,14 +32,23 @@ export const inputInfo = [
     name: 'Address',
   },
   {
-    id: 'description',
-    placeholder: 'Description',
-    name: 'Description',
+    id: 'short_description',
+    placeholder: 'Short Description',
+    name: 'Short Description',
+  },
+  {
+    id: 'long_description',
+    placeholder: 'Long Description',
+    name: 'Long Description',
   },
   {
     id: 'principal_image',
     placeholder: 'url',
     name: 'Principal Image',
+  },{
+    id : 'total_price',
+    placeholder: 'Total Price',
+    name: 'Total Price'
   },
   {
     id: 'purchase_price',
@@ -92,14 +101,19 @@ export const inputInfo = [
     name: 'Residence',
   },
   {
-    id: '4img',
+    id: 'img_other',
     placeholder: 'url',
     name: 'Other Image',
   }
   ,
   {
-    id: '5img',
+    id: 'img_last',
     placeholder: 'url',
     name: 'Other Image',
+  },
+  {
+    id: 'clave',
+    placeholder: 'Clave',
+    name: 'Clave',
   }
 ]

@@ -20,7 +20,6 @@ import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.outp
 
 
 
-
 export default function Home() {
   const router = useRouter();
   let data = router.query.data
@@ -82,6 +81,8 @@ export default function Home() {
   const changeWallet = async () => {
     window.ethereum.on('accountsChanged', async () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+      
       const account = ethers.utils.getAddress(accounts[0])
       setAccount(account);
     })
@@ -176,18 +177,16 @@ export default function Home() {
           {homes.map((home, index) => (
             <div class="card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-evenly hover:bg-[#EE2A7B] hover:cursor-pointer" key={index} onClick={() => togglePop(home)}>
                 <a href="#">
-                    <img class="rounded-t-lg" src={home.principal_image} alt="Home" />
+                    <img class="rounded-t-lg my-px object-cover h-48 w-96" src={home.principal_image} alt="Home" />
                 </a>
                 <div class="p-5">
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{home.name}</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> {home.description}</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> {home.short_description}</p>
                     <div className="progressBar" style={{ width: `${home.percentage}%` }}>
                       {home.percentage}%
-                    </div>
-
-                    
+                    </div> 
                 </div>
             </div>
           ))}

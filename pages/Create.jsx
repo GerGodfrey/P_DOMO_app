@@ -29,6 +29,7 @@ const Create = () => {
         const auth = new Auth()
         let db = new Polybase({defaultNamespace: process.env.NEXT_PUBLIC_NAME_ESPACE});
 
+        //todo: create signer in polybase
         // db.signer(async(dataSigner) => {
         //     return {
         //       h: 'eth-personal-sign',
@@ -46,27 +47,30 @@ const Create = () => {
     }
 
     async function createItem(data){
-        console.log('Creating')
-        const auth = 'Basic ' + Buffer.from(process.env.NEXT_PUBLIC_INFURA_ID + ':' + process.env.NEXT_PUBLIC_INFURA_SECRET_KEY).toString('base64');
-        const client = create({
-            host: 'ipfs.infura.io',
-            port: 5001,
-            protocol: 'https',
-            headers: {
-                authorization: auth
-              }
-        });
-        try{
-            
-            const new_data = JSON.stringify(data)
-            const added = await client.add(new_data)
-            const url = 'https://ipfs.io/ipfs/'+added.path+""
-            console.log("NUEVA URL:", url)
-            //https://ipfs.io/ipfs/QmPxaRBAM4Zu4kcq65xs4LmcVASkFyLLYozLqE2VcY83FC 10 cachos 
-            // https://ipfs.io/ipfs/QmbGPwR7tfLxLPXg6DEq9H6HqjiS5sixGyo4NnvFpcvmKr 3 cachos 
-            createinSC(data,"https://ipfs.io/ipfs/QmbGPwR7tfLxLPXg6DEq9H6HqjiS5sixGyo4NnvFpcvmKr")
-        }catch (error){
-            console.log("Error uploading file:",error)
+        const new_data = JSON.stringify(data)
+
+        console.log("CLAVE:", data.clave)
+        if(data.clave == process.env.NEXT_PUBLIC_CREATE_CLAVE){
+            const auth = 'Basic ' + Buffer.from(process.env.NEXT_PUBLIC_INFURA_ID + ':' + process.env.NEXT_PUBLIC_INFURA_SECRET_KEY).toString('base64');
+            const client = create({
+                host: 'ipfs.infura.io',
+                port: 5001,
+                protocol: 'https',
+                headers: {
+                    authorization: auth
+                  }
+            });
+            try{
+                const added = await client.add(new_data)
+                const url = 'https://ipfs.io/ipfs/'+added.path+""
+                console.log("NUEVA URL:", url)
+                createinSC(data,url)
+            }catch (error){
+                console.error("Error uploading file:",error)
+            }
+        }else{
+            const error = 67
+            console.error("Error #%d You need the clave for create a new CPD", error)
         }
     }
 
@@ -99,7 +103,7 @@ const Create = () => {
             console.log("result: ",result)
         });
 
-        const delayInMilliseconds = 1000; //60 second 60000
+        const delayInMilliseconds = 60000; //60 second
 
         setTimeout(async function() {
             const total_rs = Number(await Contract_factory.totalRealEstate());
@@ -109,11 +113,11 @@ const Create = () => {
             }
 
             const address_rs = await Contract_factory.RealEstateArray(total_rs-1);
-            console.log(`Deployed RS 1 Contract at: ${address_rs}`); // 0xff5Bc2D5c3b147692C7FAAFa13A5327D2A373D6e
+            console.log(`Deployed RS 1 Contract at: ${address_rs}`); 
 
             const escrow = await Contract_escrow.deploy(address_rs,supply,seller,inspector);
             await escrow.deployed()
-            console.log(`Deployed Escrow Contract RS 1 at: ${escrow.address}\n`); //0x66eb0b5595cAfD6EB8578052B490A303ba3370cC
+            console.log(`Deployed Escrow Contract RS 1 at: ${escrow.address}\n`); 
 
             let real_estate = Contract_real_estate.attach(address_rs);
             console.log("real_estate",real_estate)
@@ -126,8 +130,6 @@ const Create = () => {
                 transaction = await escrow.connect(signer).preList(i)
                 await transaction.wait()
             }
-
-
             savePolyBase(data,address_rs,escrow.address)
 
         }, delayInMilliseconds);
