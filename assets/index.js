@@ -7,4 +7,5 @@ export {
     close,
     logo_color,
     menu,
+    main_home
 };
