@@ -165,7 +165,7 @@ npx hardhat run scripts/deploy.js --network mumbai
 13) https://github.com/hedgehold/prode-front 
 14) https://docs.replit.com/tutorials/web3/escrow-contract-with-solidity 
 15) https://medium.com/@shuffledex/eventos-en-la-blockchain-c%C3%B3mo-emitirlos-con-solidity-y-recepcionarlos-con-web3-js-6411dafee8b7
-
+16) [Context](https://es.react.dev/learn/passing-data-deeply-with-context)
 IPFS 
 https://docs.infura.io/infura/networks/ipfs/how-to/make-requests
 https://github.com/ipfs/js-ipfs/tree/master/packages/ipfs-http-client#url-source
@@ -191,6 +191,7 @@ https://magic.link/docs/connect/wallet-api-reference/javascript-client-sdk
 https://magic.link/docs/connect/wallet-api-reference/javascript-client-sdk#showui()
 https://codesandbox.io/s/github/magiclabs/magic-demo-react-web3?file=/src/libs/magic.ts
 
-
+[codesandbox](https://codesandbox.io/s/github/magiclabs/magic-demo-react-web3?file=/src/contexts/Web3Context.tsx)
+[Magic Connect Lib](https://magic.link/docs/connect/overview)
 
 

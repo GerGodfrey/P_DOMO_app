@@ -1,28 +1,34 @@
-// import React from 'react'
 import Link from 'next/link';
-// import Router from 'next/link'
 import logo from '../assets/logo.svg';
-// import { navLinks } from '../constants';
 import Image from 'next/image'
-// import { Button } from 'react-scroll';
 import metamask from '../assets/metamask.svg';
 import { ethers } from 'ethers';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../lib/context.js';
 import menu2 from '../assets/menu2.svg';
 import metamask2 from '../assets/metamask2.svg';
+import { magic } from '../lib/magic.js';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [account, setAccount] = useContext(UserContext);
 
   console.log(toggle)
-  const connectHandler = async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    setAccount(accounts[0]);
 
-    // const prov = new ethers.providers.Web3Provider(window.ethereum)
-    // setProvider(prov);
+  const connectHandler = async () => {
+
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    //MAGIC LINK 
+    //const accounts = await magic.wallet.connectWithUI();
+    //console.log("account:",accounts[0])
+    setAccount(accounts[0]);
+  }
+
+  //todo: create onClick={logout} in button handler
+  const logout = async () => {
+    console.log("Logged out");
+    await magic.wallet.disconnect();
+    setAccount();
   }
 
   return (
@@ -51,6 +57,11 @@ const Navbar = () => {
                   Create
                 </a>
               </Link>
+              {/* <Link href={{ pathname: "Home", query: { data: account } }} legacyBehavior>
+                <a className='textmenu hover:text-pink1'>
+                  Config
+                </a>
+              </Link> */}
             </div>
           </li>
           <li>
@@ -58,7 +69,7 @@ const Navbar = () => {
               account ? (
                 <div className='walletSucces flex items-center justify-center gap-[8px] textWallet md:w-[223px] md:h-[65px] md:text-[18px]'>
                   <Image src={metamask2} alt='metamask' className='w-[10%] md:w-[15%]' />
-                  <button type='button' style={{ color: '#1FE72E' }}>
+                  <button type='button' style={{ color: '#1FE72E' }} > 
                     {account.slice(0, 6) + '...' + account.slice(38, 42)}
                   </button>
                 </div>
@@ -109,7 +120,7 @@ const Navbar = () => {
                 account ? (
                   <div className='walletSucces flex items-center justify-center gap-[8px] textWallet md:w-[223px] md:h-[65px] md:text-[18px]'>
                     <Image src={metamask2} alt='metamask' className='w-[10%] md:w-[15%]' />
-                    <button type='button' style={{ color: '#1FE72E' }}>
+                    <button type='button' style={{ color: '#1FE72E' }} >
                       {account.slice(0, 6) + '...' + account.slice(38, 42)}
                     </button>
                   </div>
