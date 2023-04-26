@@ -12,6 +12,18 @@ body {
 @layer base {
   /* ? Navbar */
 
+  .home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    background-size: 100vw 320px;
+    background-repeat: no-repeat;
+    background-image: url('./assets/main_home.svg');
+  }
+
   .textmenu {
     @apply font-bold text-[16px] text-white1 tracking-[1.61px];
   }
@@ -84,10 +96,10 @@ body {
     @apply h-[48px] w-[240px] bg-pink2 rounded-[4px] flex justify-center items-center cursor-default text-white1 text-[16px] font-bold cursor-pointer
   }
   .btnContact{
-    @apply cursor-default w-[150px] h-[50px] bg-transparent text-white1 text-[16px] font-bold cursor-pointer
+    @apply cursor-default w-[150px] h-[50px] bg-transparent text-white1 text-[16px] font-bold cursor-pointer bg-pink2 rounded-[60px] hover:bg-pink1 m-2
   }
   .btnBuy{
-    @apply w-[225px] h-[50px] cursor-default text-white1 text-[16px] font-bold cursor-pointer
+    @apply w-[225px] h-[50px] cursor-default text-white1 text-[16px] font-bold cursor-pointer bg-pink2 rounded-[60px] hover:bg-pink1 m-2
   }
   .inputMain{
     @apply w-[300px] h-[60px] border-[1px] border-solid border-white1 rounded-[40px] bg-transparent
