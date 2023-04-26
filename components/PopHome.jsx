@@ -148,10 +148,10 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                         <img src={home.img_bathrooms} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-2 row-span-3 brightness-75  hover:brightness-100'>
-                        <img src={home.principal_image} alt='Home' className='imageStyle' />
+                        <img src={home.img_other} alt='Home' className='imageStyle' />
                     </div>
                     <div className='overflow-hidden col-span-2 row-span-2 brightness-75  hover:brightness-100'>
-                        <img src={home.principal_image} alt='Home' className='imageStyle' />
+                        <img src={home.img_last} alt='Home' className='imageStyle' />
                     </div>
                 </div>
                 <div className='flex flex-col gap-10 w-full'>
@@ -165,18 +165,18 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                 <p className='textmenu font-normal text-center'>
                                     Precio
                                 </p>
-                                <h1 className='tittlePop text-white1'>
-                                    {home.purchase_price} MXN
-                                </h1>
+                                <h2 className='tittlePop text-white1'>
+                                    {home.total_price} MXN
+                                </h2>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={type1} alt='Type' />
                                 <p className='textmenu font-normal text-center'>
                                     Tipo de residencia
                                 </p>
-                                <h1 className='tittlePop text-white1'>
+                                <h2 className='tittlePop text-white1'>
                                     {home.residence}
-                                </h1>
+                                </h2>
                             </div>
                             <div className='flex flex-col items-center gap-[20px]'>
                                 <Image src={bed} alt='Bedroom' />
@@ -235,10 +235,10 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                 </div>
                                 <div className='flex justify-around'>
                                     <h1 className='textmenu'>
-                                        Precio
+                                        Precio Fracción
                                     </h1>
                                     <span className='textmenu font-normal text-center'>
-                                        {home.purchase_price} MXN
+                                        {home.purchase_price} MATIC
                                     </span>
                                 </div>
                                 {
@@ -252,7 +252,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                     ) : (
                                         <div>
                                             {(account === inspector) ? (
-                                                <button className='btnBuy' onClick={appInspection}>
+                                                <button className='btnBuy ' onClick={appInspection}>
                                                     Approve Inspection
                                                 </button>
                                             ) : (account === seller) ? (
@@ -261,7 +261,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                                 </button>
                                             ) : (
                                                 <div>
-                                                    <button className='btnBuy' onClick={buyHandler} >
+                                                    <button className='btnBuy ' onClick={buyHandler} >
                                                         Buy
                                                     </button>
                                                     <button className='btnContact' >
@@ -295,7 +295,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                             Description
                         </h1>
                         <p className='textWallet font-normal'>
-                            {home.description}
+                            {home.long_description}
                         </p>
                     </div>
                 </div>
