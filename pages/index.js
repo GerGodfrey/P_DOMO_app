@@ -175,15 +175,15 @@ export default function Home() {
 
         <div className='flex justify-around flex-wrap  mt-[120px] mb-[120px]'>
           {homes.map((home, index) => (
-            <div class="card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-evenly hover:bg-[#EE2A7B] hover:cursor-pointer" key={index} onClick={() => togglePop(home)}>
+            <div className="card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-evenly hover:bg-[#EE2A7B] hover:cursor-pointer" key={index} onClick={() => togglePop(home)}>
                 <a href="#">
-                    <img class="rounded-t-lg my-px object-cover h-48 w-96" src={home.principal_image} alt="Home" />
+                    <img className="rounded-t-lg my-px object-cover h-48 w-96" src={home.principal_image} alt="Home" />
                 </a>
-                <div class="p-5">
+                <div className="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{home.name}</h5>
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{home.name}</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> {home.short_description}</p>
+                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"> {home.short_description}</p>
                     <div className="progressBar" style={{ width: `${home.percentage}%` }}>
                       {home.percentage}%
                     </div> 
