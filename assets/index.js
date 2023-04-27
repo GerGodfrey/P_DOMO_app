@@ -6,6 +6,5 @@ import menu from "./menu.svg";
 export {
     close,
     logo_color,
-    menu,
-    main_home
+    menu
 };
