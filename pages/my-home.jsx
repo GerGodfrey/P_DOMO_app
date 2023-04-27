@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import {utils} from 'ethers';
 import RealEstate from '../constants/RealEstate_metadata.json'; // RealEstate.output.abi 
 //import RealEstate_LH from '../artifacts/contracts/RealEstate.sol/RealEstate.json' RealEstate_LH.abi 
-const polybase_name = "Tesnet02"
-
 
 export default function My_home (){
     const router = useRouter();
@@ -42,9 +40,9 @@ export default function My_home (){
         setProvider(provider)
 
         let db = new Polybase({
-            defaultNamespace: "pk/0x7fd09c2b6e44027ed2b6e478a5ff36e201317a6d4734e3ae4868827740ecf53265bff10a510904fc12fd98e277fb8af107f463425346ae359b19f25754bbf9fb/DOMO",
+            defaultNamespace: process.env.NEXT_PUBLIC_NAME_ESPACE,
           });
-          const collectionReference = db.collection(polybase_name);
+          const collectionReference = db.collection(process.env.NEXT_PUBLIC_POLYBASE_NAME);
           const records = await collectionReference.where("real_estate_contract").get();          
           const len = records.data.length
 
