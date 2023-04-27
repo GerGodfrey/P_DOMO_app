@@ -17,14 +17,13 @@ import Escrow from '../constants/Escrow_metadata.json' // Escrow.output.abi
 import Factory from '../constants/Factory_metadata.json' //Factory.output.abi
 import RealEstate from '../constants/RealEstate_metadata.json' //RealEstate.output.abi
 
-
-
-
 export default function Home() {
   const router = useRouter();
   let data = router.query.data
   if (data) { data = utils.getAddress(data) }
   const [account, setAccount] = useState(data)
+
+
   const [provider, setProvider] = useState(null)
   const [homes, setHomes] = useState([])
   const [home, setHome] = useState([])
@@ -32,11 +31,22 @@ export default function Home() {
   const [escrow, setEscrow] = useState(null)
   const [realEstate, setRealEstate] = useState(null)
 
-  const polybase_name = process.env.NEXT_PUBLIC_POLYBASE_NAME
-
   const dataBase_sc = new Polybase({
-    defaultNamespace: process.env.NEXT_PUBLIC_NAME_ESPACE,
+    defaultNamespace: "pk/0x7fd09c2b6e44027ed2b6e478a5ff36e201317a6d4734e3ae4868827740ecf53265bff10a510904fc12fd98e277fb8af107f463425346ae359b19f25754bbf9fb/DOMO" ,
   });
+  const collectionReference = dataBase_sc.collection("Tesnet5");
+
+  async function get_escrow_contracts () {
+    const records = await collectionReference.get("escrow_contract");
+    return records
+  }
+
+  async function get_real_estate_contract(address_re) {
+
+    const records = await collectionReference.where("real_estate_contract", "==", address_re).get();
+    const escrow_contract = records.data[0].data.escrow_contract
+    return escrow_contract;
+  }
 
 
   const loadData = async () => {
@@ -47,25 +57,20 @@ export default function Home() {
     const factory = new ethers.Contract(sc_factory_tesnet, Factory.output.abi, provider)
     const total_rs = Number(await factory.totalRealEstate())
     const homes = []
-
-    const collectionReference = dataBase_sc.collection(polybase_name);
-    const records = await collectionReference.get("escrow_contract");
+    const records = await get_escrow_contracts()
 
     for (var i = 0; i < total_rs; i++) {
       const address_re = await factory.RealEstateArray(i);
       const realEstate = new ethers.Contract(address_re, RealEstate.output.abi, provider);
-
       const address_escrow = records.data[i].data.escrow_contract
       const escrow = new ethers.Contract(address_escrow, Escrow.output.abi, provider);
       const totalSupply = Number(await escrow.totalSupply());
       const maxSupply = Number(await escrow.maxSupply());
 
       const data = await realEstate.tokenDATA();
-      console.log("DATA",data)
       const response = await fetch(data);
-      console.log("RESPONSE",response)
       var metadata = await response.json();
-      console.log("METADATA",metadata)
+
       metadata["address_escrow"] = address_escrow;
       metadata["address_re"] = address_re;
       metadata["totalSupply"] = totalSupply;
@@ -81,32 +86,21 @@ export default function Home() {
   const changeWallet = async () => {
     window.ethereum.on('accountsChanged', async () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-      
       const account = ethers.utils.getAddress(accounts[0])
       setAccount(account);
     })
   }
 
-  async function connectDB(address_re) {
-    let db = new Polybase({
-      defaultNamespace: "pk/0x7fd09c2b6e44027ed2b6e478a5ff36e201317a6d4734e3ae4868827740ecf53265bff10a510904fc12fd98e277fb8af107f463425346ae359b19f25754bbf9fb/DOMO",
-    });
-    const collectionReference = db.collection(polybase_name);
-    const records = await collectionReference.where("real_estate_contract", "==", address_re).get();
-    const escrow_contract = records.data[0].data.escrow_contract
-    return escrow_contract;
-  }
 
   useEffect(() => {
     changeWallet(),
-      loadData()
+    loadData()
   }, [])
 
   const togglePop = (home) => {
 
     setHome(home);
-    const escrow_contract = connectDB(home.address_re);
+    const escrow_contract = get_real_estate_contract(home.address_re);
     const escrow = new ethers.Contract(escrow_contract, Escrow.output.abi, provider);
     setEscrow(escrow);
 
