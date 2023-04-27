@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { UserContext } from '../lib/context.js';
+import { UserContext } from '../context/context.js';
 import Layout from '../components/layout';
 import '../styles/globals.css';
 import '../index.css';

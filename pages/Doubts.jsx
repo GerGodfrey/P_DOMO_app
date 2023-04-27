@@ -11,8 +11,6 @@ const Doubts = () => {
     useEffect(() => {
         axios.get('https://notion-api.splitbee.io/v1/page/54607699593d450aa4900a9132a54412')
             .then(res => setData(res.data))
-        console.log(data);
-
     }, []);
 
     return (

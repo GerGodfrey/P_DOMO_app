@@ -4,7 +4,7 @@ import Image from 'next/image'
 import metamask from '../assets/metamask.svg';
 import { ethers } from 'ethers';
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../lib/context.js';
+import { UserContext } from '../context/context.js';
 import menu2 from '../assets/menu2.svg';
 import metamask2 from '../assets/metamask2.svg';
 //import { magic } from '../lib/magic.js';
@@ -12,8 +12,6 @@ import metamask2 from '../assets/metamask2.svg';
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [account, setAccount] = useContext(UserContext);
-
-  console.log(toggle)
 
   const connectHandler = async () => {
 
