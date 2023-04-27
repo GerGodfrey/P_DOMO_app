@@ -7,7 +7,7 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../lib/context.js';
 import menu2 from '../assets/menu2.svg';
 import metamask2 from '../assets/metamask2.svg';
-import { magic } from '../lib/magic.js';
+//import { magic } from '../lib/magic.js';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -25,11 +25,11 @@ const Navbar = () => {
   }
 
   //todo: create onClick={logout} in button handler
-  const logout = async () => {
-    console.log("Logged out");
-    await magic.wallet.disconnect();
-    setAccount();
-  }
+  // const logout = async () => {
+  //   console.log("Logged out");
+  //   await magic.wallet.disconnect();
+  //   setAccount();
+  // }
 
   return (
     <div>
