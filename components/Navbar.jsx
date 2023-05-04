@@ -55,6 +55,11 @@ const Navbar = () => {
                   Create
                 </a>
               </Link>
+              <Link href={{ pathname: "Kyc", query: { data: account } }} legacyBehavior>
+                <a className='textmenu hover:text-pink1'>
+                  KYC
+                </a>
+              </Link>
               {/* <Link href={{ pathname: "Home", query: { data: account } }} legacyBehavior>
                 <a className='textmenu hover:text-pink1'>
                   Config
