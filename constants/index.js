@@ -1,3 +1,7 @@
+import {
+  instagram, twitter, linkedin
+} from "../assets";
+
 
 export const navLinks = [
   {
@@ -117,3 +121,106 @@ export const inputInfo = [
     name: 'Clave',
   }
 ]
+
+
+export const personalInfo = [
+  {
+    id: 'nombre',
+    placeholder: 'Nombre',
+    name: 'Nombre'
+  },
+  {
+    id: 'direccion',
+    placeholder: 'Dirección',
+    name: 'Dirección'
+  },
+  {
+    id: 'correo',
+    placeholder: 'Corre',
+    name: 'Correo'
+  },
+  {
+    id: 'rfc',
+    placeholder: 'RFC',
+    name: 'RFC'
+  },
+  
+]
+
+export const footerLinks = [
+  {
+    title: "Acerca de DOMO",
+    links: [
+
+      // {
+      //   name: "Información General",
+      //   link: "https://domo-real-state.notion.site/Informaci-n-General-0cb7c714f9db44c3932b7c6d78f096e2",
+      // }
+      /*  {
+        name: "Contenido",
+        link: "https://domopro.xyz/content/",
+      },
+      {
+        name: "Cómo funciona",
+        link: "https://domopro.xyz/how-it-works/",
+      },
+      {
+        name: "Explorar inmuebles",
+        link: "https://domopro.xyz/explore/",
+      },
+      {
+        name: "Terms & Services",
+        link: "https://domopro.xyz/terms-and-services/",
+      },*/
+
+    ],
+  },
+  {
+    title: "Explora",
+    links: [
+       {
+         route: 'doubt',
+         name: "Centro de dudas",
+         link: "https://domopro.xyz/help-center/",
+       }
+    ],
+  },
+  {
+    title: "Alianzas",
+    links: [
+      {
+        route: 'regprop',
+        name: "Quiero vender un inmueble",
+        link: "https://domopro.xyz/create/",
+      },
+      {
+        route: 'investor',
+        name: "Soy VC, Angel o similar",
+        link: "https://domopro.xyz/become-a-investor/",
+      },
+      {
+        route: 'partner',
+        name: "Quiero ser aliado estratégico",
+        link: "https://domopro.xyz/become-a-partner/",
+      },
+    ],
+  },
+];
+
+export const socialMedia = [
+  {
+    id: "social-media-1",
+    icon: instagram,
+    link: "https://www.instagram.com/domo_project/?hl=en",
+  },
+  {
+    id: "social-media-3",
+    icon: twitter,
+    link: "https://twitter.com/_DomoProject",
+  },
+  {
+    id: "social-media-4",
+    icon: linkedin,
+    link: "https://www.linkedin.com/",
+  },
+];
