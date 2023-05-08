@@ -145,6 +145,8 @@ npx hardhat run scripts/deploy.js --network mumbai
 
  yarn add react-hook-form
  yarn add framer-motion
+ yarn install react-uploader
+
 ```  
  <!-- yarn add web3modal  -->
 ## Tutorials 
