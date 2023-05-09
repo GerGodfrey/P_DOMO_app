@@ -42,7 +42,7 @@ const Navbar = () => {
             <div className='flex justify-between gap-[10px] md:gap-[30px]'>
               <Link href={{ pathname: "/my-home", query: { data: account } }} legacyBehavior>
                 <a className='textmenu hover:text-pink1'>
-                  My
+                  My Home
                 </a>
               </Link>
               <Link href={{ pathname: "/Doubts", query: { data: account } }} legacyBehavior>

@@ -45,10 +45,10 @@ body {
     @apply font-bold text-[18px] text-white1 tracking-[4.38px] text-center
   }
   .tittlePop{
-    @apply font-bold text-[36px] text-pink2 tracking-[3.62px] text-center
+    @apply font-bold text-[22px] text-pink2 tracking-[3.62px] text-center
   }
   .collage{
-   @apply w-full h-[500px] grid grid-cols-6 auto-rows-[82px] gap-[20px]
+   @apply flex flex-col gap-5  sm:h-[500px] sm:grid sm:grid-cols-6 sm:auto-rows-[82px] sm:gap-[20px] sm:w-full 
   }
   .textFacts{
     @apply font-bold text-[24px] text-white tracking-[2.41px] text-left
@@ -90,7 +90,7 @@ body {
     @apply relative w-[1120px] h-[80%] z-[2] bg-background rounded-[30px] p-[80px] pt-[60px] flex flex-col items-center gap-[60px] overflow-scroll
   }
   .cardInfo{
-    @apply w-[357px] h-[790px] bg-gradientGray2 rounded-[10px]
+    @apply w-[357px] h-[500px] md:h-[790px] bg-gradientGray2 rounded-[10px]
   }
   .soldOut {
     @apply h-[48px] w-[240px] bg-pink2 rounded-[4px] flex justify-center items-center cursor-default text-white1 text-[16px] font-bold cursor-pointer
@@ -104,11 +104,14 @@ body {
   .inputMain{
     @apply w-[300px] h-[60px] border-[1px] border-solid border-white1 rounded-[40px] bg-transparent
   }
+  .inputInfo {
+    @apply w-[311px] h-[33px] border-[1px] border-solid border-white1 bg-transparent rounded-[10px]
+  }
 }
 
 @layer utilities {
   .imageStyle{
-   @apply object-cover w-full h-full rounded-[10px]
+   @apply w-[300px] object-cover sm:w-full sm:h-full rounded-[10px]
   }
   .select{
     @apply w-[177px] h-[72px] font-bold text-[18px] text-white1 tracking-[1.81px] text-center flex items-center justify-center
