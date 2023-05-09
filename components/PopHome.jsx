@@ -12,6 +12,11 @@ import bath from '../assets/bath.svg';
 import square from '../assets/square.svg';
 import calendar from '../assets/calendar.svg';
 
+import { doc, getDoc } from "firebase/firestore";
+import { firebase } from "../connection/firebase";
+import Link from 'next/link';
+
+
 
 const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
     const router = useRouter();
@@ -25,6 +30,7 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
     const [isSouldOut, setIsSouldOut] = useState(false)
     const [inspectionPassed, setInspectionPassed] = useState(false)
     const [balance, setBalance] = useState(null)
+    const [kyc, setKyc] = useState(false)
 
     const [owner, setOwner] = useState(null)
     const [hasBought, setHasBought] = useState(false)
@@ -86,7 +92,27 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
         await transaction.wait()
     }
 
+    const confirmKYC = async () => {
+        try {
+            const docRef = doc(firebase, "user_personal_info", account);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                //console.log("Document data:", docSnap.data().kyc.status);
+                setKyc(docSnap.data().kyc.status)
+            } else {
+                // docSnap.data() will be undefined in this case
+                console.log("No such document!");
+            }
+            console.log("KYC:", kyc)
+        } catch (error) {
+            console.error("Withou wallet:", error)
+        }
+        
+
+    }
+
     useEffect(() => {
+        confirmKYC()
 
         const fetchSouldOut = async () => {
             if (home.percentage == 100) {
@@ -97,11 +123,6 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
             .catch(console.error);;
 
         const fetchDetails = async () => {
-            // const buyer = await escrow.buyer(home.id)
-            // setBuyer(buyer)
-
-            // const hasBought = await escrow.approval(home.id, buyer)
-            // setHasBought(hasBought)
 
             const seller = await escrow.seller()
             setSeller(seller)
@@ -251,25 +272,49 @@ const PopHome = ({ home, provider, escrow, realEstate, togglePop }) => {
                                         </div>
                                     ) : (
                                         <div>
-                                            {(account === inspector) ? (
-                                                <button className='btnBuy ' onClick={appInspection}>
-                                                    Approve Inspection
-                                                </button>
-                                            ) : (account === seller) ? (
-                                                <button className='btnBuy'>
-                                                    Approve & Sell
-                                                </button>
-                                            ) : (
-                                                <div>
-                                                    <button className='btnBuy ' onClick={buyHandler} >
-                                                        Buy
+                                        {(account) ? (
+                                            <div>
+                                                {(account === inspector) ? (
+                                                    <button className='btnBuy ' onClick={appInspection}>
+                                                        Approve Inspection
                                                     </button>
-                                                    <button className='btnContact' >
-                                                        Buy FIAT
+                                                ) : (account === seller) ? (
+                                                    <button className='btnBuy'>
+                                                        Approve & Sell
                                                     </button>
-                                                </div>
-                                            )}
+                                                ) : (
+                                                    <div>
+                                                    {(kyc) ? (
+                                                        <div>
+                                                            <button className='btnBuy ' onClick={buyHandler} >
+                                                                Buy
+                                                            </button>
+                                                            <button className='btnContact' >
+                                                                Buy FIAT
+                                                            </button>
+                                                        </div>
+                                                    ):(
+                                                        <Link href={{ pathname: "Kyc", query: { data: account } }} legacyBehavior>
+                                                            <button className='btnContact'>
+                                                            KYC
+                                                            </button>
+                                                        </Link>
+                                                    )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ): (
+                                            <div>
+                                                <button className='btnBuy ' onClick={buyHandler} >
+                                                    Buy
+                                                </button>
+                                                <button className='btnContact' >
+                                                    Buy FIAT
+                                                </button>
+                                            </div>
+                                        )}
                                         </div>
+                                        
                                     )
                                 }
                                 <div>
