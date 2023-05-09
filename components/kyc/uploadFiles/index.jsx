@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 
 import { firebase } from "../../../connection/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
+require("dotenv").config();
 
 const WidgetUpload = ({userData}) => {
 
