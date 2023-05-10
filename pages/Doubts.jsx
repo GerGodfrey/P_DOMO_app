@@ -16,7 +16,7 @@ const Doubts = () => {
     return (
         <div>
             <Navbar/>
-            <div className='instructions min-h-[80vh]'>
+            <div className='instructions min-h-[80vh] bg-white mt-3'>
                 <div className='bg-white w-full overflow-hidden'>
                     <div className= " sm:px-16 px-6 flex justify-center items-center" >
                         <div className="xl:max-w-[1280px] w-full">

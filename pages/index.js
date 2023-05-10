@@ -166,8 +166,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <div className='flex justify-around flex-wrap  mt-[120px] mb-[120px]'>
+        <div className='flex justify-around gap-10 flex-wrap  mt-[120px] mb-[120px]'>
           {homes.map((home, index) => (
             <div className="card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-evenly hover:bg-[#EE2A7B] hover:cursor-pointer" key={index} onClick={() => togglePop(home)}>
                 <a href="#">

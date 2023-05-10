@@ -5,6 +5,7 @@ import instagram from '../assets/instagram.svg';
 import twitter from '../assets/twitter.svg';
 import facebook from '../assets/facebook.svg';
 import linkedin from '../assets/linkedin.svg';
+import Link from 'next/link';
 
 const Footer = () => {
     return (
@@ -23,33 +24,35 @@ const Footer = () => {
                                 EXPLORA
                             </h1>
                             <div>
-                                <p className='textmenu text-[12px] text-center sm:text-left'>
-                                    Centro de dudas
-                                </p>
+                                <Link href={"/Doubts"}>
+                                    <p className='textmenu text-[12px] text-center sm:text-left'>
+                                        Centro de dudas
+                                    </p>
+                                </Link>
                             </div>
                         </div>
                         <div>
                             <h1 className='textInput sm:text-left text-pink2'>
                                 ALIANZAS
                             </h1>
-                            <div className='flex flex-col gap-2'>
-                                <p className='textmenu text-[12px] text-center sm:text-left'>
+                            <div className='flex flex-col gap-2 hover:cursor-pointer'>
+                                <p className='textmenu text-[12px] text-center sm:text-left' onClick={() => window.open( "https://domopro.xyz/#/regprop")}>
                                     Quiero vender un inmueble
                                 </p>
-                                <p className='textmenu text-[12px] text-center sm:text-left'>
+                                <p className='textmenu text-[12px] text-center sm:text-left' onClick={() => window.open('https://domopro.xyz/#/investor')}>
                                     Soy VC, Angel o similar
                                 </p>
-                                <p className='textmenu text-[12px] text-center sm:text-left'>
+                                <p className='textmenu text-[12px] text-center sm:text-left' onClick={() => window.open('https://domopro.xyz/#/partner')}>
                                     Quiero ser aliado estratégico
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div className='grid grid-cols-2  auto-rows-fr gap-[35px]'>
-                        <Image src={instagram} alt='Instagram' />
-                        <Image src={facebook} alt='Facebook' />
-                        <Image src={linkedin} alt='Linkedin' />
-                        <Image src={twitter} alt='Twitter' />
+                        <Image src={instagram} alt='Instagram' onClick={() => window.open("https://www.instagram.com/domo_project/?hl=en")} className=' hover:cursor-pointer' />
+                        <Image src={facebook} alt='Facebook' onClick={() => window.open("https://www.instagram.com/domo_project/?hl=en")} className=' hover:cursor-pointer' />
+                        <Image src={linkedin} alt='Linkedin' onClick={() => window.open("https://www.linkedin.com/")} className=' hover:cursor-pointer' />
+                        <Image src={twitter} alt='Twitter' onClick={() => window.open("https://twitter.com/_DomoProject")} className=' hover:cursor-pointer' />
                     </div>
                 </section>
             </div>
